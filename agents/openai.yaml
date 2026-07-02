@@ -1,0 +1,4 @@
+interface:
+  display_name: "Understanding Demo Generator"
+  short_description: "Create content-understanding dark-grid HTML explainer decks"
+  default_prompt: "Use $understanding-demo-generator to turn this material into a content-understanding dark-grid HTML explainer deck. Use narration, TTS, or HyperFrames output only when requested."
