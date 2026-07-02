@@ -39,20 +39,55 @@ Deliver narrated-html files plus:
 
 1. Select mode: `quick-html`, `narrated-html`, or `hyperframes`.
 2. Clean or extract source material.
-3. Classify the input and audience. Consult `references/input-intake.md` and `references/audience-profiles.md`.
+3. Classify input and audience using `references/input-intake.md` and `references/audience-profiles.md`.
 4. Write `scripts/first-principles.md` before creating slides.
-5. Rebuild the material into a teaching spine with claims, mechanisms, contrasts, examples, failure points, and practical routes.
-6. Create an 8-12 slide page plan unless the user requested another length.
-7. Write `scripts/deck.md`.
+5. Rebuild the material into a coherent teaching spine with claims, mechanisms, contrasts, examples, failure points, and practical routes.
+6. Create an 8-12 slide page plan unless the user requested another length. Each headline must express a judgment, not just a topic label.
+7. Write `scripts/deck.md` as a continuous manuscript, not isolated page summaries.
 8. Write `scripts/slides.json` using `references/slide-contract.md`.
-9. Assign one visual strategy per slide by evaluating the page script, not by reusing a fixed two-column template.
-10. Force the cover to be a centered theme presentation page.
-11. Apply slide fit budgeting from `references/slide-fit-budget.md`.
-12. Choose the style family and adaptation plan from `references/style-decision.md`.
-13. Generate `dist/index.html` as a standalone local file.
-14. If narrated mode: prepare TTS queue.
-15. If HyperFrames mode: generate composition output and manifest.
-16. Run validation and the final quality checklist.
+9. Write complete page manuscripts and transitions before designing visuals.
+10. Design each content page as an independent DOM/CSS composition using `references/page-composition-first.md`.
+11. Force the cover to be a centered theme presentation page.
+12. Apply slide fit budgeting from `references/slide-fit-budget.md`.
+13. Choose style family and adaptation plan from `references/style-decision.md`.
+14. Generate `dist/index.html` as a standalone local file with shared navigation/typography but page-specific content DOM and CSS.
+15. If narrated mode: prepare TTS queue.
+16. If HyperFrames mode: generate composition output and manifest.
+17. Run validation and the final quality checklist.
+
+Never start by copying source headings into slides. Never start by writing the final visual template. The first reasoning artifact after cleaning must be `scripts/first-principles.md`.
+
+## Manuscript-first Requirement
+
+The deck must read as one continuous lesson:
+
+- each page connects to the previous page
+- each page sets up the next page
+- `speakerText` contains transition logic, not just repeated on-slide text
+- the progression should be clear: premise -> mechanism -> decomposition -> example -> boundary -> practice -> conclusion
+
+## Page-specific Visual Rewrite Requirement
+
+Do not build content pages from a universal `.module`, `.card`, `.item`, or `.layoutType` renderer. `layoutType` is only a planning hint in `slides.json`; it is not a component factory.
+
+For every content slide, define a `pageDesign` before writing HTML:
+
+```text
+Page thesis:
+Teaching move:
+Visual metaphor:
+Composition sketch:
+Primary DOM regions:
+Unique CSS classes:
+Accent and glow usage:
+Fit strategy:
+Transition from previous page:
+Transition to next page:
+```
+
+The final HTML should show page-specific semantic structures such as `.tool-gateway-map`, `.memory-layer-stack`, `.risk-crack-board`, `.decision-axis-field`, `.react-orbit`, or similarly meaningful classes.
+
+Shared classes are allowed for global typography, navigation, accent variables, glow utilities, and responsive helpers. The main content area of each slide must be authored as a page-specific DOM/CSS composition.
 
 ## Existing HTML Restyle Workflow
 
@@ -60,10 +95,10 @@ Use when the user provides an existing HTML deck and asks to make it look like t
 
 1. Extract scenes, titles, subtitles, narration, and slide order.
 2. Preserve the teaching sequence unless the user asks to restructure.
-3. Convert `.scene` / card-heavy pages into `.slide` / `.stage` pages.
+3. Rewrite shallow headings into stronger teaching claims.
 4. Force the first page into a centered cover/thematic presentation layout.
-5. Rebuild shallow headings into stronger teaching claims before restyling.
-6. Replace repeated card grids with formula, route, xray, matrix, flow, loop, graph, decision, or takeaway layouts selected from page meaning.
+5. Rewrite content pages with page-specific DOM/CSS compositions.
+6. Replace repeated card grids with formula, route, xray, matrix, flow, loop, graph, decision, or takeaway compositions selected from page meaning.
 7. Preserve or recreate navigation dots, bottom subtitle bar, progress bar, page switcher, keyboard controls, and optional play button.
 8. Remove remote assets, CDNs, and web fonts unless the user explicitly allows them.
 9. Deliver one standalone `dist/index.html` in quick-html mode unless narration or HyperFrames was requested.
@@ -81,38 +116,32 @@ Use this structure per page:
 Kicker:
 Headline:
 Lead:
-Visual type:
+Page thesis:
+Teaching move:
+Visual metaphor:
 Layout type:
-Visual plan:
-Layout rationale:
+Composition sketch:
+Primary DOM regions:
+Unique CSS classes:
 On-slide text:
 Speaker text:
-Transition:
+Transition from previous:
+Transition to next:
 ```
 
 ### slides.json
-Follow `references/slide-contract.md`. Keep slide text compact and place longer explanation in `speakerText`.
-
-## Cover and Content Layout Policy
-
-### Cover page
-- Make slide 1 a centered theme presentation page.
-- Put the main topic in the visual center.
-- Use a compact kicker, large centered title, one thesis sentence, and 2-4 chips/cards that expose the deck's main themes.
-- Do not use the left-title/right-content layout on the cover.
-
-### Content pages
-- Use formula strips, x-ray stacks, flow chains, route maps, comparison slabs, reflection labs, decision axes, graph chains, matrices, timelines, loop diagrams, and takeaway lists.
-- Evaluate the script's semantic shape before choosing the layout.
-- Avoid repeating the same composition across adjacent slides.
+Follow `references/slide-contract.md`. Keep slide text compact and put longer explanation in `speakerText`.
 
 ## Visual Rules
 
 Consult:
 - `references/visual-style-dark-grid.md`
 - `references/composition-richness.md`
+- `references/page-composition-first.md`
 - `references/slide-fit-budget.md`
 - `references/style-decision.md`
+- `assets/style-reference-template.html`
+- `assets/style-samples/`
 
 Required baseline for `dist/index.html`:
 - standalone HTML with embedded CSS and JS
@@ -124,38 +153,22 @@ Required baseline for `dist/index.html`:
 - page switcher
 - keyboard left/right navigation
 - right-side navigation dots on desktop
-- full-screen 16:9-friendly layout
+- compact-balanced sizing at 16:9 desktop size
+- semantic color selection based on each page's role
+- module background glow driven by the current accent
+- page-specific content DOM and CSS, not generic `.module + layoutType` assembly
 
-## Content Depth Rules
+Use diagrams before generic cards. Avoid long paragraphs, dense lists, repeated identical layouts, landing-page sections, oversized modules, and vertical stacks that cannot fit in one viewport.
 
-Default to `level-3-mechanism`:
-- Every content slide must include at least two of: mechanism, contrast, example, boundary, failure point, practical implication.
-- Do not generate pages that only list concepts.
-- Slide titles should express a judgment, not a topic label.
+## Content Depth and Slide Fit
 
-## Fit and Layout Rules
+Default to `level-3-mechanism`: every content slide should include at least two of mechanism, contrast, example, boundary, failure, or implication.
 
-- Do not create long vertical stacks that overflow.
-- If a slide has more than six information points, convert it to a matrix, grouped bands, hub-spoke, or split into two slides.
-- Avoid decks where most pages are simple horizontal rows.
-- Use compact-balanced sizing by default.
-- Do not wrap every slide in a large glass-card container.
+If a page has too many points, group into a matrix, radial map, split band, x-ray, or route. If it still does not fit, split the page.
 
-## Accent and Glow Rules
+## Revision Policy
 
-- Use the current page accent for 1-3 keywords in the title and for semantic markers, tags, connectors, and key nodes.
-- Do not color whole paragraphs or every module.
-- Core visual modules must have accent-driven background glow, not only colored text.
-- Use `.visual-zone` / `.glow-zone` / `.module-glow` behind major modules.
-- Use `.glow-card` / `.glow-node` / `.glow-panel` for subtle gradient module surfaces.
-
-## Revision Workflow
-
-When the user gives feedback on an existing output:
-1. Classify the feedback: content, layout, visual, color, scale, fit, interaction, or style-family.
-2. Preserve approved content and structure.
-3. Modify only the affected layer unless the user asks for a full rewrite.
-4. Revalidate after changes.
+When the user asks to adjust an output, classify the feedback layer first: content depth, layout fit, visual style, scale, color, interaction, or output mode. Preserve accepted parts and modify only the affected layer unless the user requests a full rebuild.
 
 ## Validation
 
@@ -167,4 +180,11 @@ python scripts/validate_demo_contract.py <project-dir> --mode narrated-html
 python scripts/validate_demo_contract.py <project-dir> --mode hyperframes
 ```
 
-The validator should fail only on requirements relevant to the selected mode.
+Before final delivery, verify:
+- first slide is a centered cover/theme page
+- full manuscript is coherent and connected
+- content slides have page-specific DOM/CSS compositions
+- generic `.module + layoutType` assembly is avoided
+- slide fit budget is respected
+- accent highlights and background glow are present
+- navigation, subtitle, page switcher, and progress bar work
