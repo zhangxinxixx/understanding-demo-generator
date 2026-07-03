@@ -1,0 +1,29 @@
+{
+  "skill_name": "understanding-demo-generator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "基于这份 Markdown 笔记，生成一个类似 Hyperframe 风格的科技感可翻页 HTML 学习演示，不需要语音。",
+      "expected_output": "Uses quick-html mode. Produces first-principles.md, deck.md, slides.json, and standalone dist/index.html with dark-grid style, subtitles, navigation dots, page switcher, and progress bar. Does not force narration, audio, or HyperFrames composition.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "把我现有的 HTML 课件改成之前第 04 章那种深色网格、霓虹光晕、字幕、右下翻页按钮的风格。",
+      "expected_output": "Uses existing HTML restyle workflow in quick-html mode. Extracts current scenes and narration, preserves teaching sequence, converts to .deck/.slide/.stage structure, replaces card-heavy pages with varied visual layouts, and delivers standalone dist/index.html.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我有一份产品说明文档，请生成一个可以自动讲解的演示网页：每页一个核心判断，有中文旁白，并准备 mimotts TTS 队列。",
+      "expected_output": "Uses narrated-html mode. Produces quick-html artifacts plus narration.json and scripts/tts/slide-XX.txt files. Audio files are optional unless the environment can generate them.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "请把这篇文章做成 HyperFrames-compatible slideshow，需要 composition 输出和 slideshow manifest。",
+      "expected_output": "Uses hyperframes mode only because the user explicitly requested it. Produces dist/composition/index.html with data-composition-id scene linkage and an application/hyperframes-slideshow+json manifest matching slides.json scene IDs.",
+      "files": []
+    }
+  ]
+}

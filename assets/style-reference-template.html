@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hello-Agents-04 智能体经典范式构建</title>
+<style>
+:root{
+  --bg:#05070b;
+  --ink:#f8fbff;
+  --muted:rgba(235,241,255,.62);
+  --hair:rgba(255,255,255,.13);
+  --violet:#a5b4fc;
+  --blue:#93c5fd;
+  --cyan:#2dd4e8;
+  --green:#6ee7b7;
+  --amber:#fcd34d;
+  --orange:#f59e0b;
+  --rose:#ff6f91;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"MiSans","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;letter-spacing:0}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+body::after{content:"";position:fixed;inset:-15%;background:radial-gradient(circle at 18% 22%,rgba(99,102,241,.22),transparent 27%),radial-gradient(circle at 75% 38%,rgba(168,85,247,.22),transparent 28%),radial-gradient(circle at 46% 88%,rgba(245,158,11,.10),transparent 24%);filter:blur(80px);opacity:.82;pointer-events:none}
+.deck{position:relative;z-index:1;width:100vw;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;padding:42px 56px 108px;overflow-y:auto}
+.slide::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--accent);filter:blur(110px);opacity:.18;top:18%;left:18%;pointer-events:none;animation:orbFloat 8s ease-in-out infinite alternate}
+.slide::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:color-mix(in srgb,var(--accent) 72%,#a855f7);filter:blur(105px);opacity:.13;right:14%;bottom:16%;pointer-events:none;animation:orbFloat 10s ease-in-out infinite alternate-reverse}
+.slide.active{display:block}
+.stage{width:min(1080px,100%);min-height:100%;margin:0 auto;display:grid;align-content:center;gap:18px;position:relative}
+.kicker{display:inline-flex;width:max-content;align-items:center;padding:7px 16px;border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:color-mix(in srgb,var(--accent) 84%,white);font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(32px,3.55vw,50px);line-height:1.09;font-weight:900}
+h2{margin:0;font-size:clamp(27px,2.75vw,40px);line-height:1.12;font-weight:900}
+p{margin:0}
+.motion-icon{display:inline-grid;place-items:center;width:auto;height:auto;margin-right:10px;border-radius:0;background:transparent;border:0;color:color-mix(in srgb,var(--accent) 78%,white);font-size:.72em;vertical-align:.08em;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--accent) 36%,transparent));animation:floatIcon 3.4s ease-in-out infinite}
+.node-emoji{display:block;margin-bottom:10px;font-size:22px;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--accent) 70%,transparent));animation:floatIcon 3.4s ease-in-out infinite}
+.soft-label{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;font-weight:700;letter-spacing:.05em}
+.lead{max-width:820px;color:var(--muted);font-size:clamp(15px,1.28vw,19px);line-height:1.6;font-weight:500}
+.accent{color:var(--accent)}
+.hl{color:var(--accent);font-weight:800}
+.hl-blue{color:var(--blue);font-weight:800}
+.hl-green{color:var(--green);font-weight:800}
+.hl-yellow{color:var(--amber);font-weight:800}
+.hl-orange{color:var(--orange);font-weight:800}
+.muted{color:var(--muted)}
+.center{text-align:center;justify-items:center}
+.hair{border:1px solid var(--hair);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.026));box-shadow:0 30px 90px rgba(0,0,0,.32)}
+.cover-mark{position:absolute;inset:auto auto 34px -8px;color:rgba(255,255,255,.045);font-size:126px;font-weight:900;line-height:.8}
+.cover-triad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:min(820px,100%);margin:8px auto 0}
+.triad-item{padding:15px 18px;border-radius:12px;border:1px solid color-mix(in srgb,var(--chip) 38%,transparent);background:color-mix(in srgb,var(--chip) 16%,rgba(255,255,255,.035));text-align:left}
+.triad-item strong{display:block;font-size:19px;color:color-mix(in srgb,var(--chip) 86%,white)}
+.triad-item span{display:block;margin-top:6px;color:rgba(255,255,255,.68);font-size:13px;font-weight:500}
+.formula{display:grid;grid-template-columns:1fr auto 1fr auto 1.2fr;gap:18px;align-items:center}
+.formula-box{min-height:126px;padding:20px;border-radius:12px;display:grid;align-content:center;text-align:center;border-style:dashed;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.018))}
+.formula-box b{font-size:25px}
+.formula-box small{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.5}
+.sign{color:var(--accent);font-size:34px;font-weight:900}
+.micro-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.micro{padding:12px 16px;border-left:4px solid var(--accent);background:rgba(0,0,0,.32);font-size:16px;font-weight:700}
+.xray{display:grid;grid-template-columns:.92fr 1.08fr;gap:26px;align-items:stretch}
+.xray-left{padding:24px;border-radius:12px}
+.xray-left strong{display:block;font-size:25px;line-height:1.24}
+.xray-left p{margin-top:14px;color:var(--muted);font-size:16px;line-height:1.6}
+.hidden-stack{position:relative;display:grid;gap:12px;padding-left:32px}
+.hidden-stack::before{content:"";position:absolute;left:10px;top:10px;bottom:10px;width:2px;background:linear-gradient(transparent,var(--accent),transparent);box-shadow:0 0 18px var(--accent)}
+.hidden-row{display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:center;padding:13px 4px 13px 0;border-radius:0;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.12)}
+.hidden-row:nth-child(even){transform:translateX(22px)}
+.hidden-row span{width:34px;height:34px;display:grid;place-items:center;border-radius:8px;background:transparent;border:1px solid color-mix(in srgb,var(--accent) 52%,transparent);color:color-mix(in srgb,var(--accent) 86%,white);font-weight:900;font-size:16px;box-shadow:0 0 18px color-mix(in srgb,var(--accent) 18%,transparent)}
+.hidden-row b{display:block;font-size:18px;color:color-mix(in srgb,var(--accent) 80%,white)}
+.hidden-row small{display:block;margin-top:4px;color:var(--muted);font-size:13px;line-height:1.45}
+.react-board{display:grid;grid-template-columns:1fr 330px;gap:22px}
+.react-flow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.react-node{min-height:192px;padding:20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 15%,rgba(255,255,255,.035)),rgba(0,0,0,.22));display:grid;align-content:center;text-align:center;position:relative}
+.react-node:not(:last-child)::after{content:"";position:absolute;right:-22px;top:50%;width:25px;height:2px;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+.react-node:not(:last-child)::before{content:"";position:absolute;right:-25px;top:calc(50% - 5px);width:10px;height:10px;border-top:2px solid var(--accent);border-right:2px solid var(--accent);transform:rotate(45deg)}
+.react-node b{font-size:23px;color:color-mix(in srgb,var(--accent) 86%,white)}
+.react-node small{display:block;margin-top:10px;color:var(--muted);font-size:13px;line-height:1.5}
+.react-aside{display:grid;gap:15px}
+.aside-block{padding:18px;border-radius:10px;border:1px solid var(--hair);background:rgba(0,0,0,.30)}
+.aside-block span{display:block;color:var(--accent);font-size:15px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+.aside-block p{margin-top:8px;font-size:16px;font-weight:700;line-height:1.5}
+.plan-map{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:center}
+.route{position:relative;padding:28px 22px;border-radius:16px;border:1px solid color-mix(in srgb,var(--accent) 42%,transparent);background:rgba(255,255,255,.04)}
+.route-line{position:absolute;left:58px;top:70px;bottom:70px;width:4px;background:linear-gradient(var(--accent),transparent)}
+.route-step{position:relative;display:grid;grid-template-columns:66px 1fr;gap:16px;align-items:center;margin:18px 0}
+.route-step span{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:transparent;border:1px solid color-mix(in srgb,var(--accent) 52%,transparent);color:color-mix(in srgb,var(--accent) 86%,white);font-weight:900;font-size:15px;box-shadow:0 0 18px color-mix(in srgb,var(--accent) 16%,transparent)}
+.route-step b{display:block;font-size:18px;color:color-mix(in srgb,var(--accent) 84%,white)}
+.route-step small{display:block;margin-top:4px;color:var(--muted);font-size:13px}
+.plan-compare{display:grid;grid-template-columns:1fr;gap:14px;position:relative}
+.plan-compare::before{content:"VS";position:absolute;right:18px;top:-44px;color:rgba(255,255,255,.06);font-size:86px;font-weight:900}
+.compare-slab{padding:18px 22px;border-radius:0;border:0;border-left:4px solid currentColor;background:linear-gradient(90deg,rgba(255,255,255,.06),transparent)}
+.compare-slab b{display:block;font-size:21px;color:var(--accent)}
+.compare-slab p{margin-top:9px;color:var(--muted);font-size:15px;line-height:1.55;font-weight:560}
+.reflection-lab{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;position:relative;border-top:1px solid color-mix(in srgb,var(--accent) 36%,transparent);border-bottom:1px solid color-mix(in srgb,var(--accent) 36%,transparent)}
+.reflection-lab::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.5}
+.lab-col{min-height:210px;padding:20px 22px;border-radius:0;border:0;border-right:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.045),transparent);display:grid;align-content:start;position:relative}
+.lab-col:last-child{border-right:0}
+.lab-col span{color:var(--accent);font-size:15px;font-weight:950;letter-spacing:.14em}
+.lab-col b{margin-top:10px;font-size:21px;color:color-mix(in srgb,var(--accent) 84%,white)}
+.lab-col p{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.55;font-weight:520}
+.selector{display:grid;grid-template-columns:270px 1fr;gap:30px;align-items:center}
+.selector-axis{padding:30px;border-radius:50%;aspect-ratio:1;display:grid;place-content:center;text-align:center;border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);background:radial-gradient(circle,color-mix(in srgb,var(--accent) 16%,rgba(255,255,255,.04)),rgba(0,0,0,.16));box-shadow:0 0 70px color-mix(in srgb,var(--accent) 16%,transparent)}
+.selector-axis b{display:block;font-size:22px}
+.selector-axis p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.55}
+.decision-grid{position:relative;display:grid;gap:18px;padding:18px 0}
+.decision-grid::before{content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(transparent,var(--accent),transparent);opacity:.5}
+.decision{position:relative;padding:14px 18px 14px 82px;border-radius:999px;border:0;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 15%,rgba(255,255,255,.055)),rgba(255,255,255,.02));overflow:visible}
+.decision::before{content:attr(data-num);position:absolute;left:0;top:50%;transform:translateY(-50%);width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--accent) 22%,#111827);border:1px solid color-mix(in srgb,var(--accent) 42%,transparent);color:var(--ink);font-size:18px;font-weight:900;box-shadow:0 0 22px color-mix(in srgb,var(--accent) 30%,transparent)}
+.decision::after{content:"";position:absolute;left:50px;top:50%;width:22px;height:2px;background:color-mix(in srgb,var(--accent) 55%,transparent)}
+.decision span{display:block;color:var(--muted);font-size:16px;font-weight:900}
+.decision b{display:inline-block;margin-top:5px;color:var(--accent);font-size:21px}
+.decision p{display:inline-block;margin:0 0 0 12px;font-size:15px;font-weight:760;line-height:1.45}
+.graph{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;align-items:center}
+.graph-node{min-height:142px;padding:20px 12px;border-radius:50%;aspect-ratio:1;text-align:center;display:grid;align-content:center;border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);background:radial-gradient(circle,color-mix(in srgb,var(--accent) 14%,rgba(255,255,255,.04)),rgba(0,0,0,.22));position:relative}
+.graph-node:not(:last-child)::after{content:"";position:absolute;right:-14px;top:50%;width:15px;height:2px;background:var(--accent)}
+.graph-node b{font-size:22px;color:var(--accent)}
+.graph-node small{margin-top:7px;color:var(--muted);font-size:13px;line-height:1.3}
+.graph-note{padding:18px 24px;border-radius:12px;background:color-mix(in srgb,var(--accent) 13%,rgba(255,255,255,.04));border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);font-size:18px;font-weight:800;text-align:center}
+.takeaway-list{display:grid;grid-template-columns:1fr;gap:0;width:min(980px,100%)}
+.takeaway{padding:15px 10px;border-radius:0;border:0;border-bottom:1px solid rgba(255,255,255,.13);background:transparent;display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center}
+.takeaway:first-child{border-top:1px solid rgba(255,255,255,.13)}
+.takeaway span{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:transparent;border:1px solid color-mix(in srgb,var(--accent) 48%,transparent);color:color-mix(in srgb,var(--accent) 82%,white);font-weight:900;font-size:14px}
+.takeaway b{font-size:16px;line-height:1.45}
+.closing-habits{display:flex;gap:24px;width:100%;justify-content:center;align-items:center}
+.habit{padding:0 8px 14px;border-radius:0;border:0;border-bottom:3px solid color-mix(in srgb,var(--accent) 48%,transparent);background:transparent;text-align:center;min-width:220px}
+.habit span{display:block;color:var(--muted);font-size:17px;font-weight:850}
+.habit b{display:block;margin-top:10px;font-size:20px;color:var(--accent)}
+.subtitle-bar{position:fixed;z-index:20;left:50%;bottom:20px;transform:translateX(-50%);width:min(1020px,calc(100vw - 180px));min-height:52px;padding:12px 22px;border-radius:12px;border:1px solid rgba(255,255,255,.13);background:rgba(0,0,0,.72);backdrop-filter:blur(12px);font-size:14px;line-height:1.62;text-align:center;font-weight:500;color:rgba(255,255,255,.9)}
+.controls{position:fixed;z-index:25;right:38px;top:34px;display:flex;gap:12px}
+.control{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:900;cursor:pointer}
+.nav{position:fixed;z-index:25;right:38px;top:50%;transform:translateY(-50%);display:grid;gap:12px}
+.dot{width:12px;height:12px;border:0;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer}
+.dot.active{background:var(--accent);transform:scale(1.3);box-shadow:0 0 16px var(--accent)}
+.page-switch{position:fixed;z-index:28;right:36px;bottom:24px;display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(0,0,0,.38);backdrop-filter:blur(12px)}
+.page-btn{width:28px;height:28px;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:transparent;color:rgba(255,255,255,.78);font-size:17px;font-weight:800;line-height:1;cursor:pointer}
+.page-btn:hover{border-color:color-mix(in srgb,var(--accent) 48%,transparent);color:#fff;background:color-mix(in srgb,var(--accent) 18%,rgba(255,255,255,.07))}
+.page-count{min-width:44px;text-align:center;color:rgba(255,255,255,.68);font-size:12px;font-weight:800;letter-spacing:.08em}
+.progress{position:fixed;z-index:26;left:0;bottom:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),#fff);transition:width .25s linear}
+.decision b.hl-blue,.compare-slab b.hl-blue{color:var(--blue)}
+.decision b.hl-green,.compare-slab b.hl-green{color:var(--green)}
+.decision b.hl-yellow,.compare-slab b.hl-yellow{color:var(--amber)}
+.takeaway b .hl-blue,.takeaway b .hl-green,.takeaway b .hl-yellow{
+  display:inline;
+  width:auto;
+  height:auto;
+  border-radius:0;
+  background:none;
+  color:inherit;
+}
+.takeaway b .hl-blue{color:var(--blue)}
+.takeaway b .hl-green{color:var(--green)}
+.takeaway b .hl-yellow{color:var(--amber)}
+@keyframes pulseIcon{0%,100%{transform:scale(1);box-shadow:0 0 0 rgba(255,255,255,0)}50%{transform:scale(1.06);box-shadow:0 0 28px color-mix(in srgb,var(--accent) 28%,transparent)}}
+@keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes orbFloat{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(36px,-24px,0) scale(1.08)}}
+@media(max-width:980px){
+  html,body{overflow:auto}
+  .deck{height:auto;min-height:100vh}
+  .slide{position:relative;min-height:100vh;padding:76px 22px 150px}
+  .stage{height:auto}
+  h1{font-size:40px;line-height:1.1;word-break:break-word}
+  .lead{font-size:19px}
+  .cover-triad,.formula,.xray,.react-board,.react-flow,.plan-map,.plan-compare,.reflection-lab,.selector,.decision-grid,.graph,.takeaway-list,.micro-row{grid-template-columns:1fr}
+  .closing-habits{display:grid;grid-template-columns:1fr}
+  .selector-axis{border-radius:18px;aspect-ratio:auto}
+  .graph-node{border-radius:16px;aspect-ratio:auto}
+  .sign{display:none}
+  .react-node:not(:last-child)::before,.react-node:not(:last-child)::after,.graph-node:not(:last-child)::after{display:none}
+  .react-node{min-height:190px}
+  .subtitle-bar{width:calc(100vw - 30px);font-size:15px}
+  .controls{right:16px;top:18px}
+  .control{padding:10px 15px}
+  .nav{display:none}
+  .page-switch{right:14px;bottom:14px}
+  .page-count{display:none}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+  <section class="slide active" id="scene-0" style="--accent:var(--violet)">
+    <div class="stage center">
+      <div class="cover-mark">LOOP</div>
+      <div class="kicker">HELLO AGENTS / CHAPTER 04</div>
+      <h1><span class="motion-icon">🧭</span>从<span class="hl">第一性原理</span>看 Agent Loop</h1>
+      <p class="lead">LLM 本质上只是“根据上下文预测下一段输出”。要让它成为 Agent，必须补上 <span class="hl">行动、反馈、停止</span> 这三个环节。</p>
+      <div class="cover-triad">
+        <div class="triad-item" style="--chip:var(--blue)"><strong>ReAct</strong><span>解决“不知道去哪找”</span></div>
+        <div class="triad-item" style="--chip:var(--green)"><strong>Plan-and-Solve</strong><span>解决“步骤容易乱”</span></div>
+        <div class="triad-item" style="--chip:var(--amber)"><strong>Reflection</strong><span>解决“第一版不够好”</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-1" style="--accent:var(--blue)">
+    <div class="stage">
+      <div class="kicker">CORE IDEA</div>
+      <h1><span class="motion-icon">🔁</span>一次模型调用，为什么不等于 Agent？</h1>
+      <p class="lead">第一性原理很简单：单次调用没有持续目标、没有外部反馈、没有错误恢复。Agent 的核心，是把模型放进一个可控的 <span class="hl">反馈回路</span>。</p>
+      <div class="formula">
+        <div class="formula-box hair"><span class="node-emoji">🧠</span><b class="hl">LLM</b><small>只能基于当前上下文生成输出</small></div>
+        <div class="sign">+</div>
+        <div class="formula-box hair"><span class="node-emoji">🔄</span><b class="hl">Loop</b><small>把输出变成行动，再把反馈放回上下文</small></div>
+        <div class="sign">=</div>
+        <div class="formula-box hair"><span class="node-emoji">⚙️</span><b class="hl">Agent 行为</b><small>会探索、会拆解、会修正</small></div>
+      </div>
+      <div class="micro-row">
+        <div class="micro"><span class="hl-blue">状态</span>如何流动</div>
+        <div class="micro"><span class="hl-green">工具</span>如何接入</div>
+        <div class="micro"><span class="hl-yellow">循环</span>何时停止</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-2" style="--accent:var(--amber)">
+    <div class="stage">
+      <div class="kicker">WHY BUILD BY HAND</div>
+      <h1>框架隐藏的，正是 Agent 会坏的地方</h1>
+      <div class="xray">
+        <div class="xray-left hair">
+          <strong>问题不是“会不会调 API”，而是<span class="hl-yellow">失控时你知不知道哪里坏了</span>。</strong>
+          <p>高抽象框架会让 demo 很快跑起来，但也会把解析、重试、记忆和停止策略藏起来。</p>
+        </div>
+        <div class="hidden-stack">
+          <div class="hidden-row"><span>!</span><div><b>解析问题</b><small>模型输出不稳定，工具调用就会失败。</small></div></div>
+          <div class="hidden-row"><span>↻</span><div><b>重试问题</b><small>工具报错后，需要降级、重试或换路径。</small></div></div>
+          <div class="hidden-row"><span>⌁</span><div><b>上下文问题</b><small>历史记录太乱，下一步决策就会偏。</small></div></div>
+          <div class="hidden-row"><span>■</span><div><b>停止问题</b><small>没有边界，Agent 会越跑越远。</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-3" style="--accent:var(--blue)">
+    <div class="stage">
+      <div class="kicker">REACT</div>
+      <h1><span class="hl-blue">ReAct</span>：用外部反馈对抗幻觉</h1>
+      <p class="lead">当模型内部知识不够时，改进点不是“让它更自信”，而是让它 <span class="hl-blue">先想、再查、再根据结果修正</span>。</p>
+      <div class="react-board">
+        <div class="react-flow">
+          <div class="react-node"><span class="node-emoji">💭</span><b>Thought</b><small>把“我缺什么信息”说清楚。</small></div>
+          <div class="react-node"><span class="node-emoji">🛠️</span><b>Action</b><small>调用搜索、API、计算器或业务工具。</small></div>
+          <div class="react-node"><span class="node-emoji">👁️</span><b>Observation</b><small>把工具结果放回上下文，修正下一步。</small></div>
+        </div>
+        <div class="react-aside">
+          <div class="aside-block"><span>解决的问题</span><p>纯 CoT 会幻想，纯 Action 不会纠错。</p></div>
+          <div class="aside-block"><span>改进点</span><p>清晰工具说明、稳定输出协议、高质量 Observation、max_steps。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-4" style="--accent:var(--green)">
+    <div class="stage">
+      <div class="kicker">PLAN-AND-SOLVE</div>
+      <h1><span class="hl-green">Plan-and-Solve</span>：先降低问题复杂度</h1>
+      <p class="lead">当任务路径相对确定，最大风险不是缺信息，而是 <span class="hl-green">跳步、漏步、顺序乱</span>。所以先规划，再执行。</p>
+      <div class="plan-map">
+        <div class="route">
+          <div class="route-line"></div>
+          <div class="route-step"><span>🧩</span><div><b>Plan</b><small>把大问题拆成小步骤。</small></div></div>
+          <div class="route-step"><span>▶</span><div><b>Solve</b><small>按计划逐步执行。</small></div></div>
+          <div class="route-step"><span>✓</span><div><b>Check</b><small>发现计划错误时要能回退。</small></div></div>
+        </div>
+        <div class="plan-compare">
+          <div class="compare-slab"><b class="hl-blue">ReAct</b><p>世界不清楚，边观察边改。问题在外部环境里。</p></div>
+          <div class="compare-slab"><b class="hl-green">Plan-and-Solve</b><p>题目已清楚，先拆解再做。问题在内部结构里。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-5" style="--accent:var(--orange)">
+    <div class="stage">
+      <div class="kicker">REFLECTION</div>
+      <h1><span class="hl-yellow">Reflection</span>：把质量改进显式化</h1>
+      <p class="lead">当第一版答案通常不够好，改进点不是盲目重跑，而是加入 <span class="hl-yellow">评价标准、反馈、修订</span>。</p>
+      <div class="reflection-lab">
+        <div class="lab-col"><span>✍️ DRAFT</span><b>先产出</b><p>没有初稿，就没有可检查对象。</p></div>
+        <div class="lab-col"><span>🧪 CRITIQUE</span><b>再批改</b><p>用标准指出错误、遗漏和低效之处。</p></div>
+        <div class="lab-col"><span>✨ REFINE</span><b>再修订</b><p>根据反馈重写；必要时继续循环。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-6" style="--accent:var(--violet)">
+    <div class="stage">
+      <div class="kicker">CHOOSING A LOOP</div>
+      <h1><span class="motion-icon">🎯</span>三种范式怎么选？看<span class="hl">问题的形状</span></h1>
+      <div class="selector">
+        <div class="selector-axis">
+          <b>不是哪个更高级</b>
+          <p>从第一性原理看，范式选择就是在问：当前任务最缺的是信息、结构，还是质量反馈？</p>
+        </div>
+        <div class="decision-grid">
+          <div class="decision" data-num="01"><span>缺外部信息</span><b class="hl-blue">ReAct</b><p>边看边决定。</p></div>
+          <div class="decision" data-num="02"><span>缺拆解结构</span><b class="hl-green">Plan-and-Solve</b><p>先想清楚再执行。</p></div>
+          <div class="decision" data-num="03"><span>缺质量反馈</span><b class="hl-yellow">Reflection</b><p>先做出来再优化。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-7" style="--accent:var(--cyan)">
+    <div class="stage">
+      <div class="kicker">LANGGRAPH BRIDGE</div>
+      <h1><span class="motion-icon">🕸️</span>LangGraph 不是新概念，是把 loop 工程化</h1>
+      <p class="lead">当 loop 变复杂，就需要把状态、节点、工具、边和停止条件显式管理起来。</p>
+      <div class="graph">
+        <div class="graph-node"><b>State</b><small>上下文如何保存</small></div>
+        <div class="graph-node"><b>Node</b><small>每一步谁决策</small></div>
+        <div class="graph-node"><b>Tool</b><small>如何连接环境</small></div>
+        <div class="graph-node"><b>Edge</b><small>下一步去哪</small></div>
+        <div class="graph-node"><b>Stop</b><small>循环何时结束</small></div>
+      </div>
+      <div class="graph-note">改进点：把隐式 prompt 链，变成可观察、可调试、可终止的图。</div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-8" style="--accent:var(--rose)">
+    <div class="stage">
+      <div class="kicker">FIVE TAKEAWAYS</div>
+      <h1>这章最该记住的 <span class="hl-yellow">5 句话</span></h1>
+      <div class="takeaway-list">
+        <div class="takeaway"><span>1</span><b>Agent = LLM + 状态 + 工具 + 反馈 + 停止条件。</b></div>
+        <div class="takeaway"><span>2</span><b><span class="hl-blue">ReAct</span> 改进信息获取，降低幻觉。</b></div>
+        <div class="takeaway"><span>3</span><b><span class="hl-green">Plan</span> 改进任务拆解，减少跳步。</b></div>
+        <div class="takeaway"><span>4</span><b><span class="hl-yellow">Reflection</span> 改进最终质量，但要有评价标准。</b></div>
+        <div class="takeaway"><span>5</span><b>学框架之前，先看懂 loop 的失控点。</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="scene-9" style="--accent:var(--violet)">
+    <div class="stage center">
+      <div class="kicker">CLOSING</div>
+      <h1>从会用 Agent，到能<span class="hl">设计循环</span></h1>
+      <p class="lead">真正的迁移能力，不是背三个范式，而是看见任务的问题形状，再选择合适的 loop。</p>
+      <div class="closing-habits">
+        <div class="habit"><span>ReAct</span><b>先去看，再决定</b></div>
+        <div class="habit"><span>Plan-and-Solve</span><b>先想清楚，再去做</b></div>
+        <div class="habit"><span>Reflection</span><b>先做出来，再优化</b></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="controls">
+  <button class="control" id="audioBtn">开启语音</button>
+  <button class="control" id="playBtn">播放</button>
+</div>
+<nav class="nav" id="nav"></nav>
+<div class="subtitle-bar" id="subtitle"></div>
+<div class="page-switch" aria-label="页切换">
+  <button class="page-btn" id="prevPage" aria-label="上一页">‹</button>
+  <span class="page-count" id="pageCount">1/10</span>
+  <button class="page-btn" id="nextPage" aria-label="下一页">›</button>
+</div>
+<div class="progress" id="progress"></div>
+
+<script>
+const slides = [
+  {id:"scene-0",narration:"这节课，我们先从第一性原理看智能体。大语言模型本身只是根据上下文生成下一段输出，它不会天然知道什么时候行动、怎么接收反馈、什么时候停下来。所以这一章真正讲的不是三个英文名词，而是三种把模型放进反馈循环的方法：React，Plan and Solve，Reflection。"},
+  {id:"scene-1",narration:"为什么一次模型调用不等于智能体？因为单次调用没有持续目标，没有外部反馈，也没有错误恢复。智能体的核心，是把模型输出变成行动，再把行动结果放回上下文。换句话说，智能体不是更长的 prompt，而是一个可控的 loop。"},
+  {id:"scene-2",narration:"这也是为什么要亲手实现。框架能让演示很快跑起来，但它会把真正容易出问题的地方藏住：输出怎么解析，工具失败怎么重试，历史记录怎么组织，以及循环什么时候停止。理解这些失控点，才有能力改进系统。"},
+  {id:"scene-3",narration:"React 的第一性原理，是用外部反馈来弥补模型内部知识的不足。纯思考容易幻觉，纯行动又缺少纠错。React 把 thought，action，observation 接成循环，让模型先判断缺什么，再调用工具，最后根据观察结果修正下一步。"},
+  {id:"scene-4",narration:"Plan and Solve 解决的是另一类问题：信息已经够了，但任务太复杂，模型容易跳步、漏步、顺序混乱。它的改进点是先把大问题拆成路线图，再按步骤执行。它比 React 更适合路径清楚、结构明确的任务。"},
+  {id:"scene-5",narration:"Reflection 面对的问题是：第一版答案通常不够好。改进点不是盲目多跑几次，而是把评价和修订显式化。先产出初稿，再用标准批改，再根据反馈修订。它适合代码优化、文本润色、方案改进这类允许迭代的任务。"},
+  {id:"scene-6",narration:"所以三种范式不是谁更高级，而是对应三种问题形状。缺外部信息，用 React；缺拆解结构，用 Plan and Solve；缺质量反馈，用 Reflection。选择范式，本质上是在选择任务最需要补上的那一段 loop。"},
+  {id:"scene-7",narration:"后面学 Lang Graph 框架时，这条线会自然接上。状态、节点、工具、边和停止条件，并不是新概念，它们是在把这些循环工程化。改进点是让原来隐式的提示词链，变成可观察、可调试、可终止的图。"},
+  {id:"scene-8",narration:"最后收束成五句话。智能体等于模型加状态、工具、反馈和停止条件。React 改进信息获取，Plan 改进任务拆解，Reflection 改进最终质量。工具是环境接口，prompt 是行为协议。学框架之前，要先看懂 loop 的失控点。"},
+  {id:"scene-9",narration:"到这里，第四章的重点就很清楚了。不要把 React，Plan and Solve，Reflection 背成三个术语，而要看见它们背后的问题：信息不够、结构不稳、质量不够。能看见问题形状，才算真的开始会设计智能体。"}
+];
+let current = 0;
+let audioEnabled = false;
+let playing = false;
+let currentAudio = null;
+let timer = null;
+const nav = document.getElementById("nav");
+const subtitle = document.getElementById("subtitle");
+const progress = document.getElementById("progress");
+const audioBtn = document.getElementById("audioBtn");
+const playBtn = document.getElementById("playBtn");
+const prevPage = document.getElementById("prevPage");
+const nextPage = document.getElementById("nextPage");
+const pageCount = document.getElementById("pageCount");
+nav.innerHTML = slides.map((s,i)=>`<button class="dot${i===0 ? " active" : ""}" data-index="${i}" aria-label="跳到第 ${i+1} 页"></button>`).join("");
+function stopAudio(){
+  if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;currentAudio=null}
+}
+function playAudio(){
+  stopAudio();
+  if(!audioEnabled) return;
+  currentAudio = new Audio(`assets/audio/${slides[current].id}.wav`);
+  currentAudio.addEventListener("ended",()=>{if(playing) go(current+1,true)});
+  currentAudio.addEventListener("error",()=>{subtitle.textContent=`音频加载失败：${slides[current].id}.wav`});
+  currentAudio.play().catch(()=>{subtitle.textContent="浏览器阻止自动播放，请先点击开启语音。"});
+}
+function go(index){
+  if(index < 0 || index >= slides.length){playing=false;playBtn.textContent="播放";return}
+  document.querySelectorAll(".slide").forEach((el,i)=>el.classList.toggle("active",i===index));
+  document.querySelectorAll(".dot").forEach((el,i)=>el.classList.toggle("active",i===index));
+  current=index;
+  location.hash = slides[current].id;
+  subtitle.textContent=slides[current].narration;
+  pageCount.textContent = `${current + 1}/${slides.length}`;
+  progress.style.width=`${current/(slides.length-1)*100}%`;
+  if(audioEnabled) playAudio();
+  if(playing && !audioEnabled){clearTimeout(timer);timer=setTimeout(()=>go(current+1),12000)}
+}
+document.querySelectorAll(".dot").forEach(btn=>btn.addEventListener("click",()=>{playing=false;playBtn.textContent="播放";go(Number(btn.dataset.index))}));
+prevPage.addEventListener("click",()=>{playing=false;playBtn.textContent="播放";go(current-1)});
+nextPage.addEventListener("click",()=>{playing=false;playBtn.textContent="播放";go(current+1)});
+audioBtn.addEventListener("click",()=>{audioEnabled=!audioEnabled;audioBtn.textContent=audioEnabled ? "关闭语音" : "开启语音";if(audioEnabled) playAudio();else stopAudio()});
+playBtn.addEventListener("click",()=>{playing=!playing;playBtn.textContent=playing ? "暂停" : "播放";if(playing){if(audioEnabled) playAudio();else go(current)}else{clearTimeout(timer);if(currentAudio) currentAudio.pause()}});
+document.addEventListener("keydown",e=>{if(e.key==="ArrowRight") go(current+1);if(e.key==="ArrowLeft") go(current-1);if(e.key===" ") {e.preventDefault();playBtn.click();}});
+const initial = (location.hash || "").match(/scene-(\d+)/);
+go(initial ? Math.min(Math.max(Number(initial[1]),0),slides.length-1) : 0);
+</script>
+</body>
+</html>

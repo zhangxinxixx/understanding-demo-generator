@@ -89,6 +89,17 @@ def validate_index(project: Path, scene_ids, errors):
         errors.append("dist/index.html should include glow module surfaces")
     if re.search(r"\.stage\s*\{[^}]*height\s*:\s*(?:6[0-9]{2}|[7-9][0-9]{2})px", html, re.I | re.S):
         errors.append("stage appears too large; avoid large fixed-height stage cards")
+    deck_shell_match = re.search(r"\.deck-shell\s*\{(?P<body>[^}]*)\}", html, re.I | re.S)
+    if deck_shell_match:
+        body = deck_shell_match.group("body")
+        if re.search(r"border\s*:\s*(?!0\b|none\b)[^;]+", body, re.I):
+            errors.append("deck-shell should not have an obvious outer border unless requested")
+        if re.search(r"box-shadow\s*:\s*(?!none\b)[^;]+", body, re.I):
+            errors.append("deck-shell should not have an obvious outer shadow unless requested")
+    if "voice.addEventListener(\"ended\"" in html and "index < slides.length - 1" not in html:
+        errors.append("audio ended handler should stop on the final slide instead of always looping")
+    if "#audio" in html and not all(token in html for token in ["addEventListener(\"play\"", "addEventListener(\"pause\"", "addEventListener(\"ended\""]):
+        errors.append("audio play/pause button state should be driven by play/pause/ended media events")
     for sid in scene_ids:
         if sid not in html:
             errors.append(f"scene id missing from HTML: {sid}")
@@ -106,6 +117,22 @@ def validate_narration(project: Path, slides, errors):
     tts_dir = project / "scripts" / "tts"
     if not tts_dir.exists():
         errors.append("missing scripts/tts directory")
+    for index, slide in enumerate(slides, start=1):
+        speaker_text = (slide.get("speakerText") or "").strip()
+        if not speaker_text:
+            errors.append(f"slide {index} is missing speakerText for narration")
+            continue
+        if index <= len(narration_slides):
+            narration_text = (narration_slides[index - 1].get("text") or "").strip()
+            if narration_text and narration_text != speaker_text:
+                errors.append(f"narration text does not match speakerText for slide {index}")
+        tts_file = tts_dir / f"slide-{index:02d}.txt"
+        if tts_file.exists():
+            tts_text = tts_file.read_text(encoding="utf-8", errors="replace").strip()
+            if tts_text != speaker_text:
+                errors.append(f"TTS text does not match speakerText for slide {index}")
+        else:
+            errors.append(f"missing TTS file for slide {index}: {tts_file}")
 
 
 def main() -> int:

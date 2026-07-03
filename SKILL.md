@@ -50,10 +50,12 @@ Deliver narrated-html files plus:
 11. Force the cover to be a centered theme presentation page.
 12. Apply slide fit budgeting from `references/slide-fit-budget.md`.
 13. Choose style family and adaptation plan from `references/style-decision.md`.
-14. Generate `dist/index.html` as a standalone local file with shared navigation/typography but page-specific content DOM and CSS.
-15. If narrated mode: prepare TTS queue.
-16. If HyperFrames mode: generate composition output and manifest.
-17. Run validation and the final quality checklist.
+14. If narration, subtitles, or audio are involved, apply `references/subtitle-narration-continuity.md` before writing HTML or TTS files.
+15. Generate `dist/index.html` as a standalone local file with shared navigation/typography but page-specific content DOM and CSS.
+16. Apply playback rules from `references/html-playback.md`.
+17. If narrated mode: prepare TTS queue.
+18. If HyperFrames mode: generate composition output and manifest.
+19. Run validation and the final quality checklist.
 
 Never start by copying source headings into slides. Never start by writing the final visual template. The first reasoning artifact after cleaning must be `scripts/first-principles.md`.
 
@@ -140,6 +142,8 @@ Consult:
 - `references/page-composition-first.md`
 - `references/slide-fit-budget.md`
 - `references/style-decision.md`
+- `references/subtitle-narration-continuity.md` when subtitles, narration, or TTS exist
+- `references/html-playback.md` when audio, auto-advance, or play/pause controls exist
 - `assets/style-reference-template.html`
 - `assets/style-samples/`
 
@@ -153,6 +157,9 @@ Required baseline for `dist/index.html`:
 - page switcher
 - keyboard left/right navigation
 - right-side navigation dots on desktop
+- if audio exists: play/pause button state must follow real media events
+- if audio exists: the final slide stops after playback; it must not loop to the first slide unless the user asks for looping
+- no obvious outer deck frame/border/shadow around the whole slide canvas unless the user asks for a framed preview
 - compact-balanced sizing at 16:9 desktop size
 - semantic color selection based on each page's role
 - module background glow driven by the current accent
@@ -183,8 +190,11 @@ python scripts/validate_demo_contract.py <project-dir> --mode hyperframes
 Before final delivery, verify:
 - first slide is a centered cover/theme page
 - full manuscript is coherent and connected
+- subtitles, `speakerText`, TTS text files, narration metadata, and audio intent are aligned according to `subtitle-narration-continuity.md`
 - content slides have page-specific DOM/CSS compositions
+- structured visuals use stable grid/flex alignment and do not rely on drifting absolute percentage positions for primary nodes
 - generic `.module + layoutType` assembly is avoided
 - slide fit budget is respected
+- no primary visual module overflows below its parent or into the subtitle/control region
 - accent highlights and background glow are present
-- navigation, subtitle, page switcher, and progress bar work
+- navigation, subtitle, page switcher, progress bar, audio play/pause state, and final-slide stop behavior work

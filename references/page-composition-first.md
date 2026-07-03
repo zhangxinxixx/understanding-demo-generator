@@ -92,6 +92,16 @@ Avoid:
 .layout-flow-chain .module { ... }
 ```
 
+## Alignment and overflow rule
+
+Primary visual structures must be aligned by the layout system, not by fragile eyeballed offsets.
+
+- Use CSS grid or flex tracks for matrices, state rings, decision boards, ladders, and comparison fields.
+- Avoid positioning primary nodes with drifting absolute percentages such as `left: 30%; bottom: 5%` unless the geometry truly requires it and has been measured.
+- If a diagram uses absolute positioning, define one stable coordinate system and verify each node's bounding box stays inside the visual module.
+- The major visual module must fit inside its `.visual-zone` or equivalent parent. Its computed bottom must not extend into the subtitle or control area.
+- Redesign crowded decision/axis pages into grouped rows, matrices, split bands, or route panels instead of letting a tall diagram spill downward.
+
 ## Quality checks
 
 Before delivery, inspect the HTML:
@@ -101,3 +111,5 @@ Before delivery, inspect the HTML:
 - Could a reader understand the page's idea from the visual structure alone?
 - Does the narration form a continuous lesson?
 - Did the implementation avoid generic `.module + layoutType` assembly?
+- Are matrix, ring, route, and decision layouts grid-aligned rather than visually drifting?
+- Does every primary visual module fit within its parent without overlapping subtitles or controls?

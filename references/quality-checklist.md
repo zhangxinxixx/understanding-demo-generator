@@ -34,6 +34,9 @@ Run this before delivery.
 - Cards and nodes are compact enough for 16:9.
 - Information density is readable.
 - No important content is hidden below the fold.
+- The primary visual module does not extend below its parent visual area.
+- Subtitles and lower-right controls do not overlap.
+- The whole deck canvas is not wrapped in an obvious preview border or shadow unless requested.
 
 ## Interaction
 
@@ -42,3 +45,13 @@ Run this before delivery.
 - Bottom subtitle exists.
 - Progress bar exists.
 - Left/right keyboard navigation works.
+- If audio exists, play/pause state follows real media events.
+- If audio exists, the final slide stops after its audio ends instead of looping.
+- If autoplay is requested, the deck attempts it and still provides a clear click-to-start fallback for browser autoplay blocking.
+
+## Narration
+
+- `speakerText` reads as a connected lesson across slides.
+- `scripts/tts/slide-XX.txt` matches the corresponding `speakerText`.
+- `narration.json` text matches the corresponding `speakerText`.
+- Bottom subtitles summarize the same idea as the spoken script and do not drift into a different claim.

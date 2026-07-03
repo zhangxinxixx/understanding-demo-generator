@@ -27,6 +27,9 @@ If there are more than 6 points, do one of:
 - every slide using the same horizontal flow
 - large fixed-height stage cards
 - huge border-radius dashboard cards
+- primary visual modules taller than their available visual zone
+- bottom nodes or route panels that visually spill into the subtitle/control area
+- decision diagrams built from loose absolute-positioned nodes when a grid or grouped band would be more stable
 
 ## Preferred compact patterns
 
@@ -37,3 +40,14 @@ If there are more than 6 points, do one of:
 - `loop-ring`
 - `two-column-xray`
 - `constellation`
+
+## Fit verification
+
+After generating HTML, sample desktop viewports and measure key rectangles:
+
+- active slide canvas
+- major visual module
+- subtitle bar
+- lower-right controls
+
+The visual module must be fully contained above the subtitle bar. If it is not, reduce the module height, convert the layout to rows/bands, or split the content.
