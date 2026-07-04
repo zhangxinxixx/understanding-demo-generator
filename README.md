@@ -74,15 +74,60 @@ For narration or video workflows, request them explicitly:
 Use understanding-demo-generator. Generate a narrated HTML deck with TTS queue files.
 ```
 
+## Default behavior: no audio by default
+
+By default, the skill runs in `quick-html` mode. It should generate the HTML deck and the text fields needed for narration, but it should **not** generate TTS queue files, MP3 files, or audio playback assets unless the user explicitly asks for them.
+
+Default output:
+
+```text
+scripts/first-principles.md
+scripts/deck.md
+scripts/slides.json
+dist/index.html
+```
+
+In default mode, `slides.json` may still include:
+
+```text
+subtitle      # short bottom-bar subtitle text
+speakerText   # full manuscript text for possible future narration
+narrative     # fromPrevious / currentPoint / toNext continuity fields
+```
+
+But these are text planning fields only. They do not imply audio generation.
+
+Generate narration / TTS / audio only when the user explicitly asks for one of the following:
+
+```text
+narrated-html
+narration
+voice-over
+TTS
+MiMo / Xiaomi TTS
+audio
+mp3
+HyperFrames
+video composition
+```
+
+When narration is requested, then generate:
+
+```text
+scripts/narration.json
+scripts/tts/slide-XX.txt
+dist/audio/                  # only if actual audio files are generated or supplied
+```
+
 ## Modes
 
-The default output is a standalone dark-grid HTML explainer deck. Narration, TTS, or HyperFrames output is generated only when explicitly requested.
+The default output is a standalone dark-grid HTML explainer deck. Narration, TTS, audio, or HyperFrames output is generated only when explicitly requested.
 
 | Mode | When to use | Main outputs |
 | --- | --- | --- |
-| `quick-html` | Default mode for notes, markdown, articles, reports, product docs, concept materials, or restyling an existing HTML deck. | `scripts/first-principles.md`, `scripts/deck.md`, `scripts/slides.json`, `dist/index.html` |
-| `narrated-html` | Use when the request mentions narration, TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
-| `hyperframes` | Use when the request mentions HyperFrames, composition output, slideshow manifest, or video rendering workflow. | narrated-html outputs plus `dist/composition/index.html` |
+| `quick-html` | Default mode for notes, markdown, articles, reports, product docs, concept materials, or restyling an existing HTML deck. Does not generate TTS files or audio assets. | `scripts/first-principles.md`, `scripts/deck.md`, `scripts/slides.json`, `dist/index.html` |
+| `narrated-html` | Use only when the request mentions narration, TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
+| `hyperframes` | Use only when the request mentions HyperFrames, composition output, slideshow manifest, or video rendering workflow. | narrated-html outputs plus `dist/composition/index.html` |
 
 ## Supported input types
 
@@ -166,6 +211,8 @@ Prepare a TTS queue from a generated project with:
 python scripts/prepare_tts_queue.py <project-dir>
 ```
 
+Only run this command in narrated mode or when the user explicitly wants TTS queue files.
+
 ## Output contract
 
 A completed project should contain:
@@ -180,7 +227,7 @@ scripts/
 dist/
   index.html
   composition/index.html  # hyperframes only
-  audio/                  # optional generated audio files
+  audio/                  # optional; only when real audio is generated or supplied
 ```
 
 The deck HTML is standalone by default: embedded CSS, embedded JavaScript, no remote HTTP dependencies unless explicitly requested.
