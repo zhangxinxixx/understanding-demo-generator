@@ -1,0 +1,307 @@
+{
+  "mode": "quick-html",
+  "audienceProfile": {
+    "target": "product-demo",
+    "density": "standard",
+    "tone": "practical"
+  },
+  "contentDepth": "level-3-mechanism",
+  "styleProfile": {
+    "styleFamily": "compact-dark-grid",
+    "styleFamilyReason": "The demo is a 产品方案演示 demo and benefits from compact-dark-grid density and visual language.",
+    "borrowedElements": [
+      "dark grid",
+      "semantic accents",
+      "compact page-specific diagrams"
+    ],
+    "avoidedElements": [
+      "fixed template repetition",
+      "remote assets",
+      "oversized slide modules"
+    ]
+  },
+  "slides": [
+    {
+      "id": "scene-01",
+      "kicker": "PRODUCT DEMO",
+      "title": "客服 Copilot 不是替人聊天，而是缩短问题闭环",
+      "lead": "一个好 Copilot 要把工单、知识、动作和复盘接成一条服务链路。",
+      "layoutType": "cover-centered",
+      "accent": "#38bdf8",
+      "semanticFit": "A centered cover focuses the deck around one core thesis before moving into mechanisms.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "cover-centered composition for product-demo slide 1",
+        "depthMoves": [
+          "premise",
+          "framing"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "识别意图",
+          "调用知识",
+          "建议动作",
+          "修复知识"
+        ]
+      },
+      "onSlideText": [
+        "识别意图",
+        "调用知识",
+        "建议动作",
+        "修复知识"
+      ],
+      "speakerText": "这套产品 demo 不从聊天框开始，而从服务闭环开始。客服 Copilot 的价值不是回答更像人，而是让问题更快被定位、处理和沉淀。"
+    },
+    {
+      "id": "scene-02",
+      "kicker": "PAIN",
+      "title": "传统客服慢在问题被拆散到多个系统",
+      "lead": "用户问题、知识库、订单系统和复盘指标分散，导致响应和改进都变慢。",
+      "layoutType": "xray-stack",
+      "accent": "#fb923c",
+      "semanticFit": "A layered x-ray makes hidden causes and breakpoints visible without turning them into a long list.",
+      "contentBudget": {
+        "pointCount": 5,
+        "fitStrategy": "two-column-xray"
+      },
+      "visualPlan": {
+        "structure": "xray-stack composition for product-demo slide 2",
+        "depthMoves": [
+          "decomposition",
+          "failure"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "工单入口",
+          "知识库",
+          "订单系统",
+          "人工经验"
+        ]
+      },
+      "onSlideText": [
+        "工单入口",
+        "知识库",
+        "订单系统",
+        "人工经验",
+        "复盘指标"
+      ],
+      "speakerText": "传统客服最慢的地方，往往不是客服打字慢，而是问题被拆散在多个系统里。客服要在工单、知识库、订单系统和经验之间来回跳。"
+    },
+    {
+      "id": "scene-03",
+      "kicker": "FLOW",
+      "title": "Copilot 把一次问答变成可执行服务流",
+      "lead": "它先识别问题，再找证据，最后给出可操作建议和接管点。",
+      "layoutType": "route-map",
+      "accent": "#22c55e",
+      "semanticFit": "A route map turns a process into ordered stations with clear movement and handoffs.",
+      "contentBudget": {
+        "pointCount": 5,
+        "fitStrategy": "diagonal-route"
+      },
+      "visualPlan": {
+        "structure": "route-map composition for product-demo slide 3",
+        "depthMoves": [
+          "sequence",
+          "practice"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "理解意图",
+          "召回证据",
+          "生成建议",
+          "执行动作"
+        ]
+      },
+      "onSlideText": [
+        "理解意图",
+        "召回证据",
+        "生成建议",
+        "执行动作",
+        "人工接管"
+      ],
+      "speakerText": "Copilot 的第一层价值，是把问答变成服务流。它先理解用户意图，再召回证据，最后给客服可执行建议，而不是只生成一段看似流畅的话。"
+    },
+    {
+      "id": "scene-04",
+      "kicker": "PROOF",
+      "title": "可信回答必须带着证据一起出现",
+      "lead": "答案、来源、置信度和风险提示要同时展示，客服才敢使用。",
+      "layoutType": "evidence-chain",
+      "accent": "#60a5fa",
+      "semanticFit": "An evidence chain makes the support path between claim, proof, and decision explicit.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "evidence-chain composition for product-demo slide 4",
+        "depthMoves": [
+          "evidence",
+          "causality"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "答案草稿",
+          "引用来源",
+          "置信度",
+          "风险提示"
+        ]
+      },
+      "onSlideText": [
+        "答案草稿",
+        "引用来源",
+        "置信度",
+        "风险提示"
+      ],
+      "speakerText": "对客服来说，可信比流畅更重要。系统必须把答案和证据放在一起，标出来源、置信度和风险，客服才敢在真实场景里使用。"
+    },
+    {
+      "id": "scene-05",
+      "kicker": "HUMAN LOOP",
+      "title": "人工接管不是失败，而是训练系统的入口",
+      "lead": "低置信度、敏感问题和流程异常都应该进入人工回路，并反哺模型和知识库。",
+      "layoutType": "decision-matrix",
+      "accent": "#f59e0b",
+      "semanticFit": "A matrix separates choices by criteria so the audience can compare trade-offs quickly.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "decision-matrix composition for product-demo slide 5",
+        "depthMoves": [
+          "contrast",
+          "boundary"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "低置信度",
+          "敏感投诉",
+          "流程异常",
+          "高价值客户"
+        ]
+      },
+      "onSlideText": [
+        "低置信度",
+        "敏感投诉",
+        "流程异常",
+        "高价值客户"
+      ],
+      "speakerText": "人工接管不是产品失败，而是系统学习的入口。低置信度、敏感投诉、流程异常都应该被标记出来，进入人工回路。"
+    },
+    {
+      "id": "scene-06",
+      "kicker": "OPS",
+      "title": "每一次回答都应该反向修复知识库",
+      "lead": "高频问题、错误引用和客服改写，是知识运营最直接的信号。",
+      "layoutType": "mechanism-equation",
+      "accent": "#a78bfa",
+      "semanticFit": "An equation-like composition shows how separate factors combine into one operating mechanism.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "mechanism-equation composition for product-demo slide 6",
+        "depthMoves": [
+          "mechanism",
+          "implication"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "高频问题",
+          "错误引用",
+          "客服改写",
+          "知识修复"
+        ]
+      },
+      "onSlideText": [
+        "高频问题",
+        "错误引用",
+        "客服改写",
+        "知识修复"
+      ],
+      "speakerText": "当 Copilot 被用起来后，真正的增长来自运营闭环。每次客服改写、每次错误引用、每个高频问题，都是知识库应该修复的信号。"
+    },
+    {
+      "id": "scene-07",
+      "kicker": "METRICS",
+      "title": "评价 Copilot 要看闭环指标，而不是只看命中率",
+      "lead": "响应时间、一次解决率、人工接管率和知识修复速度，才说明产品是否有效。",
+      "layoutType": "metric-radar",
+      "accent": "#34d399",
+      "semanticFit": "A radar-like field groups metrics around one evaluation center.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "metric-radar composition for product-demo slide 7",
+        "depthMoves": [
+          "measurement",
+          "contrast"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "响应时间",
+          "一次解决率",
+          "接管率",
+          "知识修复速度"
+        ]
+      },
+      "onSlideText": [
+        "响应时间",
+        "一次解决率",
+        "接管率",
+        "知识修复速度"
+      ],
+      "speakerText": "所以评价这个产品，不能只看检索命中率或满意度单点。要看响应时间、一次解决率、人工接管率，以及知识修复速度。"
+    },
+    {
+      "id": "scene-08",
+      "kicker": "ROLLOUT",
+      "title": "先从高频低风险场景上线，再扩到复杂流程",
+      "lead": "从 FAQ 辅助开始，逐步进入订单、售后和主动运营。",
+      "layoutType": "takeaway-field",
+      "accent": "#fb7185",
+      "semanticFit": "A takeaway field compresses the lesson into practical decisions and memory hooks.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "takeaway-field composition for product-demo slide 8",
+        "depthMoves": [
+          "summary",
+          "application"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "FAQ 辅助",
+          "订单查询",
+          "售后流程",
+          "主动运营"
+        ]
+      },
+      "onSlideText": [
+        "FAQ 辅助",
+        "订单查询",
+        "售后流程",
+        "主动运营"
+      ],
+      "speakerText": "落地路线要收敛。先从高频低风险的 FAQ 辅助开始，验证证据链和接管机制，再逐步扩到订单、售后和主动运营。"
+    }
+  ]
+}

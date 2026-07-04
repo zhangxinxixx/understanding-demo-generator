@@ -1,0 +1,306 @@
+{
+  "mode": "quick-html",
+  "audienceProfile": {
+    "target": "research-review",
+    "density": "dense",
+    "tone": "analytical"
+  },
+  "contentDepth": "level-3-mechanism",
+  "styleProfile": {
+    "styleFamily": "minimal-evidence",
+    "styleFamilyReason": "The demo is a 研究/论文解读 demo and benefits from minimal-evidence density and visual language.",
+    "borrowedElements": [
+      "dark grid",
+      "semantic accents",
+      "compact page-specific diagrams"
+    ],
+    "avoidedElements": [
+      "fixed template repetition",
+      "remote assets",
+      "oversized slide modules"
+    ]
+  },
+  "slides": [
+    {
+      "id": "scene-01",
+      "kicker": "RESEARCH REVIEW",
+      "title": "RAG 评测不能只问答对没有",
+      "lead": "一个答案可能看起来正确，却来自错误证据、断裂引用或应该拒答的问题。",
+      "layoutType": "cover-centered",
+      "accent": "#93c5fd",
+      "semanticFit": "A centered cover focuses the deck around one core thesis before moving into mechanisms.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "cover-centered composition for research-review slide 1",
+        "depthMoves": [
+          "premise",
+          "framing"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "检索覆盖",
+          "证据相关",
+          "忠实生成",
+          "拒答边界"
+        ]
+      },
+      "onSlideText": [
+        "检索覆盖",
+        "证据相关",
+        "忠实生成",
+        "拒答边界"
+      ],
+      "speakerText": "这组研究解读的核心问题是：RAG 评测不能只问答案对不对。因为答案表面正确，证据链也可能是错的。"
+    },
+    {
+      "id": "scene-02",
+      "kicker": "PROBLEM",
+      "title": "单一准确率会把四种错误混在一起",
+      "lead": "检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里。",
+      "layoutType": "xray-stack",
+      "accent": "#f59e0b",
+      "semanticFit": "A layered x-ray makes hidden causes and breakpoints visible without turning them into a long list.",
+      "contentBudget": {
+        "pointCount": 5,
+        "fitStrategy": "two-column-xray"
+      },
+      "visualPlan": {
+        "structure": "xray-stack composition for research-review slide 2",
+        "depthMoves": [
+          "decomposition",
+          "failure"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "检索漏召",
+          "证据偏题",
+          "生成幻觉",
+          "引用断裂"
+        ]
+      },
+      "onSlideText": [
+        "检索漏召",
+        "证据偏题",
+        "生成幻觉",
+        "引用断裂",
+        "拒答失败"
+      ],
+      "speakerText": "如果只看准确率，很多错误会被混在一起。检索可能漏掉关键材料，证据可能偏题，生成可能改写过度，系统也可能在应该拒答时强行回答。"
+    },
+    {
+      "id": "scene-03",
+      "kicker": "DECOMPOSE",
+      "title": "RAG 质量要拆成检索、证据和生成三层",
+      "lead": "每一层都能独立失败，也会把错误传给下一层。",
+      "layoutType": "layer-stack",
+      "accent": "#8b5cf6",
+      "semanticFit": "A layer stack separates independent failure surfaces and their downstream effects.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "layer-stack composition for research-review slide 3",
+        "depthMoves": [
+          "decomposition",
+          "mechanism"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "Retrieval",
+          "Evidence",
+          "Generation",
+          "Citation"
+        ]
+      },
+      "onSlideText": [
+        "Retrieval",
+        "Evidence",
+        "Generation",
+        "Citation"
+      ],
+      "speakerText": "更合理的方式是分层评测。检索层决定材料是否回来，证据层决定材料是否相关，生成层决定答案是否忠实，引用层决定结果能否追踪。"
+    },
+    {
+      "id": "scene-04",
+      "kicker": "EVIDENCE",
+      "title": "证据链的核心不是有引用，而是引用能支撑断言",
+      "lead": "引用数量多不代表可靠，关键是每个主张是否能被对应证据支持。",
+      "layoutType": "evidence-chain",
+      "accent": "#22c55e",
+      "semanticFit": "An evidence chain makes the support path between claim, proof, and decision explicit.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "evidence-chain composition for research-review slide 4",
+        "depthMoves": [
+          "evidence",
+          "causality"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "Claim",
+          "Passage",
+          "Support",
+          "Trace"
+        ]
+      },
+      "onSlideText": [
+        "Claim",
+        "Passage",
+        "Support",
+        "Trace"
+      ],
+      "speakerText": "证据链评测的关键，不是答案后面有没有引用，而是每个断言是否能被对应证据支撑。引用数量多，反而可能掩盖证据质量差。"
+    },
+    {
+      "id": "scene-05",
+      "kicker": "METRICS",
+      "title": "指标要覆盖召回、相关、忠实和拒答",
+      "lead": "不同指标回答不同问题，不能互相替代。",
+      "layoutType": "decision-matrix",
+      "accent": "#38bdf8",
+      "semanticFit": "A matrix separates choices by criteria so the audience can compare trade-offs quickly.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "decision-matrix composition for research-review slide 5",
+        "depthMoves": [
+          "contrast",
+          "boundary"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "Recall",
+          "Relevance",
+          "Faithfulness",
+          "Abstention"
+        ]
+      },
+      "onSlideText": [
+        "Recall",
+        "Relevance",
+        "Faithfulness",
+        "Abstention"
+      ],
+      "speakerText": "所以指标要成组出现。召回回答材料是否找齐，相关性回答材料是否对题，忠实度回答生成是否越界，拒答指标回答系统是否知道自己不知道。"
+    },
+    {
+      "id": "scene-06",
+      "kicker": "FAILURE",
+      "title": "最危险的失败是自信地引用错误证据",
+      "lead": "用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性。",
+      "layoutType": "risk-board",
+      "accent": "#fb7185",
+      "semanticFit": "A risk board groups failure modes so boundaries and mitigations are easy to scan.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "risk-board composition for research-review slide 6",
+        "depthMoves": [
+          "failure",
+          "boundary"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "错引",
+          "过度概括",
+          "证据拼接",
+          "伪确定性"
+        ]
+      },
+      "onSlideText": [
+        "错引",
+        "过度概括",
+        "证据拼接",
+        "伪确定性"
+      ],
+      "speakerText": "最危险的失败不是没有答案，而是自信地引用错误证据。用户看到引用会放松警惕，所以错引比普通幻觉更难被发现。"
+    },
+    {
+      "id": "scene-07",
+      "kicker": "EVAL SET",
+      "title": "评测集要故意包含边界问题",
+      "lead": "可答、部分可答、不可答、证据冲突，四类样本都要出现。",
+      "layoutType": "route-map",
+      "accent": "#fbbf24",
+      "semanticFit": "A route map turns a process into ordered stations with clear movement and handoffs.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "route-map composition for research-review slide 7",
+        "depthMoves": [
+          "sequence",
+          "practice"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "可答",
+          "部分可答",
+          "不可答",
+          "证据冲突"
+        ]
+      },
+      "onSlideText": [
+        "可答",
+        "部分可答",
+        "不可答",
+        "证据冲突"
+      ],
+      "speakerText": "一个好的评测集，要故意包含边界问题。不只是可答问题，还要有部分可答、不可答和证据冲突的样本。"
+    },
+    {
+      "id": "scene-08",
+      "kicker": "CONCLUSION",
+      "title": "RAG 评测的目标是暴露证据链，而不是美化答案",
+      "lead": "当证据、引用和拒答边界被看见，系统才真正可改进。",
+      "layoutType": "takeaway-field",
+      "accent": "#a78bfa",
+      "semanticFit": "A takeaway field compresses the lesson into practical decisions and memory hooks.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "takeaway-field composition for research-review slide 8",
+        "depthMoves": [
+          "summary",
+          "application"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "分层评测",
+          "主张对齐",
+          "边界样本",
+          "拒答能力"
+        ]
+      },
+      "onSlideText": [
+        "分层评测",
+        "主张对齐",
+        "边界样本",
+        "拒答能力"
+      ],
+      "speakerText": "结论是，RAG 评测的目标不是让答案看起来更漂亮，而是把证据链暴露出来。只有看见错误在哪一层，系统才有办法改进。"
+    }
+  ]
+}

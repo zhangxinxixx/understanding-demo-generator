@@ -76,6 +76,10 @@ Inside that style family, pages should not look like one fixed template. Each co
 
 The skill can be extended with additional style families later, but the current contract is one polished dark-grid visual language with page-specific layouts.
 
+## Examples
+
+See `examples/` for generated 8-slide demos covering technical framework explanation, product demo, research review, and executive briefing content.
+
 ## Output contract
 
 A completed project should contain:

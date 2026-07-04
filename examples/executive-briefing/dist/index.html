@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SaaS 增长瓶颈从获客成本，转向价值兑现速度</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040a;color:#e5eefc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.deck-shell{position:relative;width:100vw;height:100vh;overflow:hidden;background:#05070b}.deck{position:absolute;inset:0}.slide{position:absolute;inset:0;padding:5.8vh 7.2vw 14.5vh;display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;opacity:0;visibility:hidden;pointer-events:none;transition:.25s ease}.slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.scene-bg{position:absolute;inset:0;background:radial-gradient(circle at 28% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 30%),radial-gradient(circle at 76% 72%,rgba(56,189,248,.12),transparent 34%),linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px),#05070b;background-size:auto,auto,60px 60px,60px 60px,auto}.scene-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 30%,rgba(2,6,23,.68));pointer-events:none}.slide-head{position:relative;z-index:2;max-width:1120px}.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}h1{margin:8px 0 0;font-size:clamp(34px,4.2vw,60px);line-height:1.05;max-width:1160px;letter-spacing:0}.lead{margin:12px 0 0;max-width:880px;color:#aab7ca;font-size:clamp(15px,1.25vw,19px);line-height:1.55}.visual-zone{position:relative;z-index:1;min-height:0;display:grid;place-items:center;border-radius:8px;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 62%)}.glow-card,.glow-node,.glow-panel{border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(148,163,184,.18));background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 12%,rgba(15,23,42,.82)),rgba(2,6,23,.74));box-shadow:0 0 34px color-mix(in srgb,var(--accent) 14%,transparent),inset 0 1px 0 rgba(255,255,255,.06);border-radius:8px}.cover-zone{grid-row:1 / span 2}.cover-field{position:relative;text-align:center;display:grid;gap:16px;justify-items:center;max-width:1120px}.cover-field h1{font-size:clamp(44px,5.6vw,82px);max-width:1100px}.cover-ghost{position:absolute;top:-54px;font-size:clamp(56px,9vw,150px);font-weight:900;color:rgba(148,163,184,.045);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.tag-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.tag-row span{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.62);border-radius:999px;padding:8px 12px;color:#cbd5e1;font-size:13px}.equation-field{width:min(1040px,100%);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);align-items:center;gap:14px}.equation-node,.equation-result{min-height:118px;padding:18px;display:grid;align-content:center;gap:8px;text-align:center}.equation-result{grid-column:span 2}.operator{color:var(--accent);font-weight:900;font-size:30px;text-align:center}.xray-field{width:min(1060px,100%);display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:stretch}.xray-core{padding:24px;display:grid;align-content:center;gap:12px}.xray-layers{display:grid;gap:10px}.xray-layer{padding:14px 16px;display:grid;grid-template-columns:44px 1fr;align-items:center}.xray-layer i,.route-step i,.orbit-node i,.risk-tile i,.matrix-cell span{color:var(--accent);font-style:normal;font-weight:900}.matrix-field,.risk-field{width:min(1040px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.matrix-cell,.risk-tile{min-height:112px;padding:18px;display:grid;gap:8px}.matrix-cell small,.risk-tile span,.glow-node span,.glow-card span{color:#9fb0c7;line-height:1.4}.route-field{width:min(1080px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}.route-step{min-height:138px;padding:16px;display:grid;align-content:center;gap:8px;text-align:center;position:relative}.route-step:not(:last-child):after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:2px;background:var(--accent)}.orbit-field{width:min(1060px,100%);display:grid;grid-template-columns:.82fr 1.18fr;gap:22px;align-items:center}.orbit-core{padding:24px;min-height:250px;display:grid;align-content:center;gap:12px;text-align:center}.orbit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.orbit-node{min-height:112px;padding:18px;display:grid;align-content:center;gap:8px}.takeaway-field{width:min(1040px,100%);display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch}.takeaway-core{padding:24px;display:grid;align-content:center;gap:12px}.takeaway-grid{display:grid;gap:12px}.takeaway-node{padding:18px;font-weight:800}.subtitle{position:absolute;z-index:8;left:7.2vw;right:7.2vw;bottom:3.2vh;min-height:58px;border-top:1px solid rgba(148,163,184,.16);display:flex;align-items:center;color:#cbd5e1;font-size:14px;line-height:1.45;background:linear-gradient(90deg,rgba(5,7,11,.94),rgba(5,7,11,.6));padding:8px 168px 10px 0}.progress{position:absolute;z-index:10;left:0;bottom:0;height:3px;width:100%;background:rgba(148,163,184,.12)}.progress span{display:block;height:100%;width:12.5%;background:var(--accent);transition:.25s ease}.page-switch{position:absolute;right:3.2vw;bottom:3.4vh;z-index:12;display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:13px}.page-switch button,.dots button{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.68);color:#e5eefc;border-radius:8px;cursor:pointer}.page-switch button{width:32px;height:32px}.dots{position:absolute;right:2.8vw;top:50%;transform:translateY(-50%);z-index:11;display:grid;gap:9px}.dots button{width:9px;height:9px;border-radius:50%;padding:0}.dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px var(--accent)}@media(max-width:980px){.route-field{grid-template-columns:repeat(3,1fr)}.equation-field{grid-auto-flow:row;grid-template-columns:repeat(2,1fr)}.operator{display:none}.subtitle{font-size:13px;right:6vw}.dots{display:none}}
+</style>
+</head>
+<body>
+<main class="deck-shell" aria-label="SaaS 增长瓶颈从获客成本，转向价值兑现速度">
+  <div class="deck"><section class="slide is-active" id="scene-01" style="--accent:#94a3b8">
+    <div class="scene-bg"></div>
+    
+    <div class="visual-zone cover-zone executive-briefing-scene-01 executive-briefing-cover-centered">
+      <div class="cover-field">
+        <div class="cover-ghost">executive briefing</div>
+        <div class="kicker">EXEC BRIEF</div>
+        <h1>SaaS 增长瓶颈正在从获客转向价值兑现</h1>
+        <p class="lead">当 CAC 上升，真正的增长杠杆会从流量端转到留存和扩张端。</p>
+        <div class="tag-row"><span>CAC 上升</span><span>激活变慢</span><span>留存分层</span><span>扩张机会</span></div>
+      </div>
+    </div>
+    <div class="subtitle">这份策略简报的判断很直接：SaaS 增长瓶颈正在从获客端，转向客户价值兑现的速度。</div>
+  </section>
+<section class="slide" id="scene-02" style="--accent:#38bdf8">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">SHIFT</div><h1>获客效率下降时，留存质量会决定增长上限</h1><p class="lead">更多线索不能自动变成更多收入，除非用户更快进入高价值使用。</p></div>
+    <div class="visual-zone executive-briefing-scene-02 executive-briefing-mechanism-equation">
+      <div class="equation-field">
+        <div class="glow-node equation-node"><b>CAC</b><span>输入变量</span></div><div class="operator">+</div><div class="glow-node equation-node"><b>Activation</b><span>输入变量</span></div><div class="operator">+</div><div class="glow-node equation-node"><b>Retention</b><span>输入变量</span></div>
+        <div class="operator">=</div>
+        <div class="glow-card equation-result"><b>Expansion</b><span>更多线索不能自动变成更多收入，除非用户更快进入高价值使用。</span></div>
+      </div>
+    </div>
+    <div class="subtitle">当获客成本上升，继续加预算不一定有效。增长上限会被留存质量决定，尤其是用户能不能快速进入高价值使用。</div>
+  </section>
+<section class="slide" id="scene-03" style="--accent:#22c55e">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">FUNNEL</div><h1>传统漏斗看见转化，却看不见价值延迟</h1><p class="lead">签约、开通、首次使用、关键行为之间的时间差，才暴露真实阻力。</p></div>
+    <div class="visual-zone executive-briefing-scene-03 executive-briefing-route-map">
+      <div class="route-field">
+        <div class="route-step glow-node"><i>01</i><b>签约</b><span>传递</span></div><div class="route-step glow-node"><i>02</i><b>开通</b><span>传递</span></div><div class="route-step glow-node"><i>03</i><b>首次使用</b><span>传递</span></div><div class="route-step glow-node"><i>04</i><b>关键行为</b><span>传递</span></div><div class="route-step glow-node"><i>05</i><b>续费</b><span>输出</span></div>
+      </div>
+    </div>
+    <div class="subtitle">传统漏斗能看到转化率，但看不到价值延迟。签约到开通、开通到首次使用、首次使用到关键行为，每一段时间差都是阻力。</div>
+  </section>
+<section class="slide" id="scene-04" style="--accent:#a78bfa">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">SEGMENT</div><h1>客户不是按规模分层，而是按价值兑现速度分层</h1><p class="lead">同样的 ARR，使用深度和关键行为完全不同，续费风险也不同。</p></div>
+    <div class="visual-zone executive-briefing-scene-04 executive-briefing-decision-matrix">
+      <div class="matrix-field">
+        <div class="glow-panel matrix-cell"><span>A</span><b>快速兑现</b><small>高确定性</small></div><div class="glow-panel matrix-cell"><span>B</span><b>慢速兑现</b><small>高杠杆点</small></div><div class="glow-panel matrix-cell"><span>C</span><b>高潜沉默</b><small>高确定性</small></div><div class="glow-panel matrix-cell"><span>D</span><b>低值噪声</b><small>高杠杆点</small></div>
+      </div>
+    </div>
+    <div class="subtitle">客户分层不能只看规模。同样的 ARR，如果一个客户很快进入关键行为，另一个长期停在浅层使用，它们的续费风险完全不同。</div>
+  </section>
+<section class="slide" id="scene-05" style="--accent:#60a5fa">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">SIGNALS</div><h1>行为信号比满意度调查更早暴露风险</h1><p class="lead">使用频率、关键功能覆盖、协作人数和工单类型，会提前显示流失或扩张。</p></div>
+    <div class="visual-zone executive-briefing-scene-05 executive-briefing-metric-radar">
+      <div class="orbit-field">
+        <div class="glow-card orbit-core"><b>SIGNALS</b><span>使用频率、关键功能覆盖、协作人数和工单类型，会提前显示流失或扩张。</span></div>
+        <div class="orbit-grid"><div class="glow-node orbit-node"><i>1</i><b>使用频率</b></div><div class="glow-node orbit-node"><i>2</i><b>功能覆盖</b></div><div class="glow-node orbit-node"><i>3</i><b>协作人数</b></div><div class="glow-node orbit-node"><i>4</i><b>工单类型</b></div></div>
+      </div>
+    </div>
+    <div class="subtitle">满意度调查通常太晚。更早的信号来自行为：使用频率、关键功能覆盖、协作人数和工单类型，都会提前暴露风险。</div>
+  </section>
+<section class="slide" id="scene-06" style="--accent:#fb7185">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">RISK</div><h1>流失不是突然发生，而是价值链路连续断裂</h1><p class="lead">无人完成初始化、没人进入关键功能、团队没有形成协作，续费风险会逐步放大。</p></div>
+    <div class="visual-zone executive-briefing-scene-06 executive-briefing-risk-board">
+      <div class="risk-field">
+        <div class="glow-panel risk-tile"><i>R1</i><b>初始化失败</b><span>需要边界或缓解动作</span></div><div class="glow-panel risk-tile"><i>R2</i><b>关键功能缺席</b><span>需要边界或缓解动作</span></div><div class="glow-panel risk-tile"><i>R3</i><b>协作未形成</b><span>需要边界或缓解动作</span></div><div class="glow-panel risk-tile"><i>R4</i><b>价值不可见</b><span>需要边界或缓解动作</span></div>
+      </div>
+    </div>
+    <div class="subtitle">流失不是最后一天突然发生的。它通常从初始化失败开始，然后关键功能缺席，团队协作没有形成，价值也就无法被看见。</div>
+  </section>
+<section class="slide" id="scene-07" style="--accent:#f59e0b">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">ACTIONS</div><h1>增长动作要围绕缩短 Time to Value 排序</h1><p class="lead">优先做能压缩价值兑现时间的 onboarding、模板、触发器和 CSM 动作。</p></div>
+    <div class="visual-zone executive-briefing-scene-07 executive-briefing-evidence-chain">
+      <div class="route-field">
+        <div class="route-step glow-node"><i>01</i><b>Onboarding</b><span>传递</span></div><div class="route-step glow-node"><i>02</i><b>模板</b><span>传递</span></div><div class="route-step glow-node"><i>03</i><b>触发器</b><span>传递</span></div><div class="route-step glow-node"><i>04</i><b>CSM Playbook</b><span>输出</span></div>
+      </div>
+    </div>
+    <div class="subtitle">因此增长动作要重新排序。优先级最高的不是新增入口，而是能缩短 Time to Value 的 onboarding、模板、触发器和 CSM 动作。</div>
+  </section>
+<section class="slide" id="scene-08" style="--accent:#34d399">
+    <div class="scene-bg"></div>
+    <div class="slide-head"><div class="kicker">DECISION</div><h1>下一阶段增长要用留存运营替代单纯获客加码</h1><p class="lead">管理层要把指标从线索数量，切到激活速度、健康分和扩张率。</p></div>
+    <div class="visual-zone executive-briefing-scene-08 executive-briefing-takeaway-field">
+    <div class="takeaway-field">
+      <div class="glow-card takeaway-core"><b>下一阶段增长要用留存运营替代单纯获客加码</b><span>管理层要把指标从线索数量，切到激活速度、健康分和扩张率。</span></div>
+      <div class="takeaway-grid"><div class="glow-node takeaway-node">激活速度</div><div class="glow-node takeaway-node">健康分</div><div class="glow-node takeaway-node">扩张率</div><div class="glow-node takeaway-node">流失预警</div></div>
+    </div>
+  </div>
+    <div class="subtitle">最后的决策建议是，把下一阶段增长从单纯获客加码，转向留存运营。核心指标也要从线索数量，切到激活速度、健康分和扩张率。</div>
+  </section></div>
+  <div class="progress"><span></span></div>
+  <div class="page-switch"><button id="prev">‹</button><span id="pageNow">01</span><span>/</span><span>08</span><button id="next">›</button></div>
+  <div class="dots"><button class="active" data-index="0" aria-label="Go to slide 1"></button><button class="" data-index="1" aria-label="Go to slide 2"></button><button class="" data-index="2" aria-label="Go to slide 3"></button><button class="" data-index="3" aria-label="Go to slide 4"></button><button class="" data-index="4" aria-label="Go to slide 5"></button><button class="" data-index="5" aria-label="Go to slide 6"></button><button class="" data-index="6" aria-label="Go to slide 7"></button><button class="" data-index="7" aria-label="Go to slide 8"></button></div>
+</main>
+<script>
+const slides=[...document.querySelectorAll(".slide")];
+const dots=[...document.querySelectorAll(".dots button")];
+const progress=document.querySelector(".progress span");
+const pageNow=document.querySelector("#pageNow");
+let index=0;
+function show(next){
+  index=(next+slides.length)%slides.length;
+  slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===index));
+  dots.forEach((dot,i)=>dot.classList.toggle("active",i===index));
+  pageNow.textContent=String(index+1).padStart(2,"0");
+  progress.style.width=((index+1)/slides.length*100)+"%";
+  progress.style.background=getComputedStyle(slides[index]).getPropertyValue("--accent");
+}
+document.querySelector("#prev").addEventListener("click",()=>show(index-1));
+document.querySelector("#next").addEventListener("click",()=>show(index+1));
+dots.forEach((dot)=>dot.addEventListener("click",()=>show(Number(dot.dataset.index))));
+addEventListener("keydown",(event)=>{if(event.key==="ArrowRight")show(index+1);if(event.key==="ArrowLeft")show(index-1);});
+show(0);
+</script>
+</body>
+</html>

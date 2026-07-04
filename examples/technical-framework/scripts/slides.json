@@ -1,0 +1,306 @@
+{
+  "mode": "quick-html",
+  "audienceProfile": {
+    "target": "technical-sharing",
+    "density": "standard",
+    "tone": "teaching"
+  },
+  "contentDepth": "level-3-mechanism",
+  "styleProfile": {
+    "styleFamily": "blueprint-system",
+    "styleFamilyReason": "The demo is a 技术框架讲解 demo and benefits from blueprint-system density and visual language.",
+    "borrowedElements": [
+      "dark grid",
+      "semantic accents",
+      "compact page-specific diagrams"
+    ],
+    "avoidedElements": [
+      "fixed template repetition",
+      "remote assets",
+      "oversized slide modules"
+    ]
+  },
+  "slides": [
+    {
+      "id": "scene-01",
+      "kicker": "FRAMEWORK LENS",
+      "title": "你不是在选框架，而是在选 Agent 系统的组织方式",
+      "lead": "AutoGen、AgentScope、CAMEL、LangGraph 的差异，根上是协作、状态和控制权的分配。",
+      "layoutType": "cover-centered",
+      "accent": "#a78bfa",
+      "semanticFit": "A centered cover focuses the deck around one core thesis before moving into mechanisms.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "cover-centered composition for technical-framework slide 1",
+        "depthMoves": [
+          "premise",
+          "framing"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "对话组织",
+          "工程运行时",
+          "角色协作",
+          "状态图控制"
+        ]
+      },
+      "onSlideText": [
+        "对话组织",
+        "工程运行时",
+        "角色协作",
+        "状态图控制"
+      ],
+      "speakerText": "先把问题换一个角度。我们不是在背框架名字，而是在判断系统应该怎样组织多个 Agent、状态、工具和反馈。"
+    },
+    {
+      "id": "scene-02",
+      "kicker": "WHY FRAMEWORK",
+      "title": "框架的价值是把 Loop 变成可维护系统",
+      "lead": "手写 Loop 能教学，框架要负责长期运行、调试和恢复。",
+      "layoutType": "mechanism-equation",
+      "accent": "#22c55e",
+      "semanticFit": "An equation-like composition shows how separate factors combine into one operating mechanism.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "mechanism-equation composition for technical-framework slide 2",
+        "depthMoves": [
+          "mechanism",
+          "implication"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "Loop",
+          "State",
+          "Tools",
+          "Trace"
+        ]
+      },
+      "onSlideText": [
+        "Loop",
+        "State",
+        "Tools",
+        "Trace"
+      ],
+      "speakerText": "有了这个视角，框架不再只是少写几行代码。它把思考、行动、观察这个 Loop，升级成能记录状态、调用工具、追踪错误的系统层。"
+    },
+    {
+      "id": "scene-03",
+      "kicker": "BREAKPOINTS",
+      "title": "手写 Loop 最先坏在看不见的系统层",
+      "lead": "复杂度不是突然出现，而是从状态漂移、工具失败和停止模糊开始累积。",
+      "layoutType": "xray-stack",
+      "accent": "#f59e0b",
+      "semanticFit": "A layered x-ray makes hidden causes and breakpoints visible without turning them into a long list.",
+      "contentBudget": {
+        "pointCount": 5,
+        "fitStrategy": "two-column-xray"
+      },
+      "visualPlan": {
+        "structure": "xray-stack composition for technical-framework slide 3",
+        "depthMoves": [
+          "decomposition",
+          "failure"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "状态漂移",
+          "工具失败",
+          "停止模糊",
+          "回放困难"
+        ]
+      },
+      "onSlideText": [
+        "状态漂移",
+        "工具失败",
+        "停止模糊",
+        "回放困难",
+        "观测缺口"
+      ],
+      "speakerText": "继续往下看，手写 Loop 最容易坏的地方不是 while 循环本身，而是循环周围的系统层。历史越来越长，工具会失败，终止条件也会变得含糊。"
+    },
+    {
+      "id": "scene-04",
+      "kicker": "FOUR MODELS",
+      "title": "四类框架其实是四种控制哲学",
+      "lead": "对话涌现、消息平台、角色提示、状态图控制，对应四种不同工程取舍。",
+      "layoutType": "decision-matrix",
+      "accent": "#06b6d4",
+      "semanticFit": "A matrix separates choices by criteria so the audience can compare trade-offs quickly.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "decision-matrix composition for technical-framework slide 4",
+        "depthMoves": [
+          "contrast",
+          "boundary"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "AutoGen: 对话涌现",
+          "AgentScope: 消息平台",
+          "CAMEL: 角色提示",
+          "LangGraph: 状态图"
+        ]
+      },
+      "onSlideText": [
+        "AutoGen: 对话涌现",
+        "AgentScope: 消息平台",
+        "CAMEL: 角色提示",
+        "LangGraph: 状态图"
+      ],
+      "speakerText": "把四类框架放在一张矩阵里，差异会更清楚。AutoGen 让角色通过对话推进，AgentScope 先搭消息和运行平台，CAMEL 依赖角色设定，LangGraph 则把控制权写进状态图。"
+    },
+    {
+      "id": "scene-05",
+      "kicker": "AUTOGEN",
+      "title": "对话型框架适合开放协作，但流程会涌现",
+      "lead": "当任务像专家会议，群聊式 Agent 很自然；当任务要强审计，涌现就会变成风险。",
+      "layoutType": "role-orbit",
+      "accent": "#60a5fa",
+      "semanticFit": "An orbit diagram shows how roles exchange responsibility around a shared objective.",
+      "contentBudget": {
+        "pointCount": 4,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "role-orbit composition for technical-framework slide 5",
+        "depthMoves": [
+          "mechanism",
+          "example"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "Planner",
+          "Coder",
+          "Reviewer",
+          "User Proxy"
+        ]
+      },
+      "onSlideText": [
+        "Planner",
+        "Coder",
+        "Reviewer",
+        "User Proxy"
+      ],
+      "speakerText": "先看对话型路线。它很适合专家分工和互相审查，因为每个角色都能接力推进。但代价是流程从消息里长出来，不像流程图那样稳定。"
+    },
+    {
+      "id": "scene-06",
+      "kicker": "RUNTIME",
+      "title": "工程平台型框架先解决系统能不能上线",
+      "lead": "消息、运行时、部署和观测，是从 demo 到生产必须补上的底座。",
+      "layoutType": "route-map",
+      "accent": "#34d399",
+      "semanticFit": "A route map turns a process into ordered stations with clear movement and handoffs.",
+      "contentBudget": {
+        "pointCount": 5,
+        "fitStrategy": "diagonal-route"
+      },
+      "visualPlan": {
+        "structure": "route-map composition for technical-framework slide 6",
+        "depthMoves": [
+          "sequence",
+          "practice"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "MsgHub",
+          "Pipeline",
+          "Runtime",
+          "Studio"
+        ]
+      },
+      "onSlideText": [
+        "MsgHub",
+        "Pipeline",
+        "Runtime",
+        "Studio",
+        "Deploy"
+      ],
+      "speakerText": "工程平台型框架关注的不是角色聊得多聪明，而是系统能不能稳定运行。消息分发、运行时、观测和部署，决定它能不能走出 notebook。"
+    },
+    {
+      "id": "scene-07",
+      "kicker": "STATE GRAPH",
+      "title": "状态图路线用结构换可靠性",
+      "lead": "显式状态、节点和条件边，让重试、审核、回退和终止变成可检查规则。",
+      "layoutType": "state-graph",
+      "accent": "#8b5cf6",
+      "semanticFit": "A state graph shows how control moves between state, rules, and human review.",
+      "contentBudget": {
+        "pointCount": 5,
+        "fitStrategy": "loop-ring"
+      },
+      "visualPlan": {
+        "structure": "state-graph composition for technical-framework slide 7",
+        "depthMoves": [
+          "mechanism",
+          "control"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "State",
+          "Node",
+          "Edge",
+          "Condition"
+        ]
+      },
+      "onSlideText": [
+        "State",
+        "Node",
+        "Edge",
+        "Condition",
+        "Human Review"
+      ],
+      "speakerText": "如果项目最怕不可控，状态图就有优势。它把状态放在中心，让节点读写状态，让条件边决定下一步，复杂流程因此可以回放和审计。"
+    },
+    {
+      "id": "scene-08",
+      "kicker": "SELECTION",
+      "title": "选型先问最不能接受哪一种失败",
+      "lead": "怕协作不开放、怕流程不可控、怕上不了线，会导向不同框架。",
+      "layoutType": "takeaway-field",
+      "accent": "#fb7185",
+      "semanticFit": "A takeaway field compresses the lesson into practical decisions and memory hooks.",
+      "contentBudget": {
+        "pointCount": 3,
+        "fitStrategy": "compact-balanced"
+      },
+      "visualPlan": {
+        "structure": "takeaway-field composition for technical-framework slide 8",
+        "depthMoves": [
+          "summary",
+          "application"
+        ],
+        "accentUsage": "Use accent on the primary claim, connector line, and selected glow surfaces.",
+        "backgroundGlow": "Use the visual-zone radial glow and accent-tinted glow-card / glow-node surfaces.",
+        "symbols": [
+          "开放讨论: AutoGen / CAMEL",
+          "生产运行: AgentScope",
+          "审计回退: LangGraph"
+        ]
+      },
+      "onSlideText": [
+        "开放讨论: AutoGen / CAMEL",
+        "生产运行: AgentScope",
+        "审计回退: LangGraph"
+      ],
+      "speakerText": "所以选型不要先问谁最流行，而要先问项目最不能接受什么失败。不同恐惧，会把你推向不同的组织方式。"
+    }
+  ]
+}
