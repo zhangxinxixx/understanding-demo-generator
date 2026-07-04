@@ -1,21 +1,58 @@
 # Understanding Demo Generator
 
-A content-understanding ChatGPT Skill for generating dark-grid explainer HTML decks from notes, documents, concept materials, and existing HTML slides.
+A content-understanding ChatGPT Skill for generating teaching-oriented HTML explainer decks from notes, documents, concept materials, reports, technical docs, and existing HTML slides.
 
-It is designed for teaching-oriented presentations: the skill first reconstructs the source material into a coherent lesson, then turns that lesson into a full-screen local HTML deck with page-specific visual compositions, subtitles, navigation, and optional narration / HyperFrames output.
+It is designed to work like a small presentation director: first reconstruct the source material into a coherent lesson, then write a continuous slide manuscript, then design each page as an independent DOM/CSS visual composition.
 
 ## What it does
 
-This skill turns source material into teaching-oriented, full-screen HTML slide decks with:
+This skill turns source material into full-screen local HTML decks with:
 
 - first-principles reconstruction
-- audience and input-type intake
+- input type and audience intake
 - continuous manuscript writing before visual layout
 - slide-level content depth control
-- page-specific layout design based on slide meaning
+- topic-specific visual style systems
+- page-specific DOM and CSS composition
 - dark-grid visual systems with accent colors and module background glow
+- subtitle, narration, and TTS alignment rules
 - compact fit budgeting to avoid oversized or overflowing slides
 - optional narration, TTS queue, audio playback, and HyperFrames-compatible output
+
+## Core design principle
+
+The skill does **not** generate decks by filling a generic card template.
+
+Correct flow:
+
+```text
+source material
+-> first-principles reconstruction
+-> coherent teaching manuscript
+-> page-by-page narrative transitions
+-> topic style system selection
+-> independent page DOM/CSS composition
+-> standalone HTML deck
+```
+
+Avoid:
+
+```text
+generic .module + layoutType + repeated card grid
+```
+
+`layoutType` may exist in `slides.json` as a planning hint, but the final HTML should use page-specific semantic structures, for example:
+
+```text
+.tool-gateway-map
+.memory-layer-stack
+.risk-crack-board
+.decision-axis-field
+.react-orbit
+.evidence-radar
+.theorem-proof-rail
+.architecture-topology
+```
 
 ## Quick start
 
@@ -47,38 +84,87 @@ The default output is a standalone dark-grid HTML explainer deck. Narration, TTS
 | `narrated-html` | Use when the request mentions narration, TTS, MiMo / Xiaomi TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
 | `hyperframes` | Use when the request mentions HyperFrames, composition output, slideshow manifest, or video rendering workflow. | narrated-html outputs plus `dist/composition/index.html` |
 
-## Supported demo types
+## Supported input types
 
-The skill works best for explanation-heavy material where the deck needs to teach a concept, not just decorate existing headings:
+The skill works best for explanation-heavy material where the deck needs to teach a concept, not just decorate headings:
 
-- note-to-lesson decks from Markdown, Obsidian notes, articles, reports, and research summaries
-- technical framework explainers for architecture, state flow, tool flow, agent systems, and framework comparisons
-- first-principles concept lessons that unpack mechanisms, contrasts, assumptions, boundaries, and failure modes
-- existing HTML deck restyles that preserve the teaching sequence while rebuilding the visual system
-- narrated talk decks with full `speakerText`, bottom subtitles, TTS queue files, and optional audio playback
-- HyperFrames slideshow compositions for video or animation workflows
+- Markdown notes, Obsidian notes, course notes, and rough outlines
+- articles, reports, and research summaries
+- academic/theory material and paper-style explanations
+- architecture and system design documents
+- engineering implementation docs and framework notes
+- product demos, solution briefs, and pitch material
+- strategy or executive briefing material
+- interview-learning and exam-prep material
+- existing HTML decks that need to be rewritten visually
 
-## Visual style system
+## Topic style systems
 
-The current default style family is `dark-grid explainer`: near-black canvas, subtle grid, radial glow, semantic accent colors, compact text, bottom subtitles, navigation dots, page switcher, and progress bar.
+Different subjects should use different visual languages. The skill should not solve style variation by only changing colors.
 
-Inside that style family, pages should not look like one fixed template. Each content slide should choose a semantic composition based on the teaching move, such as:
+| Domain | Visual language | Preferred composition patterns | Avoid |
+| --- | --- | --- | --- |
+| `academic` | paper-lab, theorem board, evidence margin | theorem proof rail, equation decomposition, argument tree, citation rail, literature matrix | sales cards, excessive neon, generic three-card summaries |
+| `architecture` | blueprint, topology graph, layered system | layered stack, gateway map, interface contract map, pipeline, state machine, dependency graph | card rows pretending to be architecture |
+| `engineering` | terminal-lab, build pipeline, debug path | implementation route, build-test-deploy lane, validation gates, failure x-ray, annotated code block | abstract diagrams without operational steps |
+| `research` | analyst board, evidence radar, variable map | thesis-evidence-risk board, scenario tree, trigger/failure table, confidence ladder | decorative nodes without evidence relation |
+| `product` | user journey, value bridge, funnel | problem-solution bridge, before/after split, feature-to-value matrix, workflow storyboard | academic proof layout for product pitch |
+| `strategy` | executive radar, decision board | decision matrix, priority heatmap, risk/return axis, roadmap bands | playful labels, excessive glow, no decision implication |
+| `interview-learning` | Q&A board, pitfall map, answer template | comparison grid, mistake board, follow-up tree, memory hook ladder | vague diagrams without answer structure |
+| `concept-learning` | dark-grid explainer, concept orbit | mechanism chain, analogy split, route map, takeaway constellation | repeated generic card grids |
 
-- mechanism equation
-- route or flow map
-- decision matrix
-- comparison axis
-- x-ray layer stack
-- state graph
-- risk / failure board
-- role or message orbit
-- memory ladder or takeaway field
+Each generated project should define a top-level `topicStyleSystem` in `scripts/slides.json`:
 
-The skill can be extended with additional style families later, but the current contract is one polished dark-grid visual language with page-specific layouts.
+```json
+{
+  "topicStyleSystem": {
+    "domain": "architecture",
+    "visualLanguage": "blueprint topology with layered system map",
+    "paletteLogic": "cyan/blue for flow, amber for risk gates",
+    "compositionBias": ["layered-stack", "topology-graph", "interface-map"],
+    "avoid": ["generic card grid", "sales-like cards"],
+    "reason": "The source explains system structure and data flow."
+  }
+}
+```
 
-## Examples
+## Manuscript and narrative continuity
 
-See `examples/` for generated 8-slide narrated demos with MiMo TTS audio, covering technical framework explanation, product demo, research review, and executive briefing content.
+The deck should read as one continuous lesson:
+
+- each slide connects to the previous slide
+- each slide sets up the next slide
+- `speakerText` contains transition logic, not just repeated on-slide text
+- the flow should be clear: premise -> mechanism -> decomposition -> example -> boundary -> practice -> conclusion
+
+Each content slide should include a `narrative` object:
+
+```json
+{
+  "narrative": {
+    "fromPrevious": "Bridge from the previous slide.",
+    "currentPoint": "The core point of this slide.",
+    "toNext": "Setup for the next slide."
+  }
+}
+```
+
+## Narration, subtitles, and TTS
+
+When narration is enabled, keep these fields aligned:
+
+- `speakerText` is the full voice manuscript.
+- `subtitle` is the short bottom-bar version of the same idea.
+- `scripts/narration.json.slides[n].subtitle` must match `scripts/slides.json.slides[n].subtitle` exactly.
+- `scripts/tts/slide-XX.txt` must contain the exact full `speakerText`, not the shortened subtitle.
+- Audio playback state must be driven by real media events (`play`, `pause`, `ended`).
+- The final slide must stop after its audio ends; it should not loop back to slide 1 unless the user asks for looping.
+
+Prepare a TTS queue from a generated project with:
+
+```bash
+python scripts/prepare_tts_queue.py <project-dir>
+```
 
 ## Output contract
 
@@ -99,23 +185,6 @@ dist/
 
 The deck HTML is standalone by default: embedded CSS, embedded JavaScript, no remote HTTP dependencies unless explicitly requested.
 
-## Narration, subtitles, and TTS
-
-When narration is enabled, keep these fields aligned:
-
-- `speakerText` is the full voice manuscript.
-- `subtitle` is the short bottom-bar version of the same idea.
-- `scripts/narration.json.slides[n].subtitle` must match `scripts/slides.json.slides[n].subtitle`.
-- `scripts/tts/slide-XX.txt` must contain the exact full `speakerText`, not the shortened subtitle.
-- Audio playback state must be driven by real media events (`play`, `pause`, `ended`).
-- The final slide must stop after its audio ends; it should not loop back to slide 1 unless the user asks for looping.
-
-Prepare a TTS queue from a generated project with:
-
-```bash
-python scripts/prepare_tts_queue.py <project-dir>
-```
-
 ## Visual and playback quality rules
 
 The generated `dist/index.html` should satisfy these baseline checks:
@@ -124,7 +193,9 @@ The generated `dist/index.html` should satisfy these baseline checks:
 - background and slide root fill the viewport
 - first slide is a centered cover / theme page
 - content pages use page-specific DOM and CSS, not a generic card template
+- domain style affects composition, not only accent color
 - major visual modules fit above the subtitle and control area
+- core modules use accent-driven background glow where appropriate
 - bottom subtitle bar, progress bar, page switcher, keyboard navigation, and desktop dots are present
 - play / pause button label and visual state match the actual audio state when audio exists
 - HyperFrames composition output embeds a slideshow manifest when hyperframes mode is used
@@ -139,9 +210,9 @@ python scripts/validate_demo_contract.py <project-dir> --mode narrated-html
 python scripts/validate_demo_contract.py <project-dir> --mode hyperframes
 ```
 
-Use the mode that matches the requested output. The stricter modes include checks for narration files, TTS alignment, audio playback rules, and HyperFrames composition output.
+Use the mode that matches the requested output. Stricter modes include checks for narration files, TTS alignment, audio playback rules, and HyperFrames composition output.
 
-## Structure
+## Repository structure
 
 ```text
 SKILL.md
@@ -155,10 +226,12 @@ evals/
 ## Key references
 
 - `references/input-intake.md` - classify source material and audience.
+- `references/topic-style-systems.md` - choose domain-specific visual language.
 - `references/page-composition-first.md` - design each slide as a semantic composition.
 - `references/subtitle-narration-continuity.md` - keep subtitles, manuscripts, and TTS aligned.
 - `references/html-playback.md` - playback controls, final-slide stop behavior, and visual chrome.
 - `references/slide-fit-budget.md` - keep visual modules inside the available slide area.
+- `references/visual-style-dark-grid.md` - dark-grid canvas, accent, glow, and module-light rules.
 
 ## Notes
 
