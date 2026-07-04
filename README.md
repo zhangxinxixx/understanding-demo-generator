@@ -71,7 +71,7 @@ Use understanding-demo-generator to turn these notes into a dark-grid explainer 
 For narration or video workflows, request them explicitly:
 
 ```text
-Use understanding-demo-generator. Generate a narrated HyperFrames deck with MiMo / Xiaomi TTS.
+Use understanding-demo-generator. Generate a narrated HTML deck with TTS queue files.
 ```
 
 ## Modes
@@ -81,7 +81,7 @@ The default output is a standalone dark-grid HTML explainer deck. Narration, TTS
 | Mode | When to use | Main outputs |
 | --- | --- | --- |
 | `quick-html` | Default mode for notes, markdown, articles, reports, product docs, concept materials, or restyling an existing HTML deck. | `scripts/first-principles.md`, `scripts/deck.md`, `scripts/slides.json`, `dist/index.html` |
-| `narrated-html` | Use when the request mentions narration, TTS, MiMo / Xiaomi TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
+| `narrated-html` | Use when the request mentions narration, TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
 | `hyperframes` | Use when the request mentions HyperFrames, composition output, slideshow manifest, or video rendering workflow. | narrated-html outputs plus `dist/composition/index.html` |
 
 ## Supported input types
@@ -211,6 +211,24 @@ python scripts/validate_demo_contract.py <project-dir> --mode hyperframes
 ```
 
 Use the mode that matches the requested output. Stricter modes include checks for narration files, TTS alignment, audio playback rules, and HyperFrames composition output.
+
+## Current repository status
+
+This repository currently contains the editable skill source, references, and validation / TTS queue scripts.
+
+The repository does **not** currently include generated demo examples, MiMo audio, or binary release assets. If examples are needed, generate them from the skill source and commit only the source-friendly files, or publish large binary audio assets via GitHub Releases / Git LFS.
+
+Planned optional additions:
+
+```text
+examples/
+  technical-framework/
+  product-demo/
+  research-review/
+  executive-briefing/
+scripts/generate_example_demos.mjs
+scripts/generate_mimo_tts.mjs
+```
 
 ## Repository structure
 
