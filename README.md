@@ -47,6 +47,35 @@ The default output is a standalone dark-grid HTML explainer deck. Narration, TTS
 | `narrated-html` | Use when the request mentions narration, TTS, MiMo / Xiaomi TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
 | `hyperframes` | Use when the request mentions HyperFrames, composition output, slideshow manifest, or video rendering workflow. | narrated-html outputs plus `dist/composition/index.html` |
 
+## Supported demo types
+
+The skill works best for explanation-heavy material where the deck needs to teach a concept, not just decorate existing headings:
+
+- note-to-lesson decks from Markdown, Obsidian notes, articles, reports, and research summaries
+- technical framework explainers for architecture, state flow, tool flow, agent systems, and framework comparisons
+- first-principles concept lessons that unpack mechanisms, contrasts, assumptions, boundaries, and failure modes
+- existing HTML deck restyles that preserve the teaching sequence while rebuilding the visual system
+- narrated talk decks with full `speakerText`, bottom subtitles, TTS queue files, and optional audio playback
+- HyperFrames slideshow compositions for video or animation workflows
+
+## Visual style system
+
+The current default style family is `dark-grid explainer`: near-black canvas, subtle grid, radial glow, semantic accent colors, compact text, bottom subtitles, navigation dots, page switcher, and progress bar.
+
+Inside that style family, pages should not look like one fixed template. Each content slide should choose a semantic composition based on the teaching move, such as:
+
+- mechanism equation
+- route or flow map
+- decision matrix
+- comparison axis
+- x-ray layer stack
+- state graph
+- risk / failure board
+- role or message orbit
+- memory ladder or takeaway field
+
+The skill can be extended with additional style families later, but the current contract is one polished dark-grid visual language with page-specific layouts.
+
 ## Output contract
 
 A completed project should contain:
