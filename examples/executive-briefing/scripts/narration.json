@@ -3,7 +3,7 @@
     {
       "sceneId": "scene-01",
       "audio": "audio/slide-01.mp3",
-      "durationMs": 10000,
+      "durationMs": 8640,
       "subtitle": "当 CAC 上升，真正的增长杠杆会从流量端转到留存和扩张端",
       "text": "这份策略简报的判断很直接：SaaS 增长瓶颈正在从获客端，转向客户价值兑现的速度。",
       "ttsText": "scripts/tts/slide-01.txt"
@@ -11,7 +11,7 @@
     {
       "sceneId": "scene-02",
       "audio": "audio/slide-02.mp3",
-      "durationMs": 10000,
+      "durationMs": 11840,
       "subtitle": "更多线索不能自动变成更多收入，除非用户更快进入高价值使用",
       "text": "当获客成本上升，继续加预算不一定有效。增长上限会被留存质量决定，尤其是用户能不能快速进入高价值使用。",
       "ttsText": "scripts/tts/slide-02.txt"
@@ -19,7 +19,7 @@
     {
       "sceneId": "scene-03",
       "audio": "audio/slide-03.mp3",
-      "durationMs": 10000,
+      "durationMs": 12640,
       "subtitle": "签约、开通、首次使用、关键行为之间的时间差，才暴露真实阻力",
       "text": "传统漏斗能看到转化率，但看不到价值延迟。签约到开通、开通到首次使用、首次使用到关键行为，每一段时间差都是阻力。",
       "ttsText": "scripts/tts/slide-03.txt"
@@ -27,7 +27,7 @@
     {
       "sceneId": "scene-04",
       "audio": "audio/slide-04.mp3",
-      "durationMs": 10000,
+      "durationMs": 13600,
       "subtitle": "同样的 ARR，使用深度和关键行为完全不同，续费风险也不同",
       "text": "客户分层不能只看规模。同样的 ARR，如果一个客户很快进入关键行为，另一个长期停在浅层使用，它们的续费风险完全不同。",
       "ttsText": "scripts/tts/slide-04.txt"
@@ -35,7 +35,7 @@
     {
       "sceneId": "scene-05",
       "audio": "audio/slide-05.mp3",
-      "durationMs": 10000,
+      "durationMs": 12640,
       "subtitle": "使用频率、关键功能覆盖、协作人数和工单类型，会提前显示流失或扩张",
       "text": "满意度调查通常太晚。更早的信号来自行为：使用频率、关键功能覆盖、协作人数和工单类型，都会提前暴露风险。",
       "ttsText": "scripts/tts/slide-05.txt"
@@ -43,7 +43,7 @@
     {
       "sceneId": "scene-06",
       "audio": "audio/slide-06.mp3",
-      "durationMs": 10000,
+      "durationMs": 13120,
       "subtitle": "无人完成初始化、没人进入关键功能、团队没有形成协作，续费风险会逐步放大",
       "text": "流失不是最后一天突然发生的。它通常从初始化失败开始，然后关键功能缺席，团队协作没有形成，价值也就无法被看见。",
       "ttsText": "scripts/tts/slide-06.txt"
@@ -51,7 +51,7 @@
     {
       "sceneId": "scene-07",
       "audio": "audio/slide-07.mp3",
-      "durationMs": 11000,
+      "durationMs": 13280,
       "subtitle": "优先做能压缩价值兑现时间的 onboarding、模板、触发器和 CSM 动作",
       "text": "因此增长动作要重新排序。优先级最高的不是新增入口，而是能缩短 Time to Value 的 onboarding、模板、触发器和 CSM 动作。",
       "ttsText": "scripts/tts/slide-07.txt"
@@ -59,7 +59,7 @@
     {
       "sceneId": "scene-08",
       "audio": "audio/slide-08.mp3",
-      "durationMs": 10000,
+      "durationMs": 14240,
       "subtitle": "管理层要把指标从线索数量，切到激活速度、健康分和扩张率",
       "text": "最后的决策建议是，把下一阶段增长从单纯获客加码，转向留存运营。核心指标也要从线索数量，切到激活速度、健康分和扩张率。",
       "ttsText": "scripts/tts/slide-08.txt"

@@ -3,7 +3,7 @@
     {
       "sceneId": "scene-01",
       "audio": "audio/slide-01.mp3",
-      "durationMs": 10000,
+      "durationMs": 12320,
       "subtitle": "一个好 Copilot 要把工单、知识、动作和复盘接成一条服务链路",
       "text": "这套产品 demo 不从聊天框开始，而从服务闭环开始。客服 Copilot 的价值不是回答更像人，而是让问题更快被定位、处理和沉淀。",
       "ttsText": "scripts/tts/slide-01.txt"
@@ -11,7 +11,7 @@
     {
       "sceneId": "scene-02",
       "audio": "audio/slide-02.mp3",
-      "durationMs": 10000,
+      "durationMs": 12800,
       "subtitle": "用户问题、知识库、订单系统和复盘指标分散，导致响应和改进都变慢",
       "text": "传统客服最慢的地方，往往不是客服打字慢，而是问题被拆散在多个系统里。客服要在工单、知识库、订单系统和经验之间来回跳。",
       "ttsText": "scripts/tts/slide-02.txt"
@@ -19,7 +19,7 @@
     {
       "sceneId": "scene-03",
       "audio": "audio/slide-03.mp3",
-      "durationMs": 10000,
+      "durationMs": 14080,
       "subtitle": "它先识别问题，再找证据，最后给出可操作建议和接管点",
       "text": "Copilot 的第一层价值，是把问答变成服务流。它先理解用户意图，再召回证据，最后给客服可执行建议，而不是只生成一段看似流畅的话。",
       "ttsText": "scripts/tts/slide-03.txt"
@@ -27,7 +27,7 @@
     {
       "sceneId": "scene-04",
       "audio": "audio/slide-04.mp3",
-      "durationMs": 10000,
+      "durationMs": 12320,
       "subtitle": "答案、来源、置信度和风险提示要同时展示，客服才敢使用",
       "text": "对客服来说，可信比流畅更重要。系统必须把答案和证据放在一起，标出来源、置信度和风险，客服才敢在真实场景里使用。",
       "ttsText": "scripts/tts/slide-04.txt"
@@ -35,7 +35,7 @@
     {
       "sceneId": "scene-05",
       "audio": "audio/slide-05.mp3",
-      "durationMs": 10000,
+      "durationMs": 11040,
       "subtitle": "低置信度、敏感问题和流程异常都应该进入人工回路，并反哺模型和知识库",
       "text": "人工接管不是产品失败，而是系统学习的入口。低置信度、敏感投诉、流程异常都应该被标记出来，进入人工回路。",
       "ttsText": "scripts/tts/slide-05.txt"
@@ -43,7 +43,7 @@
     {
       "sceneId": "scene-06",
       "audio": "audio/slide-06.mp3",
-      "durationMs": 10000,
+      "durationMs": 12480,
       "subtitle": "高频问题、错误引用和客服改写，是知识运营最直接的信号",
       "text": "当 Copilot 被用起来后，真正的增长来自运营闭环。每次客服改写、每次错误引用、每个高频问题，都是知识库应该修复的信号。",
       "ttsText": "scripts/tts/slide-06.txt"
@@ -51,7 +51,7 @@
     {
       "sceneId": "scene-07",
       "audio": "audio/slide-07.mp3",
-      "durationMs": 10000,
+      "durationMs": 12160,
       "subtitle": "响应时间、一次解决率、人工接管率和知识修复速度，才说明产品是否有效",
       "text": "所以评价这个产品，不能只看检索命中率或满意度单点。要看响应时间、一次解决率、人工接管率，以及知识修复速度。",
       "ttsText": "scripts/tts/slide-07.txt"
@@ -59,7 +59,7 @@
     {
       "sceneId": "scene-08",
       "audio": "audio/slide-08.mp3",
-      "durationMs": 10000,
+      "durationMs": 12320,
       "subtitle": "从 FAQ 辅助开始，逐步进入订单、售后和主动运营",
       "text": "落地路线要收敛。先从高频低风险的 FAQ 辅助开始，验证证据链和接管机制，再逐步扩到订单、售后和主动运营。",
       "ttsText": "scripts/tts/slide-08.txt"

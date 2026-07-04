@@ -3,7 +3,7 @@
     {
       "sceneId": "scene-01",
       "audio": "audio/slide-01.mp3",
-      "durationMs": 10000,
+      "durationMs": 9440,
       "subtitle": "一个答案可能看起来正确，却来自错误证据、断裂引用或应该拒答的问题",
       "text": "这组研究解读的核心问题是：RAG 评测不能只问答案对不对。因为答案表面正确，证据链也可能是错的。",
       "ttsText": "scripts/tts/slide-01.txt"
@@ -11,7 +11,7 @@
     {
       "sceneId": "scene-02",
       "audio": "audio/slide-02.mp3",
-      "durationMs": 10000,
+      "durationMs": 14080,
       "subtitle": "检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里",
       "text": "如果只看准确率，很多错误会被混在一起。检索可能漏掉关键材料，证据可能偏题，生成可能改写过度，系统也可能在应该拒答时强行回答。",
       "ttsText": "scripts/tts/slide-02.txt"
@@ -19,7 +19,7 @@
     {
       "sceneId": "scene-03",
       "audio": "audio/slide-03.mp3",
-      "durationMs": 10000,
+      "durationMs": 16000,
       "subtitle": "每一层都能独立失败，也会把错误传给下一层",
       "text": "更合理的方式是分层评测。检索层决定材料是否回来，证据层决定材料是否相关，生成层决定答案是否忠实，引用层决定结果能否追踪。",
       "ttsText": "scripts/tts/slide-03.txt"
@@ -27,7 +27,7 @@
     {
       "sceneId": "scene-04",
       "audio": "audio/slide-04.mp3",
-      "durationMs": 10000,
+      "durationMs": 11840,
       "subtitle": "引用数量多不代表可靠，关键是每个主张是否能被对应证据支持",
       "text": "证据链评测的关键，不是答案后面有没有引用，而是每个断言是否能被对应证据支撑。引用数量多，反而可能掩盖证据质量差。",
       "ttsText": "scripts/tts/slide-04.txt"
@@ -35,7 +35,7 @@
     {
       "sceneId": "scene-05",
       "audio": "audio/slide-05.mp3",
-      "durationMs": 10000,
+      "durationMs": 18880,
       "subtitle": "不同指标回答不同问题，不能互相替代",
       "text": "所以指标要成组出现。召回回答材料是否找齐，相关性回答材料是否对题，忠实度回答生成是否越界，拒答指标回答系统是否知道自己不知道。",
       "ttsText": "scripts/tts/slide-05.txt"
@@ -43,7 +43,7 @@
     {
       "sceneId": "scene-06",
       "audio": "audio/slide-06.mp3",
-      "durationMs": 10000,
+      "durationMs": 11520,
       "subtitle": "用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性",
       "text": "最危险的失败不是没有答案，而是自信地引用错误证据。用户看到引用会放松警惕，所以错引比普通幻觉更难被发现。",
       "ttsText": "scripts/tts/slide-06.txt"
@@ -51,7 +51,7 @@
     {
       "sceneId": "scene-07",
       "audio": "audio/slide-07.mp3",
-      "durationMs": 10000,
+      "durationMs": 10720,
       "subtitle": "可答、部分可答、不可答、证据冲突，四类样本都要出现",
       "text": "一个好的评测集，要故意包含边界问题。不只是可答问题，还要有部分可答、不可答和证据冲突的样本。",
       "ttsText": "scripts/tts/slide-07.txt"
@@ -59,7 +59,7 @@
     {
       "sceneId": "scene-08",
       "audio": "audio/slide-08.mp3",
-      "durationMs": 10000,
+      "durationMs": 12480,
       "subtitle": "当证据、引用和拒答边界被看见，系统才真正可改进",
       "text": "结论是，RAG 评测的目标不是让答案看起来更漂亮，而是把证据链暴露出来。只有看见错误在哪一层，系统才有办法改进。",
       "ttsText": "scripts/tts/slide-08.txt"

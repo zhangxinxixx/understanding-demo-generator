@@ -1,13 +1,6 @@
 # Example demos
 
-Each example is an 8-slide narrated-html project generated with the Understanding Demo Generator contract. The checked-in demos include MiMo TTS mp3 files under each dist/audio/ directory.
-
-The demos intentionally use different visual systems instead of one repeated card template:
-
-- `technical-framework`: blueprint diagrams and system-map rails
-- `product-demo`: product journey screens and service-flow UI
-- `research-review`: paper/evidence layouts with citation spines
-- `executive-briefing`: executive radar and briefing-wall layouts
+Each example is an 8-slide narrated-html project generated with the Understanding Demo Generator contract. The checked-in demos include MiMo TTS mp3 files under each `dist/audio/` directory.
 
 | Example | Type | Open locally |
 | --- | --- | --- |
