@@ -6,15 +6,19 @@
 <title>RAG 评测不能只问答对没有，还要问证据链是否可靠</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040a;color:#e5eefc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.deck-shell{position:relative;width:100vw;height:100vh;overflow:hidden;background:#05070b}.deck{position:absolute;inset:0}.slide{position:absolute;inset:0;padding:5.8vh 7.2vw 14.5vh;display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;opacity:0;visibility:hidden;pointer-events:none;transition:.25s ease}.slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.scene-bg{position:absolute;inset:0;background:radial-gradient(circle at 28% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 30%),radial-gradient(circle at 76% 72%,rgba(56,189,248,.12),transparent 34%),linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px),#05070b;background-size:auto,auto,60px 60px,60px 60px,auto}.scene-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 30%,rgba(2,6,23,.68));pointer-events:none}.slide-head{position:relative;z-index:2;max-width:1120px}.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}h1{margin:8px 0 0;font-size:clamp(34px,4.2vw,60px);line-height:1.05;max-width:1160px;letter-spacing:0}.lead{margin:12px 0 0;max-width:880px;color:#aab7ca;font-size:clamp(15px,1.25vw,19px);line-height:1.55}.visual-zone{position:relative;z-index:1;min-height:0;display:grid;place-items:center;border-radius:8px;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 62%)}.glow-card,.glow-node,.glow-panel{border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(148,163,184,.18));background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 12%,rgba(15,23,42,.82)),rgba(2,6,23,.74));box-shadow:0 0 34px color-mix(in srgb,var(--accent) 14%,transparent),inset 0 1px 0 rgba(255,255,255,.06);border-radius:8px}.cover-zone{grid-row:1 / span 2}.cover-field{position:relative;text-align:center;display:grid;gap:16px;justify-items:center;max-width:1120px}.cover-field h1{font-size:clamp(44px,5.6vw,82px);max-width:1100px}.cover-ghost{position:absolute;top:-54px;font-size:clamp(56px,9vw,150px);font-weight:900;color:rgba(148,163,184,.045);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.tag-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.tag-row span{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.62);border-radius:999px;padding:8px 12px;color:#cbd5e1;font-size:13px}.equation-field{width:min(1040px,100%);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);align-items:center;gap:14px}.equation-node,.equation-result{min-height:118px;padding:18px;display:grid;align-content:center;gap:8px;text-align:center}.equation-result{grid-column:span 2}.operator{color:var(--accent);font-weight:900;font-size:30px;text-align:center}.xray-field{width:min(1060px,100%);display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:stretch}.xray-core{padding:24px;display:grid;align-content:center;gap:12px}.xray-layers{display:grid;gap:10px}.xray-layer{padding:14px 16px;display:grid;grid-template-columns:44px 1fr;align-items:center}.xray-layer i,.route-step i,.orbit-node i,.risk-tile i,.matrix-cell span{color:var(--accent);font-style:normal;font-weight:900}.matrix-field,.risk-field{width:min(1040px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.matrix-cell,.risk-tile{min-height:112px;padding:18px;display:grid;gap:8px}.matrix-cell small,.risk-tile span,.glow-node span,.glow-card span{color:#9fb0c7;line-height:1.4}.route-field{width:min(1080px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}.route-step{min-height:138px;padding:16px;display:grid;align-content:center;gap:8px;text-align:center;position:relative}.route-step:not(:last-child):after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:2px;background:var(--accent)}.orbit-field{width:min(1060px,100%);display:grid;grid-template-columns:.82fr 1.18fr;gap:22px;align-items:center}.orbit-core{padding:24px;min-height:250px;display:grid;align-content:center;gap:12px;text-align:center}.orbit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.orbit-node{min-height:112px;padding:18px;display:grid;align-content:center;gap:8px}.takeaway-field{width:min(1040px,100%);display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch}.takeaway-core{padding:24px;display:grid;align-content:center;gap:12px}.takeaway-grid{display:grid;gap:12px}.takeaway-node{padding:18px;font-weight:800}.subtitle{position:absolute;z-index:8;left:7.2vw;right:7.2vw;bottom:3.2vh;min-height:58px;border-top:1px solid rgba(148,163,184,.16);display:flex;align-items:center;color:#cbd5e1;font-size:14px;line-height:1.45;background:linear-gradient(90deg,rgba(5,7,11,.94),rgba(5,7,11,.6));padding:8px 202px 10px 0}.progress{position:absolute;z-index:10;left:0;bottom:0;height:3px;width:100%;background:rgba(148,163,184,.12)}.progress span{display:block;height:100%;width:12.5%;background:var(--accent);transition:.25s ease}.page-switch{position:absolute;right:3.2vw;bottom:3.4vh;z-index:12;display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:13px}.page-switch button,.audio-btn,.dots button{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.68);color:#e5eefc;border-radius:8px;cursor:pointer}.page-switch button,.audio-btn{width:32px;height:32px}.audio-btn.is-playing{border-color:color-mix(in srgb,var(--accent,#38bdf8) 52%,rgba(148,163,184,.24));background:color-mix(in srgb,var(--accent,#38bdf8) 18%,rgba(15,23,42,.68))}.dots{position:absolute;right:2.8vw;top:50%;transform:translateY(-50%);z-index:11;display:grid;gap:9px}.dots button{width:9px;height:9px;border-radius:50%;padding:0}.dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px var(--accent)}@media(max-width:980px){.route-field{grid-template-columns:repeat(3,1fr)}.equation-field{grid-auto-flow:row;grid-template-columns:repeat(2,1fr)}.operator{display:none}.subtitle{font-size:13px;right:6vw}.dots{display:none}}
+.theme-technical-framework .scene-bg{background:radial-gradient(circle at 20% 22%,rgba(6,182,212,.18),transparent 30%),linear-gradient(rgba(34,211,238,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.06) 1px,transparent 1px),linear-gradient(135deg,#031019,#06111d 52%,#020617);background-size:auto,44px 44px,44px 44px,auto}.theme-technical-framework .slide-head{border-left:2px solid var(--accent);padding-left:18px}.blueprint-system{position:relative;width:min(1100px,100%);height:min(420px,100%);display:grid;grid-template-rows:48px 1fr 90px;align-items:center;border-top:1px solid rgba(34,211,238,.28);border-bottom:1px solid rgba(34,211,238,.28)}.bp-axis{display:flex;justify-content:space-between;color:#67e8f9;text-transform:uppercase;letter-spacing:.18em;font-size:11px}.bp-backbone{height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 28px var(--accent)}.bp-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.bp-pin{clip-path:polygon(8% 0,100% 0,92% 100%,0 100%);border-radius:0;min-height:82px;padding:14px;display:grid;align-content:center}.bp-pin i,.bp-satellite i{font-style:normal;color:#67e8f9}.bp-pin small{color:#7dd3fc}.bp-note{position:absolute;right:0;top:74px;width:310px;padding:18px;border-radius:0 18px 0 18px}.blueprint-orbit{position:relative;width:min(820px,100%);height:420px}.bp-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:250px;min-height:130px;padding:22px;text-align:center}.bp-ring{position:absolute;inset:52px;border:1px dashed rgba(103,232,249,.34);border-radius:50%}.ring-b{inset:104px}.bp-satellite{position:absolute;width:165px;min-height:78px;padding:14px}.bp-1{left:50%;top:8px;transform:translateX(-50%)}.bp-2{right:18px;top:42%}.bp-3{left:50%;bottom:8px;transform:translateX(-50%)}.bp-4{left:18px;top:42%}.bp-5{right:80px;bottom:64px}
+.theme-product-demo .scene-bg{background:radial-gradient(circle at 78% 18%,rgba(34,197,94,.2),transparent 30%),radial-gradient(circle at 18% 72%,rgba(14,165,233,.16),transparent 34%),linear-gradient(120deg,#07140e,#061019 52%,#080d18)}.theme-product-demo h1{max-width:1000px}.product-console{width:min(1080px,100%);display:grid;grid-template-columns:310px 1fr 250px;gap:22px;align-items:stretch}.ticket-thread{background:#e8fff4;color:#062015;border-radius:22px 22px 8px 22px;padding:22px;box-shadow:0 24px 70px rgba(34,197,94,.18);display:grid;gap:12px}.thread-head{display:grid;gap:4px}.thread-head span{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#047857}.ticket-thread p{margin:0;padding:12px 14px;border-left:4px solid #10b981;background:rgba(255,255,255,.62);border-radius:0 14px 14px 0}.ticket-thread i,.ops-row i{font-style:normal;margin-right:8px;color:#059669}.copilot-core{align-self:center;min-height:260px;border-radius:38px;padding:30px;display:grid;place-content:center;text-align:center;background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(2,6,23,.86))}.ops-stack{display:grid;gap:12px;align-content:center}.ops-row{min-height:66px;border-radius:999px;padding:14px 18px;display:flex;align-items:center}.product-journey{width:min(1100px,100%);display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:center}.journey-screen{min-height:300px;border-radius:34px;padding:30px;display:grid;align-content:center;gap:12px}.journey-screen em{color:#86efac;font-style:normal;text-transform:uppercase;letter-spacing:.16em;font-size:12px}.journey-rail{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.journey-rail:before{content:"";position:absolute;left:4%;right:4%;top:50%;height:7px;border-radius:999px;background:linear-gradient(90deg,#10b981,#38bdf8,#fbbf24)}.journey-stop{position:relative;z-index:1;min-height:138px;display:grid;align-content:end;gap:10px;padding:14px;border-radius:28px;background:rgba(2,6,23,.78);border:1px solid rgba(255,255,255,.16)}.journey-stop i{font-style:normal;color:#86efac}
+.theme-research-review{background:#10100d}.theme-research-review .scene-bg{background:radial-gradient(circle at 80% 20%,rgba(251,191,36,.12),transparent 28%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),#11100d;background-size:auto,72px 72px,72px 72px,auto}.theme-research-review h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;max-width:1040px}.theme-research-review .lead{color:#d6d0c2}.research-board{width:min(1080px,100%);display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:stretch}.abstract-block{background:#f3eedf;color:#1d1a14;padding:32px;border-radius:2px;box-shadow:18px 20px 0 rgba(255,255,255,.05);display:grid;align-content:center;gap:14px}.abstract-block b{font-family:Georgia,"Times New Roman",serif;font-size:30px}.abstract-block span{line-height:1.65}.margin-notes{display:grid;gap:10px;align-content:center}.note-line{display:grid;grid-template-columns:54px 1fr;gap:12px;border-bottom:1px solid rgba(243,238,223,.22);padding:12px 0}.note-line i{font-style:normal;color:#fbbf24}.method-strip{grid-column:1/-1;display:flex;gap:12px}.method-strip span{border:1px solid rgba(243,238,223,.28);padding:8px 14px;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#e7dfce}.evidence-desk{width:min(1080px,100%);display:grid;grid-template-columns:1fr 96px;gap:22px;align-items:stretch}.paper-sheet{margin:0;background:#f7f2e4;color:#171511;padding:30px 38px;border-radius:3px;box-shadow:0 32px 80px rgba(0,0,0,.36)}.paper-sheet h2{margin:0 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:34px}.paper-sheet p{margin:0 0 18px;color:#4b4638;line-height:1.55}.paper-sheet ol{margin:0;padding-left:22px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 28px}.paper-sheet li span{display:block;color:#736b59;font-size:12px;margin-top:5px}.citation-spine{display:grid;align-content:space-between;justify-items:center}.citation-spine span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#fbbf24;color:#1d1a14;font-weight:900}
+.theme-executive-briefing .scene-bg{background:radial-gradient(circle at 74% 22%,rgba(245,158,11,.2),transparent 32%),linear-gradient(135deg,#0c0b08,#16130d 54%,#070707)}.theme-executive-briefing h1{font-size:clamp(34px,3.8vw,56px);max-width:1050px}.briefing-wall{width:min(1080px,100%);display:grid;grid-template-columns:210px 1fr;grid-template-rows:auto 1fr;gap:20px;align-items:stretch}.brief-number{grid-row:1/3;border-left:8px solid #f59e0b;padding-left:22px;display:grid;align-content:center;gap:10px}.brief-number span{font-size:100px;line-height:.85;font-weight:900;color:#f59e0b}.brief-number b{letter-spacing:.15em;text-transform:uppercase;color:#f8e6c1}.brief-thesis{border-radius:2px;padding:26px;background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(15,23,42,.7));box-shadow:none}.brief-bars{display:grid;gap:16px;align-content:center}.brief-bar{position:relative;min-height:42px;border-bottom:1px solid rgba(248,230,193,.18);display:flex;align-items:center}.brief-bar span{position:absolute;left:0;height:10px;border-radius:999px;background:linear-gradient(90deg,#f59e0b,rgba(245,158,11,.12));opacity:.7}.brief-bar b{position:relative;margin-left:18px}.exec-radar{position:relative;width:620px;height:420px}.radar-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:250px;min-height:130px;padding:20px;text-align:center;border-radius:50%;display:grid;place-content:center}.radar-ring{position:absolute;border:1px solid rgba(245,158,11,.25);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}.r-a{width:600px;height:390px}.r-b{width:430px;height:280px}.r-c{width:260px;height:170px}.radar-label{position:absolute;min-width:160px;border-top:2px solid #f59e0b;padding-top:8px}.radar-label i{font-style:normal;color:#f59e0b;margin-right:8px}.radar-label.r1{left:50%;top:0;transform:translateX(-50%)}.radar-label.r2{right:-150px;top:42%}.radar-label.r3{left:50%;bottom:0;transform:translateX(-50%)}.radar-label.r4{left:-150px;top:42%}
 </style>
 </head>
 <body>
-<main class="deck-shell" aria-label="RAG 评测不能只问答对没有，还要问证据链是否可靠">
+<main class="deck-shell theme-research-review" aria-label="RAG 评测不能只问答对没有，还要问证据链是否可靠">
   <div class="deck"><section class="slide is-active" id="scene-01" style="--accent:#93c5fd">
     <div class="scene-bg"></div>
     
     <div class="visual-zone cover-zone research-review-scene-01 research-review-cover-centered">
-      <div class="cover-field">
+      <div class="cover-field research-review-cover">
         <div class="cover-ghost">research review</div>
         <div class="kicker">RESEARCH REVIEW</div>
         <h1>RAG 评测不能只问答对没有</h1>
@@ -28,9 +32,10 @@
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">PROBLEM</div><h1>单一准确率会把四种错误混在一起</h1><p class="lead">检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里。</p></div>
     <div class="visual-zone research-review-scene-02 research-review-xray-stack">
-      <div class="xray-field">
-        <div class="glow-card xray-core"><b>PROBLEM</b><span>检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里。</span></div>
-        <div class="xray-layers"><div class="glow-panel xray-layer"><i>01</i><b>检索漏召</b></div><div class="glow-panel xray-layer"><i>02</i><b>证据偏题</b></div><div class="glow-panel xray-layer"><i>03</i><b>生成幻觉</b></div><div class="glow-panel xray-layer"><i>04</i><b>引用断裂</b></div><div class="glow-panel xray-layer"><i>05</i><b>拒答失败</b></div></div>
+      <div class="research-board">
+        <div class="abstract-block"><b>PROBLEM</b><span>检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里。</span></div>
+        <div class="margin-notes"><div class="note-line"><i>[1]</i><b>检索漏召</b></div><div class="note-line"><i>[2]</i><b>证据偏题</b></div><div class="note-line"><i>[3]</i><b>生成幻觉</b></div><div class="note-line"><i>[4]</i><b>引用断裂</b></div><div class="note-line"><i>[5]</i><b>拒答失败</b></div></div>
+        <div class="method-strip"><span>question</span><span>evidence</span><span>boundary</span></div>
       </div>
     </div>
     <div class="subtitle">检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里</div>
@@ -39,9 +44,10 @@
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">DECOMPOSE</div><h1>RAG 质量要拆成检索、证据和生成三层</h1><p class="lead">每一层都能独立失败，也会把错误传给下一层。</p></div>
     <div class="visual-zone research-review-scene-03 research-review-layer-stack">
-      <div class="xray-field">
-        <div class="glow-card xray-core"><b>DECOMPOSE</b><span>每一层都能独立失败，也会把错误传给下一层。</span></div>
-        <div class="xray-layers"><div class="glow-panel xray-layer"><i>01</i><b>Retrieval</b></div><div class="glow-panel xray-layer"><i>02</i><b>Evidence</b></div><div class="glow-panel xray-layer"><i>03</i><b>Generation</b></div><div class="glow-panel xray-layer"><i>04</i><b>Citation</b></div></div>
+      <div class="research-board">
+        <div class="abstract-block"><b>DECOMPOSE</b><span>每一层都能独立失败，也会把错误传给下一层。</span></div>
+        <div class="margin-notes"><div class="note-line"><i>[1]</i><b>Retrieval</b></div><div class="note-line"><i>[2]</i><b>Evidence</b></div><div class="note-line"><i>[3]</i><b>Generation</b></div><div class="note-line"><i>[4]</i><b>Citation</b></div></div>
+        <div class="method-strip"><span>question</span><span>evidence</span><span>boundary</span></div>
       </div>
     </div>
     <div class="subtitle">每一层都能独立失败，也会把错误传给下一层</div>
@@ -50,18 +56,21 @@
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">EVIDENCE</div><h1>证据链的核心不是有引用，而是引用能支撑断言</h1><p class="lead">引用数量多不代表可靠，关键是每个主张是否能被对应证据支持。</p></div>
     <div class="visual-zone research-review-scene-04 research-review-evidence-chain">
-      <div class="route-field">
-        <div class="route-step glow-node"><i>01</i><b>Claim</b><span>传递</span></div><div class="route-step glow-node"><i>02</i><b>Passage</b><span>传递</span></div><div class="route-step glow-node"><i>03</i><b>Support</b><span>传递</span></div><div class="route-step glow-node"><i>04</i><b>Trace</b><span>输出</span></div>
+        <div class="evidence-desk">
+          <article class="paper-sheet"><h2>EVIDENCE</h2><p>引用数量多不代表可靠，关键是每个主张是否能被对应证据支持。</p><ol><li><b>Claim</b><span>checked against source</span></li><li><b>Passage</b><span>checked against source</span></li><li><b>Support</b><span>checked against source</span></li><li><b>Trace</b><span>checked against source</span></li></ol></article>
+          <div class="citation-spine"><span>01</span><span>02</span><span>03</span><span>04</span></div>
+        </div>
       </div>
-    </div>
     <div class="subtitle">引用数量多不代表可靠，关键是每个主张是否能被对应证据支持</div>
   </section>
 <section class="slide" id="scene-05" style="--accent:#38bdf8">
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">METRICS</div><h1>指标要覆盖召回、相关、忠实和拒答</h1><p class="lead">不同指标回答不同问题，不能互相替代。</p></div>
     <div class="visual-zone research-review-scene-05 research-review-decision-matrix">
-      <div class="matrix-field">
-        <div class="glow-panel matrix-cell"><span>A</span><b>Recall</b><small>高确定性</small></div><div class="glow-panel matrix-cell"><span>B</span><b>Relevance</b><small>高杠杆点</small></div><div class="glow-panel matrix-cell"><span>C</span><b>Faithfulness</b><small>高确定性</small></div><div class="glow-panel matrix-cell"><span>D</span><b>Abstention</b><small>高杠杆点</small></div>
+      <div class="research-board">
+        <div class="abstract-block"><b>METRICS</b><span>不同指标回答不同问题，不能互相替代。</span></div>
+        <div class="margin-notes"><div class="note-line"><i>[1]</i><b>Recall</b></div><div class="note-line"><i>[2]</i><b>Relevance</b></div><div class="note-line"><i>[3]</i><b>Faithfulness</b></div><div class="note-line"><i>[4]</i><b>Abstention</b></div></div>
+        <div class="method-strip"><span>question</span><span>evidence</span><span>boundary</span></div>
       </div>
     </div>
     <div class="subtitle">不同指标回答不同问题，不能互相替代</div>
@@ -70,8 +79,10 @@
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">FAILURE</div><h1>最危险的失败是自信地引用错误证据</h1><p class="lead">用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性。</p></div>
     <div class="visual-zone research-review-scene-06 research-review-risk-board">
-      <div class="risk-field">
-        <div class="glow-panel risk-tile"><i>R1</i><b>错引</b><span>需要边界或缓解动作</span></div><div class="glow-panel risk-tile"><i>R2</i><b>过度概括</b><span>需要边界或缓解动作</span></div><div class="glow-panel risk-tile"><i>R3</i><b>证据拼接</b><span>需要边界或缓解动作</span></div><div class="glow-panel risk-tile"><i>R4</i><b>伪确定性</b><span>需要边界或缓解动作</span></div>
+      <div class="research-board">
+        <div class="abstract-block"><b>FAILURE</b><span>用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性。</span></div>
+        <div class="margin-notes"><div class="note-line"><i>[1]</i><b>错引</b></div><div class="note-line"><i>[2]</i><b>过度概括</b></div><div class="note-line"><i>[3]</i><b>证据拼接</b></div><div class="note-line"><i>[4]</i><b>伪确定性</b></div></div>
+        <div class="method-strip"><span>question</span><span>evidence</span><span>boundary</span></div>
       </div>
     </div>
     <div class="subtitle">用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性</div>
@@ -80,21 +91,23 @@
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">EVAL SET</div><h1>评测集要故意包含边界问题</h1><p class="lead">可答、部分可答、不可答、证据冲突，四类样本都要出现。</p></div>
     <div class="visual-zone research-review-scene-07 research-review-route-map">
-      <div class="route-field">
-        <div class="route-step glow-node"><i>01</i><b>可答</b><span>传递</span></div><div class="route-step glow-node"><i>02</i><b>部分可答</b><span>传递</span></div><div class="route-step glow-node"><i>03</i><b>不可答</b><span>传递</span></div><div class="route-step glow-node"><i>04</i><b>证据冲突</b><span>输出</span></div>
+        <div class="evidence-desk">
+          <article class="paper-sheet"><h2>EVAL SET</h2><p>可答、部分可答、不可答、证据冲突，四类样本都要出现。</p><ol><li><b>可答</b><span>checked against source</span></li><li><b>部分可答</b><span>checked against source</span></li><li><b>不可答</b><span>checked against source</span></li><li><b>证据冲突</b><span>checked against source</span></li></ol></article>
+          <div class="citation-spine"><span>01</span><span>02</span><span>03</span><span>04</span></div>
+        </div>
       </div>
-    </div>
     <div class="subtitle">可答、部分可答、不可答、证据冲突，四类样本都要出现</div>
   </section>
 <section class="slide" id="scene-08" style="--accent:#a78bfa">
     <div class="scene-bg"></div>
     <div class="slide-head"><div class="kicker">CONCLUSION</div><h1>RAG 评测的目标是暴露证据链，而不是美化答案</h1><p class="lead">当证据、引用和拒答边界被看见，系统才真正可改进。</p></div>
     <div class="visual-zone research-review-scene-08 research-review-takeaway-field">
-    <div class="takeaway-field">
-      <div class="glow-card takeaway-core"><b>RAG 评测的目标是暴露证据链，而不是美化答案</b><span>当证据、引用和拒答边界被看见，系统才真正可改进。</span></div>
-      <div class="takeaway-grid"><div class="glow-node takeaway-node">分层评测</div><div class="glow-node takeaway-node">主张对齐</div><div class="glow-node takeaway-node">边界样本</div><div class="glow-node takeaway-node">拒答能力</div></div>
+      <div class="research-board">
+        <div class="abstract-block"><b>CONCLUSION</b><span>当证据、引用和拒答边界被看见，系统才真正可改进。</span></div>
+        <div class="margin-notes"><div class="note-line"><i>[1]</i><b>分层评测</b></div><div class="note-line"><i>[2]</i><b>主张对齐</b></div><div class="note-line"><i>[3]</i><b>边界样本</b></div><div class="note-line"><i>[4]</i><b>拒答能力</b></div></div>
+        <div class="method-strip"><span>question</span><span>evidence</span><span>boundary</span></div>
+      </div>
     </div>
-  </div>
     <div class="subtitle">当证据、引用和拒答边界被看见，系统才真正可改进</div>
   </section></div>
   <div class="progress"><span></span></div>

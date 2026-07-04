@@ -166,6 +166,10 @@ Prepare a TTS queue from a generated project with:
 python scripts/prepare_tts_queue.py <project-dir>
 ```
 
+## Examples
+
+See `examples/` for generated 8-slide narrated demos with MiMo TTS audio, covering technical framework explanation, product demo, research review, and executive briefing content. The examples intentionally use different visual systems: blueprint diagrams, product journey screens, paper/evidence layouts, and executive radar briefings.
+
 ## Output contract
 
 A completed project should contain:

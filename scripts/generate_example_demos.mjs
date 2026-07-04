@@ -266,9 +266,10 @@ Transition to next: ${index === slides.length - 1 ? "Close with a practical memo
 function visualHtml(demo, slide) {
   const points = slide.onSlideText;
   const cls = `${demo.slug}-${slide.id} ${demo.slug}-${slide.layoutType}`;
+  const indexed = points.map((p, i) => ({ text: p, index: i + 1, letter: String.fromCharCode(65 + i) }));
   if (slide.layoutType === "cover-centered") {
     return `<div class="visual-zone cover-zone ${cls}">
-      <div class="cover-field">
+      <div class="cover-field ${demo.slug}-cover">
         <div class="cover-ghost">${esc(demo.slug).replace(/-/g, " ")}</div>
         <div class="kicker">${esc(slide.kicker)}</div>
         <h1>${esc(slide.title)}</h1>
@@ -277,52 +278,85 @@ function visualHtml(demo, slide) {
       </div>
     </div>`;
   }
-  if (slide.layoutType === "mechanism-equation") {
+
+  if (demo.slug === "technical-framework") {
+    if (slide.layoutType === "role-orbit" || slide.layoutType === "state-graph") {
+      return `<div class="visual-zone ${cls}">
+        <div class="blueprint-orbit">
+          <div class="bp-core glow-card"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span></div>
+          ${indexed.map((p) => `<div class="bp-satellite bp-${p.index} glow-node"><i>${String(p.index).padStart(2, "0")}</i><b>${esc(p.text)}</b></div>`).join("")}
+          <i class="bp-ring ring-a"></i><i class="bp-ring ring-b"></i>
+        </div>
+      </div>`;
+    }
     return `<div class="visual-zone ${cls}">
-      <div class="equation-field">
-        ${points.slice(0, -1).map((p) => `<div class="glow-node equation-node"><b>${esc(p)}</b><span>输入变量</span></div>`).join("<div class=\"operator\">+</div>")}
-        <div class="operator">=</div>
-        <div class="glow-card equation-result"><b>${esc(points.at(-1))}</b><span>${esc(slide.lead)}</span></div>
+      <div class="blueprint-system">
+        <div class="bp-axis"><span>emergent</span><span>controlled</span></div>
+        <div class="bp-backbone"></div>
+        <div class="bp-rail">${indexed.map((p) => `<div class="bp-pin glow-node"><i>${String(p.index).padStart(2, "0")}</i><b>${esc(p.text)}</b><small>${slide.layoutType.replace("-", " / ")}</small></div>`).join("")}</div>
+        <div class="bp-note glow-card"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span></div>
       </div>
     </div>`;
   }
-  if (slide.layoutType === "xray-stack" || slide.layoutType === "layer-stack") {
+
+  if (demo.slug === "product-demo") {
+    if (slide.layoutType === "route-map" || slide.layoutType === "evidence-chain") {
+      return `<div class="visual-zone ${cls}">
+        <div class="product-journey">
+          <div class="journey-screen glow-card"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span><em>live service flow</em></div>
+          <div class="journey-rail">${indexed.map((p) => `<div class="journey-stop"><i>${String(p.index).padStart(2, "0")}</i><b>${esc(p.text)}</b></div>`).join("")}</div>
+        </div>
+      </div>`;
+    }
     return `<div class="visual-zone ${cls}">
-      <div class="xray-field">
-        <div class="glow-card xray-core"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span></div>
-        <div class="xray-layers">${points.map((p, i) => `<div class="glow-panel xray-layer"><i>${String(i + 1).padStart(2, "0")}</i><b>${esc(p)}</b></div>`).join("")}</div>
+      <div class="product-console">
+        <div class="ticket-thread">
+          <div class="thread-head"><span>customer signal</span><b>${esc(slide.kicker)}</b></div>
+          ${indexed.slice(0, 3).map((p) => `<p><i>${p.letter}</i>${esc(p.text)}</p>`).join("")}
+        </div>
+        <div class="copilot-core glow-card"><b>${esc(slide.title)}</b><span>${esc(slide.lead)}</span></div>
+        <div class="ops-stack">${indexed.slice(3).map((p) => `<div class="ops-row glow-node"><i>${p.letter}</i><b>${esc(p.text)}</b></div>`).join("")}</div>
       </div>
     </div>`;
   }
-  if (slide.layoutType === "decision-matrix") {
+
+  if (demo.slug === "research-review") {
+    if (slide.layoutType === "evidence-chain" || slide.layoutType === "route-map") {
+      return `<div class="visual-zone ${cls}">
+        <div class="evidence-desk">
+          <article class="paper-sheet"><h2>${esc(slide.kicker)}</h2><p>${esc(slide.lead)}</p><ol>${indexed.map((p) => `<li><b>${esc(p.text)}</b><span>checked against source</span></li>`).join("")}</ol></article>
+          <div class="citation-spine">${indexed.map((p) => `<span>${String(p.index).padStart(2, "0")}</span>`).join("")}</div>
+        </div>
+      </div>`;
+    }
     return `<div class="visual-zone ${cls}">
-      <div class="matrix-field">
-        ${points.map((p, i) => `<div class="glow-panel matrix-cell"><span>${String.fromCharCode(65 + i)}</span><b>${esc(p)}</b><small>${i % 2 === 0 ? "高确定性" : "高杠杆点"}</small></div>`).join("")}
+      <div class="research-board">
+        <div class="abstract-block"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span></div>
+        <div class="margin-notes">${indexed.map((p) => `<div class="note-line"><i>[${p.index}]</i><b>${esc(p.text)}</b></div>`).join("")}</div>
+        <div class="method-strip">${["question", "evidence", "boundary"].map((p) => `<span>${p}</span>`).join("")}</div>
       </div>
     </div>`;
   }
-  if (slide.layoutType === "route-map" || slide.layoutType === "evidence-chain") {
+
+  if (demo.slug === "executive-briefing") {
+    if (slide.layoutType === "metric-radar" || slide.layoutType === "decision-matrix") {
+      return `<div class="visual-zone ${cls}">
+        <div class="exec-radar">
+          <div class="radar-core glow-card"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span></div>
+          ${indexed.map((p) => `<div class="radar-label r${p.index}"><i>${p.letter}</i><b>${esc(p.text)}</b></div>`).join("")}
+          <i class="radar-ring r-a"></i><i class="radar-ring r-b"></i><i class="radar-ring r-c"></i>
+        </div>
+      </div>`;
+    }
     return `<div class="visual-zone ${cls}">
-      <div class="route-field">
-        ${points.map((p, i) => `<div class="route-step glow-node"><i>${String(i + 1).padStart(2, "0")}</i><b>${esc(p)}</b><span>${i === points.length - 1 ? "输出" : "传递"}</span></div>`).join("")}
+      <div class="briefing-wall">
+        <div class="brief-number"><span>${String(points.length).padStart(2, "0")}</span><b>${esc(slide.kicker)}</b></div>
+        <div class="brief-thesis glow-card"><b>${esc(slide.title)}</b><span>${esc(slide.lead)}</span></div>
+        <div class="brief-bars">${indexed.map((p) => `<div class="brief-bar"><span style="width:${52 + p.index * 8}%"></span><b>${esc(p.text)}</b></div>`).join("")}</div>
       </div>
     </div>`;
   }
-  if (slide.layoutType === "role-orbit" || slide.layoutType === "state-graph" || slide.layoutType === "metric-radar") {
-    return `<div class="visual-zone ${cls}">
-      <div class="orbit-field">
-        <div class="glow-card orbit-core"><b>${esc(slide.kicker)}</b><span>${esc(slide.lead)}</span></div>
-        <div class="orbit-grid">${points.map((p, i) => `<div class="glow-node orbit-node"><i>${String(i + 1)}</i><b>${esc(p)}</b></div>`).join("")}</div>
-      </div>
-    </div>`;
-  }
-  if (slide.layoutType === "risk-board") {
-    return `<div class="visual-zone ${cls}">
-      <div class="risk-field">
-        ${points.map((p, i) => `<div class="glow-panel risk-tile"><i>R${i + 1}</i><b>${esc(p)}</b><span>需要边界或缓解动作</span></div>`).join("")}
-      </div>
-    </div>`;
-  }
+
   return `<div class="visual-zone ${cls}">
     <div class="takeaway-field">
       <div class="glow-card takeaway-core"><b>${esc(slide.title)}</b><span>${esc(slide.lead)}</span></div>
@@ -348,10 +382,14 @@ function htmlForDemo(demo, slides) {
 <title>${esc(demo.title)}</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040a;color:#e5eefc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.deck-shell{position:relative;width:100vw;height:100vh;overflow:hidden;background:#05070b}.deck{position:absolute;inset:0}.slide{position:absolute;inset:0;padding:5.8vh 7.2vw 14.5vh;display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;opacity:0;visibility:hidden;pointer-events:none;transition:.25s ease}.slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.scene-bg{position:absolute;inset:0;background:radial-gradient(circle at 28% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 30%),radial-gradient(circle at 76% 72%,rgba(56,189,248,.12),transparent 34%),linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px),#05070b;background-size:auto,auto,60px 60px,60px 60px,auto}.scene-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 30%,rgba(2,6,23,.68));pointer-events:none}.slide-head{position:relative;z-index:2;max-width:1120px}.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}h1{margin:8px 0 0;font-size:clamp(34px,4.2vw,60px);line-height:1.05;max-width:1160px;letter-spacing:0}.lead{margin:12px 0 0;max-width:880px;color:#aab7ca;font-size:clamp(15px,1.25vw,19px);line-height:1.55}.visual-zone{position:relative;z-index:1;min-height:0;display:grid;place-items:center;border-radius:8px;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 62%)}.glow-card,.glow-node,.glow-panel{border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(148,163,184,.18));background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 12%,rgba(15,23,42,.82)),rgba(2,6,23,.74));box-shadow:0 0 34px color-mix(in srgb,var(--accent) 14%,transparent),inset 0 1px 0 rgba(255,255,255,.06);border-radius:8px}.cover-zone{grid-row:1 / span 2}.cover-field{position:relative;text-align:center;display:grid;gap:16px;justify-items:center;max-width:1120px}.cover-field h1{font-size:clamp(44px,5.6vw,82px);max-width:1100px}.cover-ghost{position:absolute;top:-54px;font-size:clamp(56px,9vw,150px);font-weight:900;color:rgba(148,163,184,.045);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.tag-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.tag-row span{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.62);border-radius:999px;padding:8px 12px;color:#cbd5e1;font-size:13px}.equation-field{width:min(1040px,100%);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);align-items:center;gap:14px}.equation-node,.equation-result{min-height:118px;padding:18px;display:grid;align-content:center;gap:8px;text-align:center}.equation-result{grid-column:span 2}.operator{color:var(--accent);font-weight:900;font-size:30px;text-align:center}.xray-field{width:min(1060px,100%);display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:stretch}.xray-core{padding:24px;display:grid;align-content:center;gap:12px}.xray-layers{display:grid;gap:10px}.xray-layer{padding:14px 16px;display:grid;grid-template-columns:44px 1fr;align-items:center}.xray-layer i,.route-step i,.orbit-node i,.risk-tile i,.matrix-cell span{color:var(--accent);font-style:normal;font-weight:900}.matrix-field,.risk-field{width:min(1040px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.matrix-cell,.risk-tile{min-height:112px;padding:18px;display:grid;gap:8px}.matrix-cell small,.risk-tile span,.glow-node span,.glow-card span{color:#9fb0c7;line-height:1.4}.route-field{width:min(1080px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}.route-step{min-height:138px;padding:16px;display:grid;align-content:center;gap:8px;text-align:center;position:relative}.route-step:not(:last-child):after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:2px;background:var(--accent)}.orbit-field{width:min(1060px,100%);display:grid;grid-template-columns:.82fr 1.18fr;gap:22px;align-items:center}.orbit-core{padding:24px;min-height:250px;display:grid;align-content:center;gap:12px;text-align:center}.orbit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.orbit-node{min-height:112px;padding:18px;display:grid;align-content:center;gap:8px}.takeaway-field{width:min(1040px,100%);display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch}.takeaway-core{padding:24px;display:grid;align-content:center;gap:12px}.takeaway-grid{display:grid;gap:12px}.takeaway-node{padding:18px;font-weight:800}.subtitle{position:absolute;z-index:8;left:7.2vw;right:7.2vw;bottom:3.2vh;min-height:58px;border-top:1px solid rgba(148,163,184,.16);display:flex;align-items:center;color:#cbd5e1;font-size:14px;line-height:1.45;background:linear-gradient(90deg,rgba(5,7,11,.94),rgba(5,7,11,.6));padding:8px 202px 10px 0}.progress{position:absolute;z-index:10;left:0;bottom:0;height:3px;width:100%;background:rgba(148,163,184,.12)}.progress span{display:block;height:100%;width:12.5%;background:var(--accent);transition:.25s ease}.page-switch{position:absolute;right:3.2vw;bottom:3.4vh;z-index:12;display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:13px}.page-switch button,.audio-btn,.dots button{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.68);color:#e5eefc;border-radius:8px;cursor:pointer}.page-switch button,.audio-btn{width:32px;height:32px}.audio-btn.is-playing{border-color:color-mix(in srgb,var(--accent,#38bdf8) 52%,rgba(148,163,184,.24));background:color-mix(in srgb,var(--accent,#38bdf8) 18%,rgba(15,23,42,.68))}.dots{position:absolute;right:2.8vw;top:50%;transform:translateY(-50%);z-index:11;display:grid;gap:9px}.dots button{width:9px;height:9px;border-radius:50%;padding:0}.dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px var(--accent)}@media(max-width:980px){.route-field{grid-template-columns:repeat(3,1fr)}.equation-field{grid-auto-flow:row;grid-template-columns:repeat(2,1fr)}.operator{display:none}.subtitle{font-size:13px;right:6vw}.dots{display:none}}
+.theme-technical-framework .scene-bg{background:radial-gradient(circle at 20% 22%,rgba(6,182,212,.18),transparent 30%),linear-gradient(rgba(34,211,238,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.06) 1px,transparent 1px),linear-gradient(135deg,#031019,#06111d 52%,#020617);background-size:auto,44px 44px,44px 44px,auto}.theme-technical-framework .slide-head{border-left:2px solid var(--accent);padding-left:18px}.blueprint-system{position:relative;width:min(1100px,100%);height:min(420px,100%);display:grid;grid-template-rows:48px 1fr 90px;align-items:center;border-top:1px solid rgba(34,211,238,.28);border-bottom:1px solid rgba(34,211,238,.28)}.bp-axis{display:flex;justify-content:space-between;color:#67e8f9;text-transform:uppercase;letter-spacing:.18em;font-size:11px}.bp-backbone{height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 28px var(--accent)}.bp-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.bp-pin{clip-path:polygon(8% 0,100% 0,92% 100%,0 100%);border-radius:0;min-height:82px;padding:14px;display:grid;align-content:center}.bp-pin i,.bp-satellite i{font-style:normal;color:#67e8f9}.bp-pin small{color:#7dd3fc}.bp-note{position:absolute;right:0;top:74px;width:310px;padding:18px;border-radius:0 18px 0 18px}.blueprint-orbit{position:relative;width:min(820px,100%);height:420px}.bp-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:250px;min-height:130px;padding:22px;text-align:center}.bp-ring{position:absolute;inset:52px;border:1px dashed rgba(103,232,249,.34);border-radius:50%}.ring-b{inset:104px}.bp-satellite{position:absolute;width:165px;min-height:78px;padding:14px}.bp-1{left:50%;top:8px;transform:translateX(-50%)}.bp-2{right:18px;top:42%}.bp-3{left:50%;bottom:8px;transform:translateX(-50%)}.bp-4{left:18px;top:42%}.bp-5{right:80px;bottom:64px}
+.theme-product-demo .scene-bg{background:radial-gradient(circle at 78% 18%,rgba(34,197,94,.2),transparent 30%),radial-gradient(circle at 18% 72%,rgba(14,165,233,.16),transparent 34%),linear-gradient(120deg,#07140e,#061019 52%,#080d18)}.theme-product-demo h1{max-width:1000px}.product-console{width:min(1080px,100%);display:grid;grid-template-columns:310px 1fr 250px;gap:22px;align-items:stretch}.ticket-thread{background:#e8fff4;color:#062015;border-radius:22px 22px 8px 22px;padding:22px;box-shadow:0 24px 70px rgba(34,197,94,.18);display:grid;gap:12px}.thread-head{display:grid;gap:4px}.thread-head span{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#047857}.ticket-thread p{margin:0;padding:12px 14px;border-left:4px solid #10b981;background:rgba(255,255,255,.62);border-radius:0 14px 14px 0}.ticket-thread i,.ops-row i{font-style:normal;margin-right:8px;color:#059669}.copilot-core{align-self:center;min-height:260px;border-radius:38px;padding:30px;display:grid;place-content:center;text-align:center;background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(2,6,23,.86))}.ops-stack{display:grid;gap:12px;align-content:center}.ops-row{min-height:66px;border-radius:999px;padding:14px 18px;display:flex;align-items:center}.product-journey{width:min(1100px,100%);display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:center}.journey-screen{min-height:300px;border-radius:34px;padding:30px;display:grid;align-content:center;gap:12px}.journey-screen em{color:#86efac;font-style:normal;text-transform:uppercase;letter-spacing:.16em;font-size:12px}.journey-rail{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.journey-rail:before{content:"";position:absolute;left:4%;right:4%;top:50%;height:7px;border-radius:999px;background:linear-gradient(90deg,#10b981,#38bdf8,#fbbf24)}.journey-stop{position:relative;z-index:1;min-height:138px;display:grid;align-content:end;gap:10px;padding:14px;border-radius:28px;background:rgba(2,6,23,.78);border:1px solid rgba(255,255,255,.16)}.journey-stop i{font-style:normal;color:#86efac}
+.theme-research-review{background:#10100d}.theme-research-review .scene-bg{background:radial-gradient(circle at 80% 20%,rgba(251,191,36,.12),transparent 28%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),#11100d;background-size:auto,72px 72px,72px 72px,auto}.theme-research-review h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;max-width:1040px}.theme-research-review .lead{color:#d6d0c2}.research-board{width:min(1080px,100%);display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:stretch}.abstract-block{background:#f3eedf;color:#1d1a14;padding:32px;border-radius:2px;box-shadow:18px 20px 0 rgba(255,255,255,.05);display:grid;align-content:center;gap:14px}.abstract-block b{font-family:Georgia,"Times New Roman",serif;font-size:30px}.abstract-block span{line-height:1.65}.margin-notes{display:grid;gap:10px;align-content:center}.note-line{display:grid;grid-template-columns:54px 1fr;gap:12px;border-bottom:1px solid rgba(243,238,223,.22);padding:12px 0}.note-line i{font-style:normal;color:#fbbf24}.method-strip{grid-column:1/-1;display:flex;gap:12px}.method-strip span{border:1px solid rgba(243,238,223,.28);padding:8px 14px;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#e7dfce}.evidence-desk{width:min(1080px,100%);display:grid;grid-template-columns:1fr 96px;gap:22px;align-items:stretch}.paper-sheet{margin:0;background:#f7f2e4;color:#171511;padding:30px 38px;border-radius:3px;box-shadow:0 32px 80px rgba(0,0,0,.36)}.paper-sheet h2{margin:0 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:34px}.paper-sheet p{margin:0 0 18px;color:#4b4638;line-height:1.55}.paper-sheet ol{margin:0;padding-left:22px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 28px}.paper-sheet li span{display:block;color:#736b59;font-size:12px;margin-top:5px}.citation-spine{display:grid;align-content:space-between;justify-items:center}.citation-spine span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#fbbf24;color:#1d1a14;font-weight:900}
+.theme-executive-briefing .scene-bg{background:radial-gradient(circle at 74% 22%,rgba(245,158,11,.2),transparent 32%),linear-gradient(135deg,#0c0b08,#16130d 54%,#070707)}.theme-executive-briefing h1{font-size:clamp(34px,3.8vw,56px);max-width:1050px}.briefing-wall{width:min(1080px,100%);display:grid;grid-template-columns:210px 1fr;grid-template-rows:auto 1fr;gap:20px;align-items:stretch}.brief-number{grid-row:1/3;border-left:8px solid #f59e0b;padding-left:22px;display:grid;align-content:center;gap:10px}.brief-number span{font-size:100px;line-height:.85;font-weight:900;color:#f59e0b}.brief-number b{letter-spacing:.15em;text-transform:uppercase;color:#f8e6c1}.brief-thesis{border-radius:2px;padding:26px;background:linear-gradient(90deg,rgba(245,158,11,.18),rgba(15,23,42,.7));box-shadow:none}.brief-bars{display:grid;gap:16px;align-content:center}.brief-bar{position:relative;min-height:42px;border-bottom:1px solid rgba(248,230,193,.18);display:flex;align-items:center}.brief-bar span{position:absolute;left:0;height:10px;border-radius:999px;background:linear-gradient(90deg,#f59e0b,rgba(245,158,11,.12));opacity:.7}.brief-bar b{position:relative;margin-left:18px}.exec-radar{position:relative;width:620px;height:420px}.radar-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:250px;min-height:130px;padding:20px;text-align:center;border-radius:50%;display:grid;place-content:center}.radar-ring{position:absolute;border:1px solid rgba(245,158,11,.25);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}.r-a{width:600px;height:390px}.r-b{width:430px;height:280px}.r-c{width:260px;height:170px}.radar-label{position:absolute;min-width:160px;border-top:2px solid #f59e0b;padding-top:8px}.radar-label i{font-style:normal;color:#f59e0b;margin-right:8px}.radar-label.r1{left:50%;top:0;transform:translateX(-50%)}.radar-label.r2{right:-150px;top:42%}.radar-label.r3{left:50%;bottom:0;transform:translateX(-50%)}.radar-label.r4{left:-150px;top:42%}
 </style>
 </head>
 <body>
-<main class="deck-shell" aria-label="${esc(demo.title)}">
+<main class="deck-shell theme-${demo.slug}" aria-label="${esc(demo.title)}">
   <div class="deck">${slideMarkup}</div>
   <div class="progress"><span></span></div>
   <div class="page-switch"><button id="prev" aria-label="Previous">‹</button><span id="pageNow">01</span><span>/</span><span>${String(slides.length).padStart(2, "0")}</span><button id="next" aria-label="Next">›</button><button id="audio" class="audio-btn" aria-label="Play narration">▶</button></div>
@@ -464,7 +502,14 @@ for (const demo of demos) writeDemo(demo);
 
 writeFileSync(join(examplesRoot, "README.md"), `# Example demos
 
-Each example is an 8-slide narrated-html project generated with the Understanding Demo Generator contract. The checked-in demos include MiMo TTS mp3 files under each `dist/audio/` directory.
+Each example is an 8-slide narrated-html project generated with the Understanding Demo Generator contract. The checked-in demos include MiMo TTS mp3 files under each dist/audio/ directory.
+
+The demos intentionally use different visual systems instead of one repeated card template:
+
+- \`technical-framework\`: blueprint diagrams and system-map rails
+- \`product-demo\`: product journey screens and service-flow UI
+- \`research-review\`: paper/evidence layouts with citation spines
+- \`executive-briefing\`: executive radar and briefing-wall layouts
 
 | Example | Type | Open locally |
 | --- | --- | --- |
