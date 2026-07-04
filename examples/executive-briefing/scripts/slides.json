@@ -1,5 +1,5 @@
 {
-  "mode": "quick-html",
+  "mode": "narrated-html",
   "audienceProfile": {
     "target": "executive-briefing",
     "density": "dense",
@@ -32,6 +32,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "当 CAC 上升，真正的增长杠杆会从流量端转到留存和扩张端",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Open with the deck thesis.",
+        "currentPoint": "当 CAC 上升，真正的增长杠杆会从流量端转到留存和扩张端。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "cover-centered composition for executive-briefing slide 1",
@@ -68,6 +75,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "更多线索不能自动变成更多收入，除非用户更快进入高价值使用",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "更多线索不能自动变成更多收入，除非用户更快进入高价值使用。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "mechanism-equation composition for executive-briefing slide 2",
         "depthMoves": [
@@ -102,6 +116,13 @@
       "contentBudget": {
         "pointCount": 5,
         "fitStrategy": "diagonal-route"
+      },
+      "subtitle": "签约、开通、首次使用、关键行为之间的时间差，才暴露真实阻力",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "签约、开通、首次使用、关键行为之间的时间差，才暴露真实阻力。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "route-map composition for executive-briefing slide 3",
@@ -139,6 +160,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "同样的 ARR，使用深度和关键行为完全不同，续费风险也不同",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "同样的 ARR，使用深度和关键行为完全不同，续费风险也不同。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "decision-matrix composition for executive-briefing slide 4",
         "depthMoves": [
@@ -173,6 +201,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "使用频率、关键功能覆盖、协作人数和工单类型，会提前显示流失或扩张",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "使用频率、关键功能覆盖、协作人数和工单类型，会提前显示流失或扩张。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "metric-radar composition for executive-briefing slide 5",
@@ -209,6 +244,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "无人完成初始化、没人进入关键功能、团队没有形成协作，续费风险会逐步放大",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "无人完成初始化、没人进入关键功能、团队没有形成协作，续费风险会逐步放大。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "risk-board composition for executive-briefing slide 6",
         "depthMoves": [
@@ -244,6 +286,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "优先做能压缩价值兑现时间的 onboarding、模板、触发器和 CSM 动作",
+      "durationSec": 11,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "优先做能压缩价值兑现时间的 onboarding、模板、触发器和 CSM 动作。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "evidence-chain composition for executive-briefing slide 7",
         "depthMoves": [
@@ -278,6 +327,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "管理层要把指标从线索数量，切到激活速度、健康分和扩张率",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "管理层要把指标从线索数量，切到激活速度、健康分和扩张率。",
+        "toNext": "Close with the deck memory hook."
       },
       "visualPlan": {
         "structure": "takeaway-field composition for executive-briefing slide 8",

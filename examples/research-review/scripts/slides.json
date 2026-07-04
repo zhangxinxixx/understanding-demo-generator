@@ -1,5 +1,5 @@
 {
-  "mode": "quick-html",
+  "mode": "narrated-html",
   "audienceProfile": {
     "target": "research-review",
     "density": "dense",
@@ -32,6 +32,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "一个答案可能看起来正确，却来自错误证据、断裂引用或应该拒答的问题",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Open with the deck thesis.",
+        "currentPoint": "一个答案可能看起来正确，却来自错误证据、断裂引用或应该拒答的问题。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "cover-centered composition for research-review slide 1",
@@ -67,6 +74,13 @@
       "contentBudget": {
         "pointCount": 5,
         "fitStrategy": "two-column-xray"
+      },
+      "subtitle": "检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "检索没找对、证据不相关、生成幻觉、拒答失败，都会落到同一个分数里。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "xray-stack composition for research-review slide 2",
@@ -104,6 +118,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "每一层都能独立失败，也会把错误传给下一层",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "每一层都能独立失败，也会把错误传给下一层。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "layer-stack composition for research-review slide 3",
         "depthMoves": [
@@ -138,6 +159,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "引用数量多不代表可靠，关键是每个主张是否能被对应证据支持",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "引用数量多不代表可靠，关键是每个主张是否能被对应证据支持。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "evidence-chain composition for research-review slide 4",
@@ -174,6 +202,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "不同指标回答不同问题，不能互相替代",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "不同指标回答不同问题，不能互相替代。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "decision-matrix composition for research-review slide 5",
         "depthMoves": [
@@ -208,6 +243,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "用户看到引用会降低警惕，因此错误证据比没有证据更有欺骗性。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "risk-board composition for research-review slide 6",
@@ -244,6 +286,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "可答、部分可答、不可答、证据冲突，四类样本都要出现",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "可答、部分可答、不可答、证据冲突，四类样本都要出现。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "route-map composition for research-review slide 7",
         "depthMoves": [
@@ -278,6 +327,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "当证据、引用和拒答边界被看见，系统才真正可改进",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "当证据、引用和拒答边界被看见，系统才真正可改进。",
+        "toNext": "Close with the deck memory hook."
       },
       "visualPlan": {
         "structure": "takeaway-field composition for research-review slide 8",

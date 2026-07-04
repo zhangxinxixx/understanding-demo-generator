@@ -1,0 +1,68 @@
+{
+  "slides": [
+    {
+      "sceneId": "scene-01",
+      "audio": "audio/slide-01.mp3",
+      "durationMs": 10560,
+      "subtitle": "AutoGen、AgentScope、CAMEL、LangGraph 的差异，根上是协作、状态和控制权的分配",
+      "text": "先把问题换一个角度。我们不是在背框架名字，而是在判断系统应该怎样组织多个 Agent、状态、工具和反馈。",
+      "ttsText": "scripts/tts/slide-01.txt"
+    },
+    {
+      "sceneId": "scene-02",
+      "audio": "audio/slide-02.mp3",
+      "durationMs": 12800,
+      "subtitle": "手写 Loop 能教学，框架要负责长期运行、调试和恢复",
+      "text": "有了这个视角，框架不再只是少写几行代码。它把思考、行动、观察这个 Loop，升级成能记录状态、调用工具、追踪错误的系统层。",
+      "ttsText": "scripts/tts/slide-02.txt"
+    },
+    {
+      "sceneId": "scene-03",
+      "audio": "audio/slide-03.mp3",
+      "durationMs": 14720,
+      "subtitle": "复杂度不是突然出现，而是从状态漂移、工具失败和停止模糊开始累积",
+      "text": "继续往下看，手写 Loop 最容易坏的地方不是 while 循环本身，而是循环周围的系统层。历史越来越长，工具会失败，终止条件也会变得含糊。",
+      "ttsText": "scripts/tts/slide-03.txt"
+    },
+    {
+      "sceneId": "scene-04",
+      "audio": "audio/slide-04.mp3",
+      "durationMs": 16960,
+      "subtitle": "对话涌现、消息平台、角色提示、状态图控制，对应四种不同工程取舍",
+      "text": "把四类框架放在一张矩阵里，差异会更清楚。AutoGen 让角色通过对话推进，AgentScope 先搭消息和运行平台，CAMEL 依赖角色设定，LangGraph 则把控制权写进状态图。",
+      "ttsText": "scripts/tts/slide-04.txt"
+    },
+    {
+      "sceneId": "scene-05",
+      "audio": "audio/slide-05.mp3",
+      "durationMs": 14240,
+      "subtitle": "当任务像专家会议，群聊式 Agent 很自然；当任务要强审计，涌现就会变成风险",
+      "text": "先看对话型路线。它很适合专家分工和互相审查，因为每个角色都能接力推进。但代价是流程从消息里长出来，不像流程图那样稳定。",
+      "ttsText": "scripts/tts/slide-05.txt"
+    },
+    {
+      "sceneId": "scene-06",
+      "audio": "audio/slide-06.mp3",
+      "durationMs": 13920,
+      "subtitle": "消息、运行时、部署和观测，是从 demo 到生产必须补上的底座",
+      "text": "工程平台型框架关注的不是角色聊得多聪明，而是系统能不能稳定运行。消息分发、运行时、观测和部署，决定它能不能走出 notebook。",
+      "ttsText": "scripts/tts/slide-06.txt"
+    },
+    {
+      "sceneId": "scene-07",
+      "audio": "audio/slide-07.mp3",
+      "durationMs": 14400,
+      "subtitle": "显式状态、节点和条件边，让重试、审核、回退和终止变成可检查规则",
+      "text": "如果项目最怕不可控，状态图就有优势。它把状态放在中心，让节点读写状态，让条件边决定下一步，复杂流程因此可以回放和审计。",
+      "ttsText": "scripts/tts/slide-07.txt"
+    },
+    {
+      "sceneId": "scene-08",
+      "audio": "audio/slide-08.mp3",
+      "durationMs": 11200,
+      "subtitle": "怕协作不开放、怕流程不可控、怕上不了线，会导向不同框架",
+      "text": "所以选型不要先问谁最流行，而要先问项目最不能接受什么失败。不同恐惧，会把你推向不同的组织方式。",
+      "ttsText": "scripts/tts/slide-08.txt"
+    }
+  ]
+}

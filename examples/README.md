@@ -1,6 +1,6 @@
 # Example demos
 
-Each example is an 8-slide quick-html project generated with the Understanding Demo Generator contract.
+Each example is an 8-slide narrated-html project generated with the Understanding Demo Generator contract. The checked-in demos include MiMo TTS mp3 files under each `dist/audio/` directory.
 
 | Example | Type | Open locally |
 | --- | --- | --- |
@@ -12,8 +12,8 @@ Each example is an 8-slide quick-html project generated with the Understanding D
 Run validation from the repository root:
 
 ```bash
-python scripts/validate_demo_contract.py examples/technical-framework --mode quick-html
-python scripts/validate_demo_contract.py examples/product-demo --mode quick-html
-python scripts/validate_demo_contract.py examples/research-review --mode quick-html
-python scripts/validate_demo_contract.py examples/executive-briefing --mode quick-html
+python scripts/validate_demo_contract.py examples/technical-framework --mode narrated-html
+python scripts/validate_demo_contract.py examples/product-demo --mode narrated-html
+python scripts/validate_demo_contract.py examples/research-review --mode narrated-html
+python scripts/validate_demo_contract.py examples/executive-briefing --mode narrated-html
 ```

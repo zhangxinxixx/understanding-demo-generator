@@ -169,6 +169,7 @@ function esc(value) {
 function slideObject(raw, index, demo) {
   const [kicker, title, lead, layoutType, accent, points, speakerText] = raw;
   const meta = layoutMeta[layoutType];
+  const subtitle = lead.replace(/[。；;]$/, "");
   return {
     id: `scene-${String(index + 1).padStart(2, "0")}`,
     kicker,
@@ -180,6 +181,13 @@ function slideObject(raw, index, demo) {
     contentBudget: {
       pointCount: points.length,
       fitStrategy: points.length > 4 ? meta.fitStrategy : "compact-balanced"
+    },
+    subtitle,
+    durationSec: Math.max(10, Math.ceil(speakerText.length / 7)),
+    narrative: {
+      fromPrevious: index === 0 ? "Open with the deck thesis." : "Continue from the previous slide's mechanism.",
+      currentPoint: lead,
+      toNext: index === demo.slides.length - 1 ? "Close with the deck memory hook." : "Set up the next mechanism or decision."
     },
     visualPlan: {
       structure: `${layoutType} composition for ${demo.slug} slide ${index + 1}`,
@@ -328,7 +336,7 @@ function htmlForDemo(demo, slides) {
     <div class="scene-bg"></div>
     ${slide.layoutType === "cover-centered" ? "" : `<div class="slide-head"><div class="kicker">${esc(slide.kicker)}</div><h1>${esc(slide.title)}</h1><p class="lead">${esc(slide.lead)}</p></div>`}
     ${visualHtml(demo, slide)}
-    <div class="subtitle">${esc(slide.speakerText)}</div>
+    <div class="subtitle">${esc(slide.subtitle)}</div>
   </section>`).join("\n");
 
   const dots = slides.map((_, i) => `<button class="${i === 0 ? "active" : ""}" data-index="${i}" aria-label="Go to slide ${i + 1}"></button>`).join("");
@@ -339,22 +347,46 @@ function htmlForDemo(demo, slides) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(demo.title)}</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040a;color:#e5eefc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.deck-shell{position:relative;width:100vw;height:100vh;overflow:hidden;background:#05070b}.deck{position:absolute;inset:0}.slide{position:absolute;inset:0;padding:5.8vh 7.2vw 14.5vh;display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;opacity:0;visibility:hidden;pointer-events:none;transition:.25s ease}.slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.scene-bg{position:absolute;inset:0;background:radial-gradient(circle at 28% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 30%),radial-gradient(circle at 76% 72%,rgba(56,189,248,.12),transparent 34%),linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px),#05070b;background-size:auto,auto,60px 60px,60px 60px,auto}.scene-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 30%,rgba(2,6,23,.68));pointer-events:none}.slide-head{position:relative;z-index:2;max-width:1120px}.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}h1{margin:8px 0 0;font-size:clamp(34px,4.2vw,60px);line-height:1.05;max-width:1160px;letter-spacing:0}.lead{margin:12px 0 0;max-width:880px;color:#aab7ca;font-size:clamp(15px,1.25vw,19px);line-height:1.55}.visual-zone{position:relative;z-index:1;min-height:0;display:grid;place-items:center;border-radius:8px;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 62%)}.glow-card,.glow-node,.glow-panel{border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(148,163,184,.18));background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 12%,rgba(15,23,42,.82)),rgba(2,6,23,.74));box-shadow:0 0 34px color-mix(in srgb,var(--accent) 14%,transparent),inset 0 1px 0 rgba(255,255,255,.06);border-radius:8px}.cover-zone{grid-row:1 / span 2}.cover-field{position:relative;text-align:center;display:grid;gap:16px;justify-items:center;max-width:1120px}.cover-field h1{font-size:clamp(44px,5.6vw,82px);max-width:1100px}.cover-ghost{position:absolute;top:-54px;font-size:clamp(56px,9vw,150px);font-weight:900;color:rgba(148,163,184,.045);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.tag-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.tag-row span{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.62);border-radius:999px;padding:8px 12px;color:#cbd5e1;font-size:13px}.equation-field{width:min(1040px,100%);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);align-items:center;gap:14px}.equation-node,.equation-result{min-height:118px;padding:18px;display:grid;align-content:center;gap:8px;text-align:center}.equation-result{grid-column:span 2}.operator{color:var(--accent);font-weight:900;font-size:30px;text-align:center}.xray-field{width:min(1060px,100%);display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:stretch}.xray-core{padding:24px;display:grid;align-content:center;gap:12px}.xray-layers{display:grid;gap:10px}.xray-layer{padding:14px 16px;display:grid;grid-template-columns:44px 1fr;align-items:center}.xray-layer i,.route-step i,.orbit-node i,.risk-tile i,.matrix-cell span{color:var(--accent);font-style:normal;font-weight:900}.matrix-field,.risk-field{width:min(1040px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.matrix-cell,.risk-tile{min-height:112px;padding:18px;display:grid;gap:8px}.matrix-cell small,.risk-tile span,.glow-node span,.glow-card span{color:#9fb0c7;line-height:1.4}.route-field{width:min(1080px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}.route-step{min-height:138px;padding:16px;display:grid;align-content:center;gap:8px;text-align:center;position:relative}.route-step:not(:last-child):after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:2px;background:var(--accent)}.orbit-field{width:min(1060px,100%);display:grid;grid-template-columns:.82fr 1.18fr;gap:22px;align-items:center}.orbit-core{padding:24px;min-height:250px;display:grid;align-content:center;gap:12px;text-align:center}.orbit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.orbit-node{min-height:112px;padding:18px;display:grid;align-content:center;gap:8px}.takeaway-field{width:min(1040px,100%);display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch}.takeaway-core{padding:24px;display:grid;align-content:center;gap:12px}.takeaway-grid{display:grid;gap:12px}.takeaway-node{padding:18px;font-weight:800}.subtitle{position:absolute;z-index:8;left:7.2vw;right:7.2vw;bottom:3.2vh;min-height:58px;border-top:1px solid rgba(148,163,184,.16);display:flex;align-items:center;color:#cbd5e1;font-size:14px;line-height:1.45;background:linear-gradient(90deg,rgba(5,7,11,.94),rgba(5,7,11,.6));padding:8px 168px 10px 0}.progress{position:absolute;z-index:10;left:0;bottom:0;height:3px;width:100%;background:rgba(148,163,184,.12)}.progress span{display:block;height:100%;width:12.5%;background:var(--accent);transition:.25s ease}.page-switch{position:absolute;right:3.2vw;bottom:3.4vh;z-index:12;display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:13px}.page-switch button,.dots button{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.68);color:#e5eefc;border-radius:8px;cursor:pointer}.page-switch button{width:32px;height:32px}.dots{position:absolute;right:2.8vw;top:50%;transform:translateY(-50%);z-index:11;display:grid;gap:9px}.dots button{width:9px;height:9px;border-radius:50%;padding:0}.dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px var(--accent)}@media(max-width:980px){.route-field{grid-template-columns:repeat(3,1fr)}.equation-field{grid-auto-flow:row;grid-template-columns:repeat(2,1fr)}.operator{display:none}.subtitle{font-size:13px;right:6vw}.dots{display:none}}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040a;color:#e5eefc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.deck-shell{position:relative;width:100vw;height:100vh;overflow:hidden;background:#05070b}.deck{position:absolute;inset:0}.slide{position:absolute;inset:0;padding:5.8vh 7.2vw 14.5vh;display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;opacity:0;visibility:hidden;pointer-events:none;transition:.25s ease}.slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.scene-bg{position:absolute;inset:0;background:radial-gradient(circle at 28% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 30%),radial-gradient(circle at 76% 72%,rgba(56,189,248,.12),transparent 34%),linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px),#05070b;background-size:auto,auto,60px 60px,60px 60px,auto}.scene-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 30%,rgba(2,6,23,.68));pointer-events:none}.slide-head{position:relative;z-index:2;max-width:1120px}.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}h1{margin:8px 0 0;font-size:clamp(34px,4.2vw,60px);line-height:1.05;max-width:1160px;letter-spacing:0}.lead{margin:12px 0 0;max-width:880px;color:#aab7ca;font-size:clamp(15px,1.25vw,19px);line-height:1.55}.visual-zone{position:relative;z-index:1;min-height:0;display:grid;place-items:center;border-radius:8px;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 62%)}.glow-card,.glow-node,.glow-panel{border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(148,163,184,.18));background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 12%,rgba(15,23,42,.82)),rgba(2,6,23,.74));box-shadow:0 0 34px color-mix(in srgb,var(--accent) 14%,transparent),inset 0 1px 0 rgba(255,255,255,.06);border-radius:8px}.cover-zone{grid-row:1 / span 2}.cover-field{position:relative;text-align:center;display:grid;gap:16px;justify-items:center;max-width:1120px}.cover-field h1{font-size:clamp(44px,5.6vw,82px);max-width:1100px}.cover-ghost{position:absolute;top:-54px;font-size:clamp(56px,9vw,150px);font-weight:900;color:rgba(148,163,184,.045);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.tag-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.tag-row span{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.62);border-radius:999px;padding:8px 12px;color:#cbd5e1;font-size:13px}.equation-field{width:min(1040px,100%);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);align-items:center;gap:14px}.equation-node,.equation-result{min-height:118px;padding:18px;display:grid;align-content:center;gap:8px;text-align:center}.equation-result{grid-column:span 2}.operator{color:var(--accent);font-weight:900;font-size:30px;text-align:center}.xray-field{width:min(1060px,100%);display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:stretch}.xray-core{padding:24px;display:grid;align-content:center;gap:12px}.xray-layers{display:grid;gap:10px}.xray-layer{padding:14px 16px;display:grid;grid-template-columns:44px 1fr;align-items:center}.xray-layer i,.route-step i,.orbit-node i,.risk-tile i,.matrix-cell span{color:var(--accent);font-style:normal;font-weight:900}.matrix-field,.risk-field{width:min(1040px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.matrix-cell,.risk-tile{min-height:112px;padding:18px;display:grid;gap:8px}.matrix-cell small,.risk-tile span,.glow-node span,.glow-card span{color:#9fb0c7;line-height:1.4}.route-field{width:min(1080px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}.route-step{min-height:138px;padding:16px;display:grid;align-content:center;gap:8px;text-align:center;position:relative}.route-step:not(:last-child):after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:2px;background:var(--accent)}.orbit-field{width:min(1060px,100%);display:grid;grid-template-columns:.82fr 1.18fr;gap:22px;align-items:center}.orbit-core{padding:24px;min-height:250px;display:grid;align-content:center;gap:12px;text-align:center}.orbit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.orbit-node{min-height:112px;padding:18px;display:grid;align-content:center;gap:8px}.takeaway-field{width:min(1040px,100%);display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch}.takeaway-core{padding:24px;display:grid;align-content:center;gap:12px}.takeaway-grid{display:grid;gap:12px}.takeaway-node{padding:18px;font-weight:800}.subtitle{position:absolute;z-index:8;left:7.2vw;right:7.2vw;bottom:3.2vh;min-height:58px;border-top:1px solid rgba(148,163,184,.16);display:flex;align-items:center;color:#cbd5e1;font-size:14px;line-height:1.45;background:linear-gradient(90deg,rgba(5,7,11,.94),rgba(5,7,11,.6));padding:8px 202px 10px 0}.progress{position:absolute;z-index:10;left:0;bottom:0;height:3px;width:100%;background:rgba(148,163,184,.12)}.progress span{display:block;height:100%;width:12.5%;background:var(--accent);transition:.25s ease}.page-switch{position:absolute;right:3.2vw;bottom:3.4vh;z-index:12;display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:13px}.page-switch button,.audio-btn,.dots button{border:1px solid rgba(148,163,184,.24);background:rgba(15,23,42,.68);color:#e5eefc;border-radius:8px;cursor:pointer}.page-switch button,.audio-btn{width:32px;height:32px}.audio-btn.is-playing{border-color:color-mix(in srgb,var(--accent,#38bdf8) 52%,rgba(148,163,184,.24));background:color-mix(in srgb,var(--accent,#38bdf8) 18%,rgba(15,23,42,.68))}.dots{position:absolute;right:2.8vw;top:50%;transform:translateY(-50%);z-index:11;display:grid;gap:9px}.dots button{width:9px;height:9px;border-radius:50%;padding:0}.dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px var(--accent)}@media(max-width:980px){.route-field{grid-template-columns:repeat(3,1fr)}.equation-field{grid-auto-flow:row;grid-template-columns:repeat(2,1fr)}.operator{display:none}.subtitle{font-size:13px;right:6vw}.dots{display:none}}
 </style>
 </head>
 <body>
 <main class="deck-shell" aria-label="${esc(demo.title)}">
   <div class="deck">${slideMarkup}</div>
   <div class="progress"><span></span></div>
-  <div class="page-switch"><button id="prev">‹</button><span id="pageNow">01</span><span>/</span><span>${String(slides.length).padStart(2, "0")}</span><button id="next">›</button></div>
+  <div class="page-switch"><button id="prev" aria-label="Previous">‹</button><span id="pageNow">01</span><span>/</span><span>${String(slides.length).padStart(2, "0")}</span><button id="next" aria-label="Next">›</button><button id="audio" class="audio-btn" aria-label="Play narration">▶</button></div>
   <div class="dots">${dots}</div>
+  <audio id="voice" preload="auto"></audio>
 </main>
 <script>
 const slides=[...document.querySelectorAll(".slide")];
 const dots=[...document.querySelectorAll(".dots button")];
 const progress=document.querySelector(".progress span");
 const pageNow=document.querySelector("#pageNow");
+const voice=document.querySelector("#voice");
+const audioBtn=document.querySelector("#audio");
 let index=0;
+let wantsPlay=false;
+function audioSrc(i){return "audio/slide-"+String(i+1).padStart(2,"0")+".mp3";}
+function updateAudioButton(playing){
+  audioBtn.textContent=playing?"⏸":"▶";
+  audioBtn.classList.toggle("is-playing",playing);
+  audioBtn.setAttribute("aria-label",playing?"Pause narration":"Play narration");
+}
+function loadAudio(){
+  voice.src=audioSrc(index);
+  voice.currentTime=0;
+}
+async function playCurrent(){
+  wantsPlay=true;
+  if(!voice.src || !voice.src.endsWith(audioSrc(index))) loadAudio();
+  try{await voice.play();}catch(error){wantsPlay=false;updateAudioButton(false);}
+}
+function pauseCurrent(){
+  wantsPlay=false;
+  voice.pause();
+  updateAudioButton(false);
+}
 function show(next){
   index=(next+slides.length)%slides.length;
   slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===index));
@@ -362,10 +394,18 @@ function show(next){
   pageNow.textContent=String(index+1).padStart(2,"0");
   progress.style.width=((index+1)/slides.length*100)+"%";
   progress.style.background=getComputedStyle(slides[index]).getPropertyValue("--accent");
+  const shouldResume=wantsPlay && !voice.paused;
+  voice.pause();
+  loadAudio();
+  if(shouldResume) playCurrent();
 }
 document.querySelector("#prev").addEventListener("click",()=>show(index-1));
 document.querySelector("#next").addEventListener("click",()=>show(index+1));
 dots.forEach((dot)=>dot.addEventListener("click",()=>show(Number(dot.dataset.index))));
+audioBtn.addEventListener("click",()=>{if(voice.paused) playCurrent(); else pauseCurrent();});
+voice.addEventListener("play",()=>updateAudioButton(true));
+voice.addEventListener("pause",()=>updateAudioButton(false));
+voice.addEventListener("ended",()=>{updateAudioButton(false);if(index < slides.length - 1){wantsPlay=true;show(index+1);playCurrent();}else{wantsPlay=false;}});
 addEventListener("keydown",(event)=>{if(event.key==="ArrowRight")show(index+1);if(event.key==="ArrowLeft")show(index-1);});
 show(0);
 </script>
@@ -383,7 +423,7 @@ function writeDemo(demo) {
   mkdirSync(sourceDir, { recursive: true });
   const slides = demo.slides.map((raw, index) => slideObject(raw, index, demo));
   const json = {
-    mode: "quick-html",
+    mode: "narrated-html",
     audienceProfile: demo.audience,
     contentDepth: "level-3-mechanism",
     styleProfile: {
@@ -398,6 +438,24 @@ function writeDemo(demo) {
   writeFileSync(join(scriptsDir, "first-principles.md"), firstPrinciples(demo), "utf8");
   writeFileSync(join(scriptsDir, "deck.md"), deckMarkdown(demo, slides), "utf8");
   writeFileSync(join(scriptsDir, "slides.json"), `${JSON.stringify(json, null, 2)}\n`, "utf8");
+  const ttsDir = join(scriptsDir, "tts");
+  const audioDir = join(distDir, "audio");
+  mkdirSync(ttsDir, { recursive: true });
+  mkdirSync(audioDir, { recursive: true });
+  const narration = { slides: [] };
+  slides.forEach((slide, index) => {
+    const stem = `slide-${String(index + 1).padStart(2, "0")}`;
+    writeFileSync(join(ttsDir, `${stem}.txt`), `${slide.speakerText}\n`, "utf8");
+    narration.slides.push({
+      sceneId: slide.id,
+      audio: `audio/${stem}.mp3`,
+      durationMs: slide.durationSec * 1000,
+      subtitle: slide.subtitle,
+      text: slide.speakerText,
+      ttsText: `scripts/tts/${stem}.txt`
+    });
+  });
+  writeFileSync(join(scriptsDir, "narration.json"), `${JSON.stringify(narration, null, 2)}\n`, "utf8");
   writeFileSync(join(distDir, "index.html"), htmlForDemo(demo, slides), "utf8");
 }
 
@@ -406,7 +464,7 @@ for (const demo of demos) writeDemo(demo);
 
 writeFileSync(join(examplesRoot, "README.md"), `# Example demos
 
-Each example is an 8-slide quick-html project generated with the Understanding Demo Generator contract.
+Each example is an 8-slide narrated-html project generated with the Understanding Demo Generator contract. The checked-in demos include MiMo TTS mp3 files under each `dist/audio/` directory.
 
 | Example | Type | Open locally |
 | --- | --- | --- |
@@ -415,7 +473,7 @@ ${demos.map((demo) => `| ${demo.title} | ${demo.subtitle} | \`examples/${demo.sl
 Run validation from the repository root:
 
 \`\`\`bash
-${demos.map((demo) => `python scripts/validate_demo_contract.py examples/${demo.slug} --mode quick-html`).join("\n")}
+${demos.map((demo) => `python scripts/validate_demo_contract.py examples/${demo.slug} --mode narrated-html`).join("\n")}
 \`\`\`
 `, "utf8");
 

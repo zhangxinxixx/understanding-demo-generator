@@ -1,0 +1,1 @@
+把四类框架放在一张矩阵里，差异会更清楚。AutoGen 让角色通过对话推进，AgentScope 先搭消息和运行平台，CAMEL 依赖角色设定，LangGraph 则把控制权写进状态图。

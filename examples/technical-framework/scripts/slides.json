@@ -1,5 +1,5 @@
 {
-  "mode": "quick-html",
+  "mode": "narrated-html",
   "audienceProfile": {
     "target": "technical-sharing",
     "density": "standard",
@@ -32,6 +32,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "AutoGen、AgentScope、CAMEL、LangGraph 的差异，根上是协作、状态和控制权的分配",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Open with the deck thesis.",
+        "currentPoint": "AutoGen、AgentScope、CAMEL、LangGraph 的差异，根上是协作、状态和控制权的分配。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "cover-centered composition for technical-framework slide 1",
@@ -68,6 +75,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "手写 Loop 能教学，框架要负责长期运行、调试和恢复",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "手写 Loop 能教学，框架要负责长期运行、调试和恢复。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "mechanism-equation composition for technical-framework slide 2",
         "depthMoves": [
@@ -102,6 +116,13 @@
       "contentBudget": {
         "pointCount": 5,
         "fitStrategy": "two-column-xray"
+      },
+      "subtitle": "复杂度不是突然出现，而是从状态漂移、工具失败和停止模糊开始累积",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "复杂度不是突然出现，而是从状态漂移、工具失败和停止模糊开始累积。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "xray-stack composition for technical-framework slide 3",
@@ -139,6 +160,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "对话涌现、消息平台、角色提示、状态图控制，对应四种不同工程取舍",
+      "durationSec": 14,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "对话涌现、消息平台、角色提示、状态图控制，对应四种不同工程取舍。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "decision-matrix composition for technical-framework slide 4",
         "depthMoves": [
@@ -174,6 +202,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "当任务像专家会议，群聊式 Agent 很自然；当任务要强审计，涌现就会变成风险",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "当任务像专家会议，群聊式 Agent 很自然；当任务要强审计，涌现就会变成风险。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "role-orbit composition for technical-framework slide 5",
         "depthMoves": [
@@ -208,6 +243,13 @@
       "contentBudget": {
         "pointCount": 5,
         "fitStrategy": "diagonal-route"
+      },
+      "subtitle": "消息、运行时、部署和观测，是从 demo 到生产必须补上的底座",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "消息、运行时、部署和观测，是从 demo 到生产必须补上的底座。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "route-map composition for technical-framework slide 6",
@@ -245,6 +287,13 @@
         "pointCount": 5,
         "fitStrategy": "loop-ring"
       },
+      "subtitle": "显式状态、节点和条件边，让重试、审核、回退和终止变成可检查规则",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "显式状态、节点和条件边，让重试、审核、回退和终止变成可检查规则。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "state-graph composition for technical-framework slide 7",
         "depthMoves": [
@@ -280,6 +329,13 @@
       "contentBudget": {
         "pointCount": 3,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "怕协作不开放、怕流程不可控、怕上不了线，会导向不同框架",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "怕协作不开放、怕流程不可控、怕上不了线，会导向不同框架。",
+        "toNext": "Close with the deck memory hook."
       },
       "visualPlan": {
         "structure": "takeaway-field composition for technical-framework slide 8",

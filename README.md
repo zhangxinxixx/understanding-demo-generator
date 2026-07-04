@@ -78,7 +78,7 @@ The skill can be extended with additional style families later, but the current 
 
 ## Examples
 
-See `examples/` for generated 8-slide demos covering technical framework explanation, product demo, research review, and executive briefing content.
+See `examples/` for generated 8-slide narrated demos with MiMo TTS audio, covering technical framework explanation, product demo, research review, and executive briefing content.
 
 ## Output contract
 

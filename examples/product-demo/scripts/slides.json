@@ -1,5 +1,5 @@
 {
-  "mode": "quick-html",
+  "mode": "narrated-html",
   "audienceProfile": {
     "target": "product-demo",
     "density": "standard",
@@ -32,6 +32,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "一个好 Copilot 要把工单、知识、动作和复盘接成一条服务链路",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Open with the deck thesis.",
+        "currentPoint": "一个好 Copilot 要把工单、知识、动作和复盘接成一条服务链路。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "cover-centered composition for product-demo slide 1",
@@ -67,6 +74,13 @@
       "contentBudget": {
         "pointCount": 5,
         "fitStrategy": "two-column-xray"
+      },
+      "subtitle": "用户问题、知识库、订单系统和复盘指标分散，导致响应和改进都变慢",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "用户问题、知识库、订单系统和复盘指标分散，导致响应和改进都变慢。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "xray-stack composition for product-demo slide 2",
@@ -104,6 +118,13 @@
         "pointCount": 5,
         "fitStrategy": "diagonal-route"
       },
+      "subtitle": "它先识别问题，再找证据，最后给出可操作建议和接管点",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "它先识别问题，再找证据，最后给出可操作建议和接管点。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "route-map composition for product-demo slide 3",
         "depthMoves": [
@@ -140,6 +161,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "答案、来源、置信度和风险提示要同时展示，客服才敢使用",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "答案、来源、置信度和风险提示要同时展示，客服才敢使用。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "evidence-chain composition for product-demo slide 4",
         "depthMoves": [
@@ -174,6 +202,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "低置信度、敏感问题和流程异常都应该进入人工回路，并反哺模型和知识库",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "低置信度、敏感问题和流程异常都应该进入人工回路，并反哺模型和知识库。",
+        "toNext": "Set up the next mechanism or decision."
       },
       "visualPlan": {
         "structure": "decision-matrix composition for product-demo slide 5",
@@ -210,6 +245,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "高频问题、错误引用和客服改写，是知识运营最直接的信号",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "高频问题、错误引用和客服改写，是知识运营最直接的信号。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "mechanism-equation composition for product-demo slide 6",
         "depthMoves": [
@@ -245,6 +287,13 @@
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
       },
+      "subtitle": "响应时间、一次解决率、人工接管率和知识修复速度，才说明产品是否有效",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "响应时间、一次解决率、人工接管率和知识修复速度，才说明产品是否有效。",
+        "toNext": "Set up the next mechanism or decision."
+      },
       "visualPlan": {
         "structure": "metric-radar composition for product-demo slide 7",
         "depthMoves": [
@@ -279,6 +328,13 @@
       "contentBudget": {
         "pointCount": 4,
         "fitStrategy": "compact-balanced"
+      },
+      "subtitle": "从 FAQ 辅助开始，逐步进入订单、售后和主动运营",
+      "durationSec": 10,
+      "narrative": {
+        "fromPrevious": "Continue from the previous slide's mechanism.",
+        "currentPoint": "从 FAQ 辅助开始，逐步进入订单、售后和主动运营。",
+        "toNext": "Close with the deck memory hook."
       },
       "visualPlan": {
         "structure": "takeaway-field composition for product-demo slide 8",
