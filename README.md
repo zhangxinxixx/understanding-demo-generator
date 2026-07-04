@@ -11,7 +11,7 @@ This skill turns source material into full-screen local HTML decks with:
 - first-principles reconstruction
 - input type and audience intake
 - continuous manuscript writing before visual layout
-- slide-level content depth control
+- slide-level content depth and content density control
 - topic-specific visual style systems
 - page-specific DOM and CSS composition
 - dark-grid visual systems with accent colors and module background glow
@@ -21,7 +21,7 @@ This skill turns source material into full-screen local HTML decks with:
 
 ## Core design principle
 
-The skill does **not** generate decks by filling a generic card template.
+The skill does **not** generate decks by filling a generic card template, and it does **not** treat a page as finished when it only has a title and a few labels.
 
 Correct flow:
 
@@ -30,6 +30,7 @@ source material
 -> first-principles reconstruction
 -> coherent teaching manuscript
 -> page-by-page narrative transitions
+-> content density and information architecture plan
 -> topic style system selection
 -> independent page DOM/CSS composition
 -> standalone HTML deck
@@ -39,6 +40,7 @@ Avoid:
 
 ```text
 generic .module + layoutType + repeated card grid
+sparse page = title + 3 labels + decorative glow
 ```
 
 `layoutType` may exist in `slides.json` as a planning hint, but the final HTML should use page-specific semantic structures, for example:
@@ -52,26 +54,6 @@ generic .module + layoutType + repeated card grid
 .evidence-radar
 .theorem-proof-rail
 .architecture-topology
-```
-
-## Quick start
-
-Install the skill into your Codex / ChatGPT skills directory:
-
-```text
-~/.codex/skills/understanding-demo-generator/
-```
-
-Then ask for a teaching deck from source material, for example:
-
-```text
-Use understanding-demo-generator to turn these notes into a dark-grid explainer HTML deck.
-```
-
-For narration or video workflows, request them explicitly:
-
-```text
-Use understanding-demo-generator. Generate a narrated HTML deck with TTS queue files.
 ```
 
 ## Default behavior: no audio by default
@@ -97,51 +79,27 @@ narrative     # fromPrevious / currentPoint / toNext continuity fields
 
 But these are text planning fields only. They do not imply audio generation.
 
-Generate narration / TTS / audio only when the user explicitly asks for one of the following:
+## Content density rule
 
-```text
-narrated-html
-narration
-voice-over
-TTS
-MiMo / Xiaomi TTS
-audio
-mp3
-HyperFrames
-video composition
+The first generated version must not be too thin or scattered. Every normal content slide should include:
+
+- one central claim;
+- 3-6 visible semantic units;
+- one explicit relationship layer, such as sequence, dependency, proof path, axis, scenario tree, route, or data flow;
+- at least one support element, such as example, boundary, failure mode, evidence point, implication, or decision rule;
+- a `speakerText` explanation that connects the visible pieces instead of repeating labels.
+
+Each content slide should define these `visualPlan` fields:
+
+```json
+{
+  "informationArchitecture": "central claim, visible units, and relationships",
+  "contentDensity": "visible unit count, support element, and density level",
+  "coherenceLinks": "how this slide connects previous/current/next ideas"
+}
 ```
 
-When narration is requested, then generate:
-
-```text
-scripts/narration.json
-scripts/tts/slide-XX.txt
-dist/audio/                  # only if actual audio files are generated or supplied
-```
-
-## Modes
-
-The default output is a standalone dark-grid HTML explainer deck. Narration, TTS, audio, or HyperFrames output is generated only when explicitly requested.
-
-| Mode | When to use | Main outputs |
-| --- | --- | --- |
-| `quick-html` | Default mode for notes, markdown, articles, reports, product docs, concept materials, or restyling an existing HTML deck. Does not generate TTS files or audio assets. | `scripts/first-principles.md`, `scripts/deck.md`, `scripts/slides.json`, `dist/index.html` |
-| `narrated-html` | Use only when the request mentions narration, TTS, voice-over, audio, or subtitles tied to speech. | quick-html outputs plus `scripts/narration.json`, `scripts/tts/slide-XX.txt`, optional `dist/audio/` |
-| `hyperframes` | Use only when the request mentions HyperFrames, composition output, slideshow manifest, or video rendering workflow. | narrated-html outputs plus `dist/composition/index.html` |
-
-## Supported input types
-
-The skill works best for explanation-heavy material where the deck needs to teach a concept, not just decorate headings:
-
-- Markdown notes, Obsidian notes, course notes, and rough outlines
-- articles, reports, and research summaries
-- academic/theory material and paper-style explanations
-- architecture and system design documents
-- engineering implementation docs and framework notes
-- product demos, solution briefs, and pitch material
-- strategy or executive briefing material
-- interview-learning and exam-prep material
-- existing HTML decks that need to be rewritten visually
+Use `references/content-density-continuity.md` to avoid sparse first drafts and scattered pages.
 
 ## Topic style systems
 
@@ -158,42 +116,6 @@ Different subjects should use different visual languages. The skill should not s
 | `interview-learning` | Q&A board, pitfall map, answer template | comparison grid, mistake board, follow-up tree, memory hook ladder | vague diagrams without answer structure |
 | `concept-learning` | dark-grid explainer, concept orbit | mechanism chain, analogy split, route map, takeaway constellation | repeated generic card grids |
 
-Each generated project should define a top-level `topicStyleSystem` in `scripts/slides.json`:
-
-```json
-{
-  "topicStyleSystem": {
-    "domain": "architecture",
-    "visualLanguage": "blueprint topology with layered system map",
-    "paletteLogic": "cyan/blue for flow, amber for risk gates",
-    "compositionBias": ["layered-stack", "topology-graph", "interface-map"],
-    "avoid": ["generic card grid", "sales-like cards"],
-    "reason": "The source explains system structure and data flow."
-  }
-}
-```
-
-## Manuscript and narrative continuity
-
-The deck should read as one continuous lesson:
-
-- each slide connects to the previous slide
-- each slide sets up the next slide
-- `speakerText` contains transition logic, not just repeated on-slide text
-- the flow should be clear: premise -> mechanism -> decomposition -> example -> boundary -> practice -> conclusion
-
-Each content slide should include a `narrative` object:
-
-```json
-{
-  "narrative": {
-    "fromPrevious": "Bridge from the previous slide.",
-    "currentPoint": "The core point of this slide.",
-    "toNext": "Setup for the next slide."
-  }
-}
-```
-
 ## Narration, subtitles, and TTS
 
 When narration is enabled, keep these fields aligned:
@@ -202,50 +124,12 @@ When narration is enabled, keep these fields aligned:
 - `subtitle` is the short bottom-bar version of the same idea.
 - `scripts/narration.json.slides[n].subtitle` must match `scripts/slides.json.slides[n].subtitle` exactly.
 - `scripts/tts/slide-XX.txt` must contain the exact full `speakerText`, not the shortened subtitle.
-- Audio playback state must be driven by real media events (`play`, `pause`, `ended`).
-- The final slide must stop after its audio ends; it should not loop back to slide 1 unless the user asks for looping.
 
-Prepare a TTS queue from a generated project with:
+Prepare a TTS queue only in narrated mode:
 
 ```bash
 python scripts/prepare_tts_queue.py <project-dir>
 ```
-
-Only run this command in narrated mode or when the user explicitly wants TTS queue files.
-
-## Output contract
-
-A completed project should contain:
-
-```text
-scripts/
-  first-principles.md
-  deck.md
-  slides.json
-  narration.json          # narrated-html / hyperframes only
-  tts/slide-XX.txt        # narrated-html / hyperframes only
-dist/
-  index.html
-  composition/index.html  # hyperframes only
-  audio/                  # optional; only when real audio is generated or supplied
-```
-
-The deck HTML is standalone by default: embedded CSS, embedded JavaScript, no remote HTTP dependencies unless explicitly requested.
-
-## Visual and playback quality rules
-
-The generated `dist/index.html` should satisfy these baseline checks:
-
-- full-screen deck canvas with no visible outer frame, border, or preview shadow
-- background and slide root fill the viewport
-- first slide is a centered cover / theme page
-- content pages use page-specific DOM and CSS, not a generic card template
-- domain style affects composition, not only accent color
-- major visual modules fit above the subtitle and control area
-- core modules use accent-driven background glow where appropriate
-- bottom subtitle bar, progress bar, page switcher, keyboard navigation, and desktop dots are present
-- play / pause button label and visual state match the actual audio state when audio exists
-- HyperFrames composition output embeds a slideshow manifest when hyperframes mode is used
 
 ## Validation
 
@@ -257,25 +141,11 @@ python scripts/validate_demo_contract.py <project-dir> --mode narrated-html
 python scripts/validate_demo_contract.py <project-dir> --mode hyperframes
 ```
 
-Use the mode that matches the requested output. Stricter modes include checks for narration files, TTS alignment, audio playback rules, and HyperFrames composition output.
-
 ## Current repository status
 
 This repository currently contains the editable skill source, references, and validation / TTS queue scripts.
 
 The repository does **not** currently include generated demo examples, MiMo audio, or binary release assets. If examples are needed, generate them from the skill source and commit only the source-friendly files, or publish large binary audio assets via GitHub Releases / Git LFS.
-
-Planned optional additions:
-
-```text
-examples/
-  technical-framework/
-  product-demo/
-  research-review/
-  executive-briefing/
-scripts/generate_example_demos.mjs
-scripts/generate_mimo_tts.mjs
-```
 
 ## Repository structure
 
@@ -291,6 +161,7 @@ evals/
 ## Key references
 
 - `references/input-intake.md` - classify source material and audience.
+- `references/content-density-continuity.md` - avoid sparse first drafts and scattered pages.
 - `references/topic-style-systems.md` - choose domain-specific visual language.
 - `references/page-composition-first.md` - design each slide as a semantic composition.
 - `references/subtitle-narration-continuity.md` - keep subtitles, manuscripts, and TTS aligned.
